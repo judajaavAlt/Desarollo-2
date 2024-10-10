@@ -8,33 +8,22 @@ import Logo from "../components/Logo";
 import Decoracion from "../components/Decoracion";
 import Footer from "../components/Footer";
 
-export default function Login() {
+export default function SingUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const [captchaValue, setCaptchaValue] = useState(null);
-
-  function handleGoogle(e) {
-    e.preventDefault();
-    console.log("inicio sesion con google");
-    navigate("/home");
-  }
-
-  function retrievePassword(e) {
-    e.preventDefault();
-    console.log("recuperar contrasenia");
-  }
 
   const onCaptchaChange = (value) => {
     setCaptchaValue(value);
   };
 
-  function handleLogin(e) {
+  function handleSingUp(e) {
     e.preventDefault();
     if (!captchaValue) {
       const Toast = Swal.mixin({
@@ -54,8 +43,14 @@ export default function Login() {
       });
       return;
     }
+    
+    console.log(`crear cuenta ${email} ${password}`);
+    navigate("/home");
+  }
 
-    console.log(`inicio sesion ${email} ${password}`);
+  function handleGoogle(e) {
+    e.preventDefault();
+    console.log("inicio sesion con google");
     navigate("/home");
   }
 
@@ -69,38 +64,15 @@ export default function Login() {
 
       <div className="flex items-center justify-center">
         <div className="rounded-xl bg-slate-50 p-8 lg:w-full 2xl:w-7/12">
-          <form onSubmit={handleLogin} className="">
+          <form onSubmit={handleSingUp} className="">
             <header className="my-4 mb-8 text-center">
               <div className="flex flex-row">
                 <div className="mr-3 h-12 w-2 bg-amber-300"></div>
                 <h2 className="content-center text-5xl font-extrabold text-slate-800">
-                  INICIAR SESION
+                  CREAR CUENTA
                 </h2>
               </div>
             </header>
-
-            <div className="my-4 text-center">
-              <button
-                type="button"
-                onClick={handleGoogle}
-                className="flex w-full items-center justify-center rounded-full border border-gray-300 px-6 py-5 shadow-md transition-shadow hover:shadow-lg"
-              >
-                <img
-                  src="https://imagepng.org/wp-content/uploads/2019/08/google-icon-1.png"
-                  alt="Google"
-                  className="mr-3 h-6 w-6"
-                />
-                <span className="font-medium text-gray-600">
-                  Continue with Google
-                </span>
-              </button>
-            </div>
-
-            <div className="flex items-center">
-              <div className="flex-grow border-t border-gray-300"></div>
-              <span className="mx-2 flex h-3 w-3 items-center justify-center rounded-full border border-gray-300"></span>
-              <div className="flex-grow border-t border-gray-300"></div>
-            </div>
 
             <div className="my-4 flex flex-col">
               <label
@@ -158,16 +130,6 @@ export default function Login() {
               </button>
             </div>
 
-            <div className="my-4 text-center">
-              <button
-                type="button"
-                onClick={retrievePassword}
-                className="font-bold text-amber-500 hover:underline"
-              >
-                ¿Haz olvidado tu contraseña?
-              </button>
-            </div>
-
             <div className="my-4 flex justify-center text-center">
               <ReCAPTCHA
                 sitekey="6LeQ_F0qAAAAAJM1qrKUTbKlAJi1zc4H6gmTj9P3"
@@ -180,18 +142,60 @@ export default function Login() {
                 type="submit"
                 className="focus:ring-esmerald-400 w-full rounded-full bg-amber-500 py-3 text-slate-900 transition-all duration-500 hover:bg-amber-600 focus:ring-2"
               >
-                Iniciar sesion
+                Aceptar y unirse
               </button>
             </div>
 
+            <div className="flex items-center">
+              <div className="flex-grow border-t border-gray-300"></div>
+              <span className="mx-2 flex h-3 w-3 items-center justify-center rounded-full border border-gray-300"></span>
+              <div className="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <div className="my-4 text-center">
+              <button
+                type="button"
+                onClick={handleGoogle}
+                className="flex w-full items-center justify-center rounded-full border border-gray-300 px-6 py-5 shadow-md transition-shadow hover:shadow-lg"
+              >
+                <img
+                  src="https://imagepng.org/wp-content/uploads/2019/08/google-icon-1.png"
+                  alt="Google"
+                  className="mr-3 h-6 w-6"
+                />
+                <span className="font-medium text-gray-600">
+                  Continue with Google
+                </span>
+              </button>
+            </div>
+
+            <div className="my-4 text-center">
+              <p className="text-sm">
+                Al hacer clic en «Aceptar y unirse» o «Continuar como», aceptas
+                las{" "}
+                <a className="text-amber-400 underline" href="#">
+                  Condiciones de uso
+                </a>
+                , la{" "}
+                <a className="text-amber-400 underline" href="#">
+                  Política de privacidad
+                </a>{" "}
+                y la
+                <a className="text-amber-400 underline" href="#">
+                  Política de cookies
+                </a>
+                de Catmoney.
+              </p>
+            </div>
+
             <div className="my-4 flex justify-center text-center">
-              <p className="text-sm text-slate-600">
-                ¿No tienes una cuenta?{" "}
+              <p className="text-sm text-slate-700">
+                ¿Ya tienes una cuenta?{" "}
                 <button
-                  onClick={() => navigate("/singup")}
+                  onClick={() => navigate("/login")}
                   className="font-bold text-amber-500 hover:underline"
                 >
-                  Sing UP
+                  Log In
                 </button>
               </p>
             </div>
