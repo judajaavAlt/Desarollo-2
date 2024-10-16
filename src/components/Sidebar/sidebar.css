@@ -1,0 +1,161 @@
+/* src/components/Sidebar.css */
+
+/* Estilos generales del sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    min-height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    /* Transición para que aparezca/desaparezca suavemente */
+  }
+  
+  /* Ocultar el sidebar fuera de la pantalla en móviles */
+  .sidebar.open {
+    transform: translateX(0); /* Cuando está abierto, se muestra */
+  }
+  
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar-logo .logo {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+  }
+  
+  .sidebar-logo h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .sidebar-user {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .sidebar-user h3 {
+    font-size: 18px;
+    color: #333;
+  }
+  .sidebar-nav {
+    margin-top: 0;
+    flex-grow: 5;
+     /* Ajusta este valor según necesites más o menos espacio */
+  }
+  
+  .sidebar-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-nav li {
+    margin: 15px 0;
+  }
+  
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar-nav a .icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .sidebar-nav a.active {
+    background-color: #FFDD77; /* Fondo amarillo para la opción seleccionada */
+    color: #000;
+  }
+  
+  .sidebar-nav a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .sidebar-footer {
+    text-align: center;
+    position: relative;
+    top: -20px; /* Mueve el footer más arriba */
+    margin-bottom: 0;
+    padding-bottom: 0; /* Elimina el padding inferior */
+  }
+  
+  
+  .sidebar-footer a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  
+  .sidebar-footer a .icon {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+  }
+  
+  /* Botón de menú para pantallas pequeñas */
+  .menu-button {
+    background-color: #FFDD77;
+    color: #333;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    display: none; /* Solo se mostrará en pantallas pequeñas */
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+  
+  /* Overlay para cerrar el sidebar al hacer clic fuera */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  /* Estilos responsive */
+  
+  /* Ocultar sidebar por defecto en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      transform: translateX(-100%); /* Ocultar sidebar hacia la izquierda */
+      z-index: 11;
+    }
+  
+    .menu-button {
+      display: block; /* Mostrar el botón de menú en pantallas pequeñas */
+    }
+  
+    .sidebar.open {
+      transform: translateX(0); /* Cuando el sidebar está abierto */
+    }
+  }
+  
