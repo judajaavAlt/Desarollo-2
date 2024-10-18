@@ -1,0 +1,135 @@
+/* Overlay que oscurece el fondo */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+    z-index: 10; /* Asegurarse de que esté por encima del contenido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Estilo del modal */
+  .modal {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    z-index: 11;
+    position: relative;
+  }
+  
+  /* Header del modal */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+  }
+  
+  .close-button:hover {
+    color: #333;
+  }
+  
+  /* Body del modal */
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-body .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .modal-body .form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .modal-body .form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .modal-body .form-group input:focus {
+    outline: none;
+    border-color: #FFDD77; /* Color de enfoque */
+  }
+  
+  /* Selección de íconos */
+  .icon-selection {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Permitir que los íconos se distribuyan en varias filas */
+    justify-content: center; /* Centrar los íconos */
+  }
+  
+  .icon-button {
+    background: none;
+    border: 2px solid transparent;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    font-size: 1.8rem;
+  }
+  
+  .icon-button:hover {
+    border-color: #FFCC66; /* Color al pasar el ratón */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  }
+  
+  .icon-button.selected {
+    border-color: #FFDD77; /* Borde llamativo para el seleccionado */
+    background-color: rgba(255, 221, 119, 0.3); /* Fondo para el ícono seleccionado */
+    transform: scale(1.2); /* Aumenta ligeramente el tamaño para destacarlo */
+  }
+  
+  /* Footer del modal */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .save-button {
+    background-color: #FFDD77;
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-button:hover {
+    background-color: #FFCC66; /* Color al pasar el mouse */
+  }
+  

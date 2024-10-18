@@ -1,6 +1,6 @@
-
 import PropTypes from 'prop-types'; // Importar PropTypes
 import './CreateWalletModal.css'; // Asegúrate de tener estilos asociados
+import { FaWallet, FaPiggyBank, FaUniversity, FaCreditCard, FaMobileAlt, FaCoins, FaMoneyBillWave, FaDollarSign, FaChartLine, FaHandHoldingUsd, FaMoneyCheckAlt, FaShoppingCart } from 'react-icons/fa'; // Importar íconos relacionados con finanzas
 
 function CreateWalletModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -15,34 +15,33 @@ function CreateWalletModal({ isOpen, onClose }) {
         <div className="modal-body">
           <div className="form-group">
             <label>Cantidad</label>
-            <input type="number" value="0" />
+            <input type="number" className="cantidad-input" value="0" />
           </div>
 
           <div className="form-group">
             <label>Nombre de la billetera</label>
-            <input type="text" placeholder="Introduzca un nombre de billetera" />
+            <input type="text" className="nombre-input" placeholder="Introduzca un nombre de billetera" />
           </div>
 
           <div className="form-group">
             <label>Símbolos</label>
             <div className="icons-grid">
-              {/* Asegúrate de tener los íconos disponibles */}
-              <img src="/path/to/icon1.png" alt="Icon1" />
-              <img src="/path/to/icon2.png" alt="Icon2" />
-              <img src="/path/to/icon3.png" alt="Icon3" />
-              {/* Más íconos según sea necesario */}
+              {/* 12 íconos relacionados con finanzas */}
+              <FaWallet title="Billetera" className="icon" />
+              <FaPiggyBank title="Ahorro" className="icon" />
+              <FaUniversity title="Banco" className="icon" />
+              <FaCreditCard title="Tarjeta de Crédito" className="icon" />
+              <FaMobileAlt title="Pagos Móviles" className="icon" />
+              <FaCoins title="Monedas" className="icon" />
+              <FaMoneyBillWave title="Dinero en Efectivo" className="icon" />
+              <FaDollarSign title="Dólares" className="icon" />
+              <FaChartLine title="Inversiones" className="icon" />
+              <FaHandHoldingUsd title="Fondos" className="icon" />
+              <FaMoneyCheckAlt title="Cheques" className="icon" />
+              <FaShoppingCart title="Gastos" className="icon" />
             </div>
           </div>
 
-          <div className="form-group">
-            <label>Color</label>
-            <div className="color-options">
-              <button className="color red"></button>
-              <button className="color blue"></button>
-              <button className="color green"></button>
-              <button className="color yellow"></button>
-            </div>
-          </div>
         </div>
         <div className="modal-footer">
           <button className="create-button">Crear</button>
