@@ -1,3 +1,5 @@
+import CreateTransaction from "./crud/CreateTransaction";
+import { useState } from "react";
 
 
 const transactions = [
@@ -8,10 +10,21 @@ const transactions = [
   { from: 'Daviplata', to: 'Tarjeta débito', amount: '220.000', date: '22 de septiembre de 2024' },
 ];
 
+
+
 function TransactionList() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="transaction-list">
-      <button className="create-transaction-btn">Crear Transferencia</button>
+      <button className="create-transaction-btn" onClick={openModal}>Crear Transferencia</button>
       <div className="transactions">
         {transactions.map((transaction, index) => (
           <div key={index} className="transaction-item">
@@ -25,6 +38,7 @@ function TransactionList() {
           </div>
         ))}
       </div>
+      <CreateTransaction isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }
