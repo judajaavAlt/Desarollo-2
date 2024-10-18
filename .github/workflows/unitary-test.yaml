@@ -34,11 +34,6 @@ jobs:
         image: sonarqube:latest
         ports:
           - 9000:9000
-        options: > 
-          --health-cmd "curl -s http://localhost:9000/api/system/health | grep -o 'UP' || exit 1" 
-          --health-interval 10s 
-          --health-timeout 5s 
-          --health-retries 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
