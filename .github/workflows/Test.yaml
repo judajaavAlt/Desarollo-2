@@ -1,0 +1,63 @@
+name: Test
+run-name: checking
+
+on:
+    pull_request:
+        branches: 
+        - develop
+        types:
+        - opened
+        - synchronize
+        - reopened
+jobs:
+  UnitaryTest:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 22
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run tests
+      run: npm run test:unitary
+    
+  CoverageTest:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 22
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run coverage tests
+      run: npm run test:coverage
+    
+  StylingGuides:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 22
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run style test
+      run: npm run lint
+    
