@@ -1,3 +1,3 @@
-const t = ()=>{expect(true).toBe(true)}
+const t = ()=>{expect(true).toBe(true);};
 
-test("prueba", t)
+test("prueba", t);
