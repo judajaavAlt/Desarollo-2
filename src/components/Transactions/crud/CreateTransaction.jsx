@@ -42,8 +42,7 @@ const CreateTransaction = ({ isOpen, onClose }) => {
                 <textarea></textarea>
             </div>
             <div className="button-group">
-                <button className="button-delete">Eliminar</button>
-                <button className="button-edit">Editar</button>
+                <button className="button-create">Crear</button>
             </div>
           </div>
         </div>

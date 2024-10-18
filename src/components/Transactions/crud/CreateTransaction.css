@@ -166,7 +166,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 
-  .button-delete, .button-edit {
+  .button-create {
     background-color: #FFDD77;
     padding: 12px 30px;
     border: none;
