@@ -1,9 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import  Page  from "../src/pages/page.jsx"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <h1>pagina</h1>
+    <Page />
   </StrictMode>,
 )
