@@ -1,3 +1,5 @@
-const t = ()=>{expect(true).toBe(true);};
+import { createWallet, deleteWallet, readWallet, updateWallet } from "../src/helpers/portWallets";
 
-test("prueba", t);
+const testCreateWallet = ()=>{return expect(createWallet).not.toThrow(null)};
+
+test("Create wallet test", testCreateWallet);
