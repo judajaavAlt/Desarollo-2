@@ -1,4 +1,4 @@
-import  supabase  from "../apis/supa-base-api.js"
+import  supabase  from "../apis/supa-base-api.js";
 import dayjs from 'dayjs';
 
 
