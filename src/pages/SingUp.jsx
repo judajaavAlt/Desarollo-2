@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Logo from "../components/Logo";
 import Decoracion from "../components/Decoracion";
 import Footer from "../components/Footer";
+import supabase from "../apis/supa-base-api";
 
 export default function SingUp() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,11 @@ export default function SingUp() {
     setCaptchaValue(value);
   };
 
-  function handleSingUp(e) {
+  async function handleSingUp(e) {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    })    
     e.preventDefault();
     if (!captchaValue) {
       const Toast = Swal.mixin({
