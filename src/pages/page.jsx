@@ -1,4 +1,4 @@
-import { deleteWallet } from "../helpers/portWallets.js"
+import { deleteWallet } from "../helpers/portWallets.js";
 
 
 const pagina = () => 
@@ -6,7 +6,7 @@ const pagina = () =>
         console.log(deleteWallet(31));
         return (
                 <h1>32</h1>
-        )
-    }
+        );
+    };
 
-export default pagina
+export default pagina;
