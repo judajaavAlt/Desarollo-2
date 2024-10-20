@@ -46,7 +46,7 @@ test("Create wallet test", testCreateWallet);
 // Prueba para leer una billetera específica
 const testReadWallet = () => {return expect(readWallet(1)).resolves.not.toBeNull();};
 
-test("Delete wallet handle Error test", testReadWallet);
+test("read wallet test", testReadWallet);
 
 //===============================================================================================================
 
