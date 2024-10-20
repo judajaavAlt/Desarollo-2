@@ -17,7 +17,7 @@ async function  createWallet(IwalletName, IwalletAmount, IwalletIcon, IuserID){
                                 .insert(data);
                                 
   if (error != null)
-  {throw new Error(error.message);}}
+  {throw error.message;}}
 
 // Read a wallet by user ID
 // Input: 
@@ -28,7 +28,7 @@ async function  readWallet(userID){
                                       .select()
                                       .eq("Wallet.userID", userID);
   if (data == null)
-  {throw new Error(error.message);}
+  {throw error.message;}
   else {return data;}}
 
 // Update an existing wallet
@@ -49,7 +49,7 @@ async function  updateWallet(walletID, IwalletName, IwalletAmount, IwalletIcon, 
                                 .update(data)
                                 .eq("walletID", walletID);
   if (error != null)
-  {throw new Error(error.message);}}
+  {throw error.message;}}
 
 // Delate a wallet by ID
 // Input: 
@@ -61,7 +61,7 @@ async function  deleteWallet(walletID){
                                       .eq("walletID", walletID)
                                       .select();
   if (data == null)
-  {throw new Error(error.message);}
+  {throw error.message;}
   else {return data;}}
 
 export { readWallet, createWallet, updateWallet, deleteWallet };
