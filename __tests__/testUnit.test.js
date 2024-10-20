@@ -1,6 +1,3 @@
-//<<<<<<< HEAD
-// __tests__/testUnit.test.js
-//=======
 import supabase from "../src/apis/supa-base-api";
 import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
 import { readTransaction } from '../src/helpers/portTransaccion';
@@ -66,9 +63,6 @@ describe('readTransaction', () => {
   });
 });
 
-
-
-
 // Prueba para la creación de la billetera
 const testCreateWallet = async () => {
   const IwalletName = 'Test Wallet';
@@ -123,4 +117,5 @@ const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(da
 test("Delete wallet sucess test", testDeleteWalletSuccess);
 
 const testDeleteWalletHandleError = () => {return expect(deleteWallet()).rejects.toThrow();};
+
 test("Delete wallet handle Error test", testDeleteWalletHandleError);
