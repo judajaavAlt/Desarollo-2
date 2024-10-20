@@ -24,7 +24,7 @@ async function createTransaction(ItransactionDate, ItransactionName, Itransactio
 
   if (error != null) {
     const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw Error(outPutError);
   }
 }
 
@@ -55,7 +55,7 @@ async function readTransaction(userID,month,year) {
                                                                             .lte('transactionDate', endDate);                                                                  
       if (transactionError) {
         const outPutError = "error code:"  + transactionError.code + ", error description:" + transactionError.message;
-        throw outPutError;
+        throw Error(outPutError);
       }
       else {return transactions;}
 
@@ -84,7 +84,7 @@ async function updateTransaction(transactionID, ItransactionDate, ItransactionNa
 
   if (error != null) {
     const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw Error(outPutError);
   }
 }
 
@@ -100,7 +100,7 @@ async function deleteTransaction(transactionID) {
 
   if (data == null) {
     const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw Error(outPutError);
 ;
   } else {
     return data;

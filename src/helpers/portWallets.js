@@ -19,7 +19,7 @@ async function  createWallet(IwalletName, IwalletAmount, IwalletIcon, IuserID){
   if (error != null)
   {
     const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw Error(outPutError);
   }}
 
 // Read a wallet by user ID
@@ -29,11 +29,11 @@ async function  createWallet(IwalletName, IwalletAmount, IwalletIcon, IuserID){
 async function  readWallet(userID){
   const {data, error} = await supabase.from("Wallet")
                                       .select()
-                                      .eq("Wallet.userID", userID);
+                                      .eq("userID", userID);
   if (data == null)
   {
     const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw Error(outPutError);
   }
   else {return data;}}
 
@@ -57,7 +57,7 @@ async function  updateWallet(walletID, IwalletName, IwalletAmount, IwalletIcon, 
   if (error != null)
   {
     const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw Error(outPutError);
   }}
 
 // Delate a wallet by ID
@@ -72,7 +72,7 @@ async function deleteWallet(walletID){
   if (data == null)
   {
     const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw Error(outPutError);
   }
   else {return data;}}
 
