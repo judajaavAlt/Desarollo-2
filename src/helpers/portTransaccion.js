@@ -23,8 +23,7 @@ async function createTransaction(ItransactionDate, ItransactionName, Itransactio
                                   .insert(data);
 
   if (error != null) {
-    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw new Error(error);
   }
 }
 
@@ -52,10 +51,10 @@ async function readTransaction(userID,month,year) {
                                                                             .select()
                                                                             .in("destination", walletIDs)
                                                                             .gte('transactionDate', startDate)  
-                                                                            .lte('transactionDate', endDate);                                                                  
+                                                                            .lte('transactionDate', endDate); 
+      console.log(transactions);                                                                      
       if (transactionError) {
-        const outPutError = "error code:"  + transactionError.code + ", error description:" + transactionError.message;
-        throw outPutError;
+        throw new Error(transactionError.message);
       }
       else {return transactions;}
 
@@ -83,8 +82,7 @@ async function updateTransaction(transactionID, ItransactionDate, ItransactionNa
                                   .eq("transactionID", transactionID);
 
   if (error != null) {
-    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
+    throw new Error(error);
   }
 }
 
@@ -99,9 +97,7 @@ async function deleteTransaction(transactionID) {
                                         .select();
 
   if (data == null) {
-    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
-    throw outPutError;
-;
+    throw new Error(error);
   } else {
     return data;
   }
