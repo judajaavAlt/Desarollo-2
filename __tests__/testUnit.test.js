@@ -9,7 +9,7 @@ const testCreateWallet = async () => {
   const IwalletIcon = 'test_icon.png';
   const IuserID = 1;
 
-  try {
+
     // Llama a la funcion que se encarga de crear la billetera
     await expect(createWallet(IwalletName, IwalletAmount, IwalletIcon, IuserID)).resolves.not.toThrow(Error);
 
@@ -38,12 +38,10 @@ const testCreateWallet = async () => {
     if (deleteError) {
       throw new Error("Error al eliminar la billetera: " + deleteError.message);
     }
-  } catch (error) {
-    throw error; // Re-lanzar el error para que la prueba falle si hay un problema
-  }
+  
 };
 
-// Realiza la prueba con Jest
+//Realiza la prueba con Jest
 test("Create wallet test", testCreateWallet);
 
 
