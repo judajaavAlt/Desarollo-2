@@ -23,7 +23,7 @@ async function createTransaction(ItransactionDate, ItransactionName, Itransactio
                                   .insert(data);
 
   if (error != null) {
-    throw new Error(error.message);
+    throw error.message;
   }
 }
 
@@ -54,7 +54,7 @@ async function readTransaction(userID,month,year) {
                                                                             .lte('transactionDate', endDate); 
       console.log(transactions);                                                                      
       if (transactionError) {
-        throw new Error(transactionError.message);
+        throw transactionError.message;
       }
       else {return transactions;}
 
@@ -82,7 +82,7 @@ async function updateTransaction(transactionID, ItransactionDate, ItransactionNa
                                   .eq("transactionID", transactionID);
 
   if (error != null) {
-    throw new Error(error.message);
+    throw error.message;
   }
 }
 
@@ -97,7 +97,7 @@ async function deleteTransaction(transactionID) {
                                         .select();
 
   if (data == null) {
-    throw new Error(error.message);
+    throw error.message;
   } else {
     return data;
   }

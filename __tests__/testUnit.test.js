@@ -1,6 +1,6 @@
 // Importa solo las funciones que necesitas
 import supabase from "../src/apis/supa-base-api";
-import { createWallet, deleteWallet } from "../src/helpers/portWallets";
+import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
 
 // Prueba para la creación de la billetera
 const testCreateWallet = async () => {
@@ -49,3 +49,8 @@ const testCreateWallet = async () => {
 
 // Realiza la prueba con Jest
 test("Create wallet test", testCreateWallet);
+
+
+const testReadWallet = ()=>{return expect(readWallet).not.toThrow(Error);};
+
+test("Read wallet test", testReadWallet);
