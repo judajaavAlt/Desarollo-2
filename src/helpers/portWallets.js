@@ -17,7 +17,10 @@ async function  createWallet(IwalletName, IwalletAmount, IwalletIcon, IuserID){
                                 .insert(data);
                                 
   if (error != null)
-  {throw new Error (error.message);}}
+  {
+    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
+    throw outPutError;
+  }}
 
 // Read a wallet by user ID
 // Input: 
@@ -67,7 +70,10 @@ async function deleteWallet(walletID){
                                       .eq("walletID", walletID)
                                       .select();
   if (data == null)
-  {throw new Error (error.message);}
+  {
+    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
+    throw outPutError;
+  }
   else {return data;}}
 
 export { readWallet, createWallet, updateWallet, deleteWallet };

@@ -122,3 +122,5 @@ const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(da
 
 test("Delete wallet sucess test", testDeleteWalletSuccess);
 
+const testDeleteWalletHandleError = () => {return expect(deleteWallet()).rejects.toThrow();};
+test("Delete wallet handle Error test", testDeleteWalletHandleError);
