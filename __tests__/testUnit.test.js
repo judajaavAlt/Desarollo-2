@@ -1,5 +1,8 @@
 //<<<<<<< HEAD
 // __tests__/testUnit.test.js
+//=======
+import supabase from "../src/apis/supa-base-api";
+import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
 import { readTransaction } from '../src/helpers/portTransaccion';
 import { from as mockFrom } from '../src/apis/supa-base-api.js'; // Importamos para poder sobrescribir
 
@@ -64,10 +67,7 @@ describe('readTransaction', () => {
 });
 
 
-//=======
-// Importa solo las funciones que necesitas
-import supabase from "../src/apis/supa-base-api";
-import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
+
 
 // Prueba para la creación de la billetera
 const testCreateWallet = async () => {
