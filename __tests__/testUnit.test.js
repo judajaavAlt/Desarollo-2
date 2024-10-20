@@ -1,4 +1,3 @@
-import supabase from "../src/apis/supa-base-api";
 import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
 
 // Prueba para la creación de la billetera
