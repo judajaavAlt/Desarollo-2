@@ -23,7 +23,7 @@ async function createTransaction(ItransactionDate, ItransactionName, Itransactio
                                   .insert(data);
 
   if (error != null) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 
@@ -82,7 +82,7 @@ async function updateTransaction(transactionID, ItransactionDate, ItransactionNa
                                   .eq("transactionID", transactionID);
 
   if (error != null) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 
@@ -97,7 +97,7 @@ async function deleteTransaction(transactionID) {
                                         .select();
 
   if (data == null) {
-    throw new Error(error);
+    throw new Error(error.message);
   } else {
     return data;
   }
