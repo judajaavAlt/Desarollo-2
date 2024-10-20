@@ -1,0 +1,85 @@
+.info-group {
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+.info-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.info-group input, .date-group input {
+    width: 492px;
+    padding: 2px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    transition: border-color .5s;
+}
+
+
+.info-group input:focus, .date-group input:focus {
+    border-color: #333;
+}
+
+.info-group select {
+    width: 150px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    color: #1e9532;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+.info-group select:focus {
+    border-color: #1e9532;
+    box-shadow: 0 0 10px rgba(136, 136, 136, 0.5);
+}
+
+.info-group textarea {
+    width: 494px;
+    font-size: 1rem;
+    height: 67px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    resize: none;
+}
+
+textarea:focus {
+    border-color: #1e9532;
+    box-shadow: 0 0 10px rgba(136, 136, 136, 0.5);
+}
+
+textarea::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra de scroll vertical*/ 
+}
+
+textarea::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Color del fondo del track */
+    border-radius: 10px; /* Bordes redondeados para el track */
+} 
+
+textarea::-webkit-scrollbar-thumb {
+    background: #888; /* Color de la barra de scroll */
+    border-radius: 10px; /* Bordes redondeados para el thumb */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+ textarea::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cambia el color al pasar el cursor*/ 
+} 
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

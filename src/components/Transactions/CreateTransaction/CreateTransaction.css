@@ -1,0 +1,26 @@
+/* Estilos existentes para el input de tipo number */
+input[type="number"] {
+    width: 492px;
+    padding: 2px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    transition: border-color .5s;
+}
+
+/* Estilos específicos para el input de tipo date */
+input[type="date"] {
+    width: 492px;
+    padding: 2px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #ddd; /* Cambia el color del borde */
+    outline: none;
+    transition: border-color .5s;
+    color: #1e9532; /* Cambia el color del texto */
+}
+
+input[type="date"]:focus {
+    border-color: #333; /* Cambia el color del borde al enfocar */
+}

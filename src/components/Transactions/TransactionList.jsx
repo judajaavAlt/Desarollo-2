@@ -1,4 +1,4 @@
-import CreateTransaction from "./crud/CreateTransaction";
+import CreateTransaction from "./CreateTransaction/CreateTransaction";
 import { useState } from "react";
 
 
