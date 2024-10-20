@@ -115,4 +115,10 @@ test("Create wallet test", testCreateWallet);
 const testReadWallet = ()=>{return expect(readWallet).not.toThrow(Error);};
 
 test("Read wallet test", testReadWallet);
-//>>>>>>> eb1463dd54aaa420f6522ecc0dd5292a37a5e12c
+
+//===============================================================================================================
+
+const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(data).not.toBeNull();});};
+
+test("Delete wallet sucess test", testDeleteWalletSuccess);
+
