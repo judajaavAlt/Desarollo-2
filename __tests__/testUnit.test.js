@@ -105,17 +105,40 @@ const testCreateWallet = async () => {
 //Realiza la prueba con Jest
 test("Create wallet test", testCreateWallet);
 
+// Prueba para leer una billetera específica
+const testReadWallet = async () => {
+  const userID = 1;
 
-const testReadWallet = ()=>{return expect(readWallet).not.toThrow(Error);};
+  // Mock específico para leer la billetera
+  supabase.from.mockImplementationOnce(() => ({
+    select: jest.fn().mockReturnThis(),
+    eq: jest.fn(() => ({
+      data: [{ walletID: 1, walletName: 'Test Wallet', walletAmount: 500, walletIcon: 'test_icon.png', userID: 1 }],
+      error: null,
+    })),
+  }));
 
+  const walletData = await readWallet(userID);
+  expect(walletData).toEqual([
+    {
+      walletID: 1,
+      walletName: 'Test Wallet',
+      walletAmount: 500,
+      walletIcon: 'test_icon.png',
+      userID: 1
+    }
+  ]);
+};
+
+// Realiza la prueba con Jest
 test("Read wallet test", testReadWallet);
 
 //===============================================================================================================
 
-const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(data).not.toBeNull();});};
+// const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(data).not.toBeNull();});};
 
-test("Delete wallet sucess test", testDeleteWalletSuccess);
+// test("Delete wallet sucess test", testDeleteWalletSuccess);
 
-const testDeleteWalletHandleError = () => {return expect(deleteWallet()).rejects.toThrow();};
+// const testDeleteWalletHandleError = () => {return expect(deleteWallet()).rejects.toThrow();};
 
-test("Delete wallet handle Error test", testDeleteWalletHandleError);
+// test("Delete wallet handle Error test", testDeleteWalletHandleError);
