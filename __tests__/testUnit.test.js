@@ -1,6 +1,3 @@
-//<<<<<<< HEAD
-// __tests__/testUnit.test.js
-//=======
 import supabase from "../src/apis/supa-base-api";
 import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
 import { readTransaction } from '../src/helpers/portTransaccion';
@@ -112,7 +109,7 @@ const testCreateWallet = async () => {
 test("Create wallet test", testCreateWallet);
 
 
-const testReadWallet = ()=>{return expect(readWallet).not.toThrow(Error);};
+//const testReadWallet = ()=>{return expect(readWallet).not.toThrow(Error);};
 
-test("Read wallet test", testReadWallet);
-//>>>>>>> eb1463dd54aaa420f6522ecc0dd5292a37a5e12c
+//test("Read wallet test", testReadWallet);
+
