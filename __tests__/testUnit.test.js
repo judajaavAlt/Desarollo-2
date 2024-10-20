@@ -32,17 +32,13 @@ const testCreateWallet = async () => {
 
     // Toma el ID de la billetera para eliminarla
     const walletID = wallets[0].walletID;
-    console.log("Billetera creada correctamente:", walletID);
     const { error: deleteError } = await deleteWallet(walletID);
 
     // Verifica si hubo un error al eliminar
     if (deleteError) {
       throw new Error("Error al eliminar la billetera: " + deleteError.message);
     }
-    //En caso de que se elimine correctamente se muestra el siguiente mensaje
-    console.log("Billetera eliminada correctamente:", walletID);
   } catch (error) {
-    console.error("Error al crear o eliminar la billetera:", error.message); // Imprimir mensaje de error legible
     throw error; // Re-lanzar el error para que la prueba falle si hay un problema
   }
 };
