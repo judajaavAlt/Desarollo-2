@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import Modal from "../../generics/Modal/Modal";
 import InfoGroup from "../../generics/InfoGroup/InfoGroup";

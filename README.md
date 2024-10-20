@@ -9,3 +9,7 @@
 # Se crean componentes genericos Modal, Button, e InfoGroup 
 # con sus respectivos estilos para reutilizarlos en otros componentes, 
 # se crea los componentes ReadTransaction.jsx y ReadTransaction.css.
+
+# Snapshot-10-20 :
+# Se creo el componente genérico SmallModal con su respectivo estilo,
+# Se crearon los componentes UpdateTransaction y DeleteTransaction.
