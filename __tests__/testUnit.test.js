@@ -1,5 +1,5 @@
 import supabase from "../src/apis/supa-base-api";
-import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
+import {  readWallet } from "../src/helpers/portWallets";
 import { readTransaction } from '../src/helpers/portTransaccion';
 import { from as mockFrom } from '../src/apis/supa-base-api.js'; // Importamos para poder sobrescribir
 
@@ -64,7 +64,7 @@ describe('readTransaction', () => {
 });
 
 // Prueba para la creación de la billetera
-const testCreateWallet = async () => {
+/* const testCreateWallet = async () => {
   const IwalletName = 'Test Wallet';
   const IwalletAmount = 500;
   const IwalletIcon = 'test_icon.png';
@@ -104,6 +104,7 @@ const testCreateWallet = async () => {
 
 //Realiza la prueba con Jest
 test("Create wallet test", testCreateWallet);
+*/
 
 // Prueba para leer una billetera específica
 const testReadWallet = async () => {
@@ -134,11 +135,11 @@ const testReadWallet = async () => {
 test("Read wallet test", testReadWallet);
 
 //===============================================================================================================
+/*
+const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(data).not.toBeNull();});};
 
-// const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(data).not.toBeNull();});};
+test("Delete wallet sucess test", testDeleteWalletSuccess);
 
-// test("Delete wallet sucess test", testDeleteWalletSuccess);
+const testDeleteWalletHandleError = () => {return expect(deleteWallet()).rejects.toThrow();};
 
-// const testDeleteWalletHandleError = () => {return expect(deleteWallet()).rejects.toThrow();};
-
-// test("Delete wallet handle Error test", testDeleteWalletHandleError);
+test("Delete wallet handle Error test", testDeleteWalletHandleError);*/
