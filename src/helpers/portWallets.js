@@ -17,7 +17,7 @@ async function  createWallet(IwalletName, IwalletAmount, IwalletIcon, IuserID){
                                 .insert(data);
                                 
   if (error != null)
-  {throw new Error(error.message);}}
+  {throw new Error (error.message);}}
 
 // Read a wallet by user ID
 // Input: 
@@ -53,7 +53,7 @@ async function  updateWallet(walletID, IwalletName, IwalletAmount, IwalletIcon, 
 
 // Delate a wallet by ID
 // Input: 
-//       Int walletID: ID of the wallet to delate
+//       Int walletID: ID of the wallet to delete
 // Returns: Nothing
 async function  deleteWallet(walletID){
   const {data, error} = await supabase.from("Wallet")
@@ -61,7 +61,7 @@ async function  deleteWallet(walletID){
                                       .eq("walletID", walletID)
                                       .select();
   if (data == null)
-  {throw new Error(error.message);}
+  {throw new Error (error.message);}
   else {return data;}}
 
 export { readWallet, createWallet, updateWallet, deleteWallet };
