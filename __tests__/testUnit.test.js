@@ -63,9 +63,6 @@ describe('readTransaction', () => {
   });
 });
 
-
-
-
 // Prueba para la creación de la billetera
 const testCreateWallet = async () => {
   const IwalletName = 'Test Wallet';
@@ -109,7 +106,7 @@ const testCreateWallet = async () => {
 test("Create wallet test", testCreateWallet);
 
 
-//const testReadWallet = ()=>{return expect(readWallet).not.toThrow(Error);};
+const testReadWallet = ()=>{return expect(readWallet).not.toThrow(Error);};
 
-//test("Read wallet test", testReadWallet);
+test("Read wallet test", testReadWallet);
 
