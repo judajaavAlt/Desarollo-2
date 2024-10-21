@@ -23,7 +23,8 @@ async function createTransaction(ItransactionDate, ItransactionName, Itransactio
                                   .insert(data);
 
   if (error != null) {
-    throw new Error(error);
+    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
+    throw Error(outPutError);
   }
 }
 
@@ -51,10 +52,10 @@ async function readTransaction(userID,month,year) {
                                                                             .select()
                                                                             .in("destination", walletIDs)
                                                                             .gte('transactionDate', startDate)  
-                                                                            .lte('transactionDate', endDate); 
-      console.log(transactions);                                                                      
+                                                                            .lte('transactionDate', endDate);                                                                  
       if (transactionError) {
-        throw new Error(transactionError.message);
+        const outPutError = "error code:"  + transactionError.code + ", error description:" + transactionError.message;
+        throw Error(outPutError);
       }
       else {return transactions;}
 
@@ -82,7 +83,8 @@ async function updateTransaction(transactionID, ItransactionDate, ItransactionNa
                                   .eq("transactionID", transactionID);
 
   if (error != null) {
-    throw new Error(error);
+    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
+    throw Error(outPutError);
   }
 }
 
@@ -97,7 +99,9 @@ async function deleteTransaction(transactionID) {
                                         .select();
 
   if (data == null) {
-    throw new Error(error);
+    const outPutError = "error code:"  + error.code + ", error description:" + error.message;
+    throw Error(outPutError);
+;
   } else {
     return data;
   }
