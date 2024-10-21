@@ -1,5 +1,5 @@
 import supabase from "../src/apis/supa-base-api";
-import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
+import { createWallet, deleteWallet, readWallet, updateWallet } from "../src/helpers/portWallets";
 import { createTransaction,deleteTransaction } from '../src/helpers/portTransaccion';
 
 // Prueba para la creación de la billetera
@@ -133,3 +133,67 @@ test("Delete transaction sucess test", testDeleteTransactionSuccess);
 const testDeleteTransactionHandleError = () => {return expect(deleteTransaction()).rejects.toThrow();};
 
 test("Delete transaction handle Error test", testDeleteTransactionHandleError);
+//===============================================================================================================
+
+// Prueba para actualizar una billetera
+const testUpdateWallet = async () => {
+  const walletName = 'Wallet to Update';
+  const walletAmount = 1000;
+  const walletIcon = 'old_icon.png';
+  const userID = 1;
+
+  // Crear una billetera que se va a actualizar
+  await createWallet(walletName, walletAmount, walletIcon, userID);
+
+  // Seleccionar la billetera creada para obtener su ID
+  const { data: wallets, error: selectError } = await supabase
+    .from("Wallet")
+    .select("*")
+    .eq("walletName", walletName)
+    .eq("userID", userID)
+    .eq("walletAmount", walletAmount)
+    .eq("walletIcon", walletIcon);
+
+  if (selectError) {
+    throw new Error("Error al seleccionar la billetera: " + selectError.message);
+  }
+
+  if (!wallets || wallets.length === 0) {
+    throw new Error("No se encontró la billetera creada");
+  }
+
+  const walletID = wallets[0].walletID;
+
+  // Definir nuevos valores para la actualización
+  const newWalletName = 'Updated Wallet';
+  const newWalletAmount = 1500;
+  const newWalletIcon = 'new_icon.png';
+
+  // Llamar a la función de actualización
+  await expect(updateWallet(walletID, newWalletName, newWalletAmount, newWalletIcon, userID)).resolves.not.toThrow(Error);
+
+  // Verificar que la billetera se haya actualizado correctamente
+  const { data: updatedWallets, error: updatedSelectError } = await supabase
+    .from("Wallet")
+    .select("*")
+    .eq("walletID", walletID);
+
+  if (updatedSelectError) {
+    throw new Error("Error al seleccionar la billetera actualizada: " + updatedSelectError.message);
+  }
+
+  if (!updatedWallets || updatedWallets.length === 0) {
+    throw new Error("No se encontró la billetera actualizada");
+  }
+
+  // Comprobar que los valores han cambiado
+  expect(updatedWallets[0].walletName).toBe(newWalletName);
+  expect(updatedWallets[0].walletAmount).toBe(newWalletAmount);
+  expect(updatedWallets[0].walletIcon).toBe(newWalletIcon);
+
+  // Eliminar la billetera creada para limpiar
+  await deleteWallet(walletID);
+};
+
+// Realiza la prueba con Jest
+test("Update wallet test", testUpdateWallet);
