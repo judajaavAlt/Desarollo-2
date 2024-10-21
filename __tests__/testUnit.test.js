@@ -1,7 +1,7 @@
 import supabase from "../src/apis/supa-base-api";
 import dayjs from "dayjs";
 import { createWallet, deleteWallet, readWallet, updateWallet } from "../src/helpers/portWallets";
-import { createTransaction,deleteTransaction } from '../src/helpers/portTransaccion';
+import { createTransaction,deleteTransaction, readTransaction } from '../src/helpers/portTransaccion';
 
 // Prueba para la creación de la billetera
 const testCreateWallet = async () => {
@@ -142,31 +142,34 @@ const testReadTransaction = async () => {
   const ItransactionAmount = 100;
   const Idestination = 1; // ID de la billetera de destino (ejemplo)
   const Ifrom = 2; // ID de la billetera de origen (ejemplo)
+  const userID = 1; // ID del usuario (ajusta según sea necesario)
+  const month = dayjs().month() + 1; // Obtener el mes actual, +1 porque dayjs usa base 0
+  const year = dayjs().year(); // Obtener el año actual
 
   // Crear una nueva transacción
   await expect(
     createTransaction(ItransactionDate, ItransactionName, ItransactionAmount, Idestination, Ifrom)
   ).resolves.not.toThrow();
 
-  // Leer directamente de supabase para confirmar la creación
-  const { data: transactions, error } = await supabase
-    .from("Transaction")
-    .select("*")
-    .eq("transactionName", ItransactionName)
-    .eq("transactionAmount", ItransactionAmount)
-    .eq("destination", Idestination)
-    .eq("from", Ifrom);
+  // Llamar a readTransaction para recuperar las transacciones creadas
+  const transactions = await readTransaction(userID, month, year);
 
-  if (error) {
-    throw new Error("Error al leer la transacción directamente de supabase: " + error.message);
-  }
-
-  // Verificar que la transacción creada esté presente en los resultados
+  // Verificar que la transacción leída no sea nula y que contenga los datos esperados
   expect(transactions).not.toBeNull();
-  expect(transactions.length).toBeGreaterThan(0);
+  expect(transactions.length).toBeGreaterThan(0); // Asegúrate de que se hayan devuelto transacciones
+
+  // Verificar que al menos una transacción coincida con los datos de prueba
+  const transactionFound = transactions.find(transaction => 
+    transaction.transactionName === ItransactionName && 
+    transaction.transactionAmount === ItransactionAmount && 
+    transaction.destination === Idestination &&
+    transaction.from === Ifrom
+  );
+
+  expect(transactionFound).toBeDefined(); // Verifica que se encontró una transacción que coincida
 
   // Limpiar los datos de prueba eliminando la transacción creada
-  const transactionID = transactions[0].transactionID;
+  const transactionID = transactionFound.transactionID; // Asegúrate de tener el ID correcto de la transacción
   await expect(deleteTransaction(transactionID)).resolves.not.toThrow();
 };
 
