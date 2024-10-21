@@ -1,0 +1,113 @@
+/* Estilos existentes de modal */
+.modal { 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  max-width: 80%;
+}
+
+/* Botón de creación de movimiento */
+.create-movement-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f0c14b;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.create-movement-button:hover {
+  background-color: #ddb347;
+}
+
+/* --- NUEVOS ESTILOS PARA LA LISTA DE MOVIMIENTOS --- */
+
+.movements-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.movements-list h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.movements-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.movements-list ul li {
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movements-list ul li span {
+  font-weight: bold;
+}
+
+/* Estilo para la cantidad */
+.movements-list ul li .amount {
+  color: #333;
+  font-weight: bold;
+}
+
+.movements-list-container {
+  max-width: 45%; 
+  text-align: center;
+  background-color: #f3cc6a8a;
+  padding: 20px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden; 
+  box-sizing: border-box; 
+}
+/* Media queries para pantallas pequeñas */
+@media (max-width: 600px) {
+  .movements-list ul li {
+      font-size: 14px;
+      padding: 10px;
+      font-weight: bold;
+  }
+
+  .movements-list h2 {
+      font-size: 20px;
+      font-weight: bold;
+  }
+}
+
+

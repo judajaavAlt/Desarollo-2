@@ -1,0 +1,66 @@
+.update-movement {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .update-movement h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .update-movement input, .update-movement select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .categories {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+  }
+  
+  .category {
+    background-color: #f0c14b;
+    color: #333;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .category:hover {
+    background-color: #e7b634;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .save-btn, .cancel-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+  }
+  
+  .cancel-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+  }
+  

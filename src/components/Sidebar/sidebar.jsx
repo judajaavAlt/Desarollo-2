@@ -25,7 +25,7 @@ export default function Sidebar() {
       <nav className="sidebar-nav">
         <ul>
           <li>
-            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+            <NavLink to="/home" className={({ isActive }) => (isActive ? "active" : "")}>
               <img src={homeIcon} alt="Home Icon" className="icon" /> {/* Icono Home */}
               Home
             </NavLink>
