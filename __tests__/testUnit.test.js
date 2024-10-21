@@ -53,13 +53,13 @@ test("read wallet test", testReadWallet);
 const testCreateTransaction = async () => {
   const wallet1 = {
     name: 'Test Wallet 1',
-    amount: 100000000000000,
+    amount: 1000000000,
     icon: 'icon1.png',
     userID: 1
   };
   const wallet2 = {
     name: 'Test Wallet 2',
-    amount: 2000000000000,
+    amount: 2000000000,
     icon: 'icon2.png',
     userID: 1
   };
@@ -67,8 +67,7 @@ const testCreateTransaction = async () => {
   // Crear las dos billeteras
   await expect(createWallet(wallet1.name, wallet1.amount, wallet1.icon, wallet1.userID)).resolves.not.toThrow(Error);
   await expect(createWallet(wallet2.name, wallet2.amount, wallet2.icon, wallet2.userID)).resolves.not.toThrow(Error);
-
-  // Obtener los IDs de las billeteras creadas
+  // Obtener las billeteras creadas
   const { data: wallets, error: selectError } = await supabase
     .from("Wallet")
     .select("*")
@@ -83,21 +82,21 @@ const testCreateTransaction = async () => {
   }
   
   //obtener IDs de las billeteras creadas
-  const walletID1 = wallets.find(w => w.walletName === wallet1.name).walletID;
-  const walletID2 = wallets.find(w => w.walletName === wallet2.name).walletID;
+  const walletID1 = wallets[0].walletID;
+  const walletID2 = wallets[1].walletID;
 
   // Crear la transacción usando los IDs de las billeteras
-  const transactionDate = new Date().toISOString();
-  const transactionName = 'Test Transaction';
-  const transactionAmount = 5000000000000;
+  const ItransactionDate = "2024/10/24";
+  const ItransactionName = 'Test Transaction';
+  const ItransactionAmount = 5000;
 
-  await expect(createTransaction(transactionDate, transactionName, transactionAmount, walletID1, walletID2)).resolves.not.toThrow(Error);
+  await expect(createTransaction(ItransactionDate, ItransactionName, ItransactionAmount, walletID1, walletID2)).resolves.not.toThrow(Error);
 
   const { data: transaction, error: trasanctionError } = await supabase
       .from("Transaction")
       .select()
-      .eq("transactionDate", transactionDate)
-      .eq("transactionName", transactionName)
+      .eq("transactionDate", ItransactionDate)
+      .eq("transactionName", ItransactionName)
       .eq("destination", walletID1)
       .eq("from", wallet2);
   if (selectError) {
@@ -114,6 +113,7 @@ const testCreateTransaction = async () => {
 
 // Realiza la prueba con Jest
 test("Create transaction test", testCreateTransaction);
+
 
 //============================================================================================================================================================================
 const testDeleteWalletSuccess = () => {deleteWallet(500).then(data => {expect(data).not.toBeNull();});};
