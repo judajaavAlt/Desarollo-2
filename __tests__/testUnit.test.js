@@ -1,5 +1,6 @@
 import supabase from "../src/apis/supa-base-api";
 import { createWallet, deleteWallet, readWallet } from "../src/helpers/portWallets";
+import { readTransaction, deleteTransaction } from '../src/helpers/portTransaccion';
 
 // Prueba para la creación de la billetera
 const testCreateWallet = async () => {
@@ -56,4 +57,14 @@ test("Delete wallet sucess test", testDeleteWalletSuccess);
 
 const testDeleteWalletHandleError = () => {return expect(deleteWallet()).rejects.toThrow();};
 
-test("Delete wallet handle Error test", testDeleteWalletHandleError);
+ test("Delete wallet handle Error test", testDeleteWalletHandleError);
+ 
+
+const testDeleteTransactionSuccess = () => {deleteTransaction(500).then(data => {expect(data).not.toBeNull();});};
+
+test("Delete transaction sucess test", testDeleteTransactionSuccess);
+
+
+const testDeleteTransactionHandleError = () => {return expect(deleteTransaction()).rejects.toThrow();};
+
+test("Delete transaction handle Error test", testDeleteTransactionHandleError);
