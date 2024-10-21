@@ -1,4 +1,5 @@
 import supabase from "../src/apis/supa-base-api";
+import dayjs from "dayjs";
 import { createWallet, deleteWallet, readWallet, updateWallet } from "../src/helpers/portWallets";
 import { createTransaction,deleteTransaction } from '../src/helpers/portTransaccion';
 
@@ -49,70 +50,6 @@ const testReadWallet = () => {return expect(readWallet(1)).resolves.not.toBeNull
 
 test("read wallet test", testReadWallet);
 
-//===============================================================================================================
-const testCreateTransaction = async () => {
-  const wallet1 = {
-    name: 'Test Wallet 1',
-    amount: 1000000000,
-    icon: 'icon1.png',
-    userID: 1
-  };
-  const wallet2 = {
-    name: 'Test Wallet 2',
-    amount: 2000000000,
-    icon: 'icon2.png',
-    userID: 1
-  };
-
-  // Crear las dos billeteras
-  await expect(createWallet(wallet1.name, wallet1.amount, wallet1.icon, wallet1.userID)).resolves.not.toThrow(Error);
-  await expect(createWallet(wallet2.name, wallet2.amount, wallet2.icon, wallet2.userID)).resolves.not.toThrow(Error);
-  // Obtener las billeteras creadas
-  const { data: wallets, error: selectError } = await supabase
-    .from("Wallet")
-    .select("*")
-    .in("walletName", [wallet1.name, wallet2.name]);
-
-  if (selectError) {
-    throw new Error("Error al seleccionar las billeteras: " + selectError.message);
-  }
-
-  if (!wallets || wallets.length !== 2) {
-    throw new Error("No se encontraron las billeteras recién creadas");
-  }
-  
-  //obtener IDs de las billeteras creadas
-  const walletID1 = wallets[0].walletID;
-  const walletID2 = wallets[1].walletID;
-
-  // Crear la transacción usando los IDs de las billeteras
-  const ItransactionDate = "2024/10/24";
-  const ItransactionName = 'Test Transaction';
-  const ItransactionAmount = 5000;
-
-  await expect(createTransaction(ItransactionDate, ItransactionName, ItransactionAmount, walletID1, walletID2)).resolves.not.toThrow(Error);
-
-  const { data: transaction, error: trasanctionError } = await supabase
-      .from("Transaction")
-      .select()
-      .eq("transactionDate", ItransactionDate)
-      .eq("transactionName", ItransactionName)
-      .eq("destination", walletID1)
-      .eq("from", wallet2);
-  if (selectError) {
-    throw new Error("Error al seleccionar la transaccion: " + trasanctionError.message);
-  }
-  const trasactionID = transaction[0].trasactionID;
-    
-  await expect(deleteTransaction(trasactionID)).resolves.not.toThrow(Error);  
-
-  // Borrar las billeteras creadas
-  await expect(deleteWallet(walletID1)).resolves.not.toThrow(Error);
-  await expect(deleteWallet(walletID2)).resolves.not.toThrow(Error);
-};
-
-// Realiza la prueba con Jest
-test("Create transaction test", testCreateTransaction);
 
 
 //============================================================================================================================================================================
@@ -133,6 +70,46 @@ test("Delete transaction sucess test", testDeleteTransactionSuccess);
 const testDeleteTransactionHandleError = () => {return expect(deleteTransaction()).rejects.toThrow();};
 
 test("Delete transaction handle Error test", testDeleteTransactionHandleError);
+
+// Prueba para leer una transacción específica
+const testReadTransaction = async () => {
+  // Configuración de los datos de prueba
+  const ItransactionDate = dayjs().format('YYYY-MM-DD'); // Fecha actual
+  const ItransactionName = "Test Transaction";
+  const ItransactionAmount = 100;
+  const Idestination = 1; // ID de la billetera de destino (ejemplo)
+  const Ifrom = 2; // ID de la billetera de origen (ejemplo)
+
+  // Crear una nueva transacción
+  await expect(
+    createTransaction(ItransactionDate, ItransactionName, ItransactionAmount, Idestination, Ifrom)
+  ).resolves.not.toThrow();
+
+  // Leer directamente de supabase para confirmar la creación
+  const { data: transactions, error } = await supabase
+    .from("Transaction")
+    .select("*")
+    .eq("transactionName", ItransactionName)
+    .eq("transactionAmount", ItransactionAmount)
+    .eq("destination", Idestination)
+    .eq("from", Ifrom);
+
+  if (error) {
+    throw new Error("Error al leer la transacción directamente de supabase: " + error.message);
+  }
+
+  // Verificar que la transacción creada esté presente en los resultados
+  expect(transactions).not.toBeNull();
+  expect(transactions.length).toBeGreaterThan(0);
+
+  // Limpiar los datos de prueba eliminando la transacción creada
+  const transactionID = transactions[0].transactionID;
+  await expect(deleteTransaction(transactionID)).resolves.not.toThrow();
+};
+
+// Test Jest
+test("read transaction test", testReadTransaction);
+
 //===============================================================================================================
 
 // Prueba para actualizar una billetera
