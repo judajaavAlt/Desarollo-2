@@ -1,7 +1,7 @@
 import supabase from "../src/apis/supa-base-api";
 import dayjs from "dayjs";
 import { createWallet, deleteWallet, readWallet, updateWallet } from "../src/helpers/portWallets";
-import { createTransaction,deleteTransaction } from '../src/helpers/portTransaccion';
+import { createTransaction,deleteTransaction, updateTransaction } from '../src/helpers/portTransaccion';
 
 // Prueba para la creación de la billetera
 const testCreateWallet = async () => {
@@ -237,3 +237,89 @@ const testUpdateWallet = async () => {
 
 // Realiza la prueba con Jest
 test("Update wallet test", testUpdateWallet);
+
+/* ************************************************************************************************************************ */
+//Test to update a transaction
+const testUpdateTransaction = async () => {
+  // Define the initial data to create a transaction
+  const initialTransactionDate = "2023-10-01";
+  const initialTransactionName = "Initial Transaction";
+  const initialTransactionAmount = 500;
+  const initialDestination = 2; // ID of the destination wallet
+  const initialFrom = 1; // ID of the source wallet
+
+  // Create an initial transaction to update later
+  await createTransaction(
+    initialTransactionDate,
+    initialTransactionName,
+    initialTransactionAmount,
+    initialDestination,
+    initialFrom
+  );
+
+  // Select the newly created transaction to get its ID
+  const { data: transactions, error: selectError } = await supabase
+    .from("Transaction")
+    .select("*")
+    .eq("transactionName", initialTransactionName)
+    .eq("transactionAmount", initialTransactionAmount)
+    .eq("destination", initialDestination)
+    .eq("from", initialFrom);
+
+  if (selectError) {
+    throw new Error("Error selecting the transaction: " + selectError.message);
+  }
+
+  if (!transactions || transactions.length === 0) {
+    throw new Error("The created transaction was not found");
+  }
+
+  const transactionID = transactions[0].transactionID;
+
+  // Define the new values to update the transaction
+  const newTransactionDate = "2023-11-01";
+  const newTransactionName = "Updated Transaction test Jtest";
+  const newTransactionAmount = 800;
+  const newDestination = 3; // New ID of the destination wallet (example)
+  const newFrom = 2; // New ID of the source wallet (example)
+
+  // Call the update function
+  await expect(
+    updateTransaction(
+      transactionID,
+      newTransactionDate,
+      newTransactionName,
+      newTransactionAmount,
+      newDestination,
+      newFrom
+    )
+  ).resolves.not.toThrow(Error);
+
+  // Verify that the transaction has been updated correctly
+  const { data: updatedTransactions, error: updatedSelectError } = await supabase
+    .from("Transaction")
+    .select("*")
+    .eq("transactionID", transactionID);
+
+  if (updatedSelectError) {
+    throw new Error("Error selecting the updated transaction: " + updatedSelectError.message);
+  }
+
+  if (!updatedTransactions || updatedTransactions.length === 0) {
+    throw new Error("The updated transaction was not found");
+  }
+
+  // Check that the values have changed correctly
+  expect(updatedTransactions[0].transactionDate).toBe(newTransactionDate);
+  expect(updatedTransactions[0].transactionName).toBe(newTransactionName);
+  expect(updatedTransactions[0].transactionAmount).toBe(newTransactionAmount);
+  expect(updatedTransactions[0].destination).toBe(newDestination);
+  expect(updatedTransactions[0].from).toBe(newFrom);
+
+  // Delete the created transaction to clean up the database
+  await deleteTransaction(transactionID);
+};
+
+// Run the test with Jest
+test("Update transaction test", testUpdateTransaction);
+
