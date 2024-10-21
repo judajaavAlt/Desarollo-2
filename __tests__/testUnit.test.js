@@ -45,10 +45,18 @@ const testCreateWallet = async () => {
 //Realiza la prueba con Jest
 test("Create wallet test", testCreateWallet);
 
+const testCreateWalletFailure = () => {return expect(createWallet()).rejects.toThrow();};
+
+test("create wallet handle Error test", testCreateWalletFailure);
+
 // Prueba para leer una billetera específica
 const testReadWallet = () => {return expect(readWallet(1)).resolves.not.toBeNull();};
 
 test("read wallet test", testReadWallet);
+
+const testReadWalletFailure = () => {return expect(readWallet()).rejects.toThrow();};
+
+test("read wallet handle Error test", testReadWalletFailure);
 
 //===============================================================================================================
 
