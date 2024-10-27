@@ -44,6 +44,7 @@ jest.mock('@supabase/supabase-js', () => {
 
 // Test related to the Wallet port
 test("Work readWallet test", ()=>{expect(readWallet()).resolves.not.toThrow();});
+test("Work createWallet test", ()=>{expect(createWallet()).resolves.not.toThrow();});
 
 // Test related to the Transaction port
 test("Work updateTransaction test", () => {expect(updateTransaction()).resolves.not.toThrow();});
