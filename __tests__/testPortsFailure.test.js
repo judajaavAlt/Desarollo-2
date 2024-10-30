@@ -55,4 +55,5 @@ jest.mock('@supabase/supabase-js', () => {
   test("Fail updateWallet test", ()=>{expect(updateWallet()).rejects.toThrow();});
 
   // Test related to the Transaction port
+  test("Fail readTransaction test", ()=>{expect(readTransaction()).rejects.toThrow();});
   test("Fail updateTransaction test", () => {expect(updateTransaction()).rejects.toThrow();});
