@@ -57,3 +57,4 @@ jest.mock('@supabase/supabase-js', () => {
   // Test related to the Transaction port
   test("Fail readTransaction test", ()=>{expect(readTransaction()).rejects.toThrow();});
   test("Fail updateTransaction test", () => {expect(updateTransaction()).rejects.toThrow();});
+  test("Fail deleteTrasanction test", () => {expect(deleteTransaction()).rejects.toThrow();});
