@@ -3,7 +3,7 @@ import { createWallet, readWallet, updateWallet, deleteWallet } from "../src/hel
 
 // Mocks the supabase api so it always throws error
 
-const select = jest.fn(() => ({
+const mockSelect = jest.fn(() => ({
     eq: jest.fn(() => ({
       data: null, 
       error: {message: "FailTest", code: "32"} 
@@ -18,13 +18,13 @@ const select = jest.fn(() => ({
     }))
   }));
 
-const update = jest.fn(() => ({
+const mockUpdate = jest.fn(() => ({
     eq: jest.fn(() => ({
       error: {message: "FailTest", code: "32"} 
     }))
   }));
 
-const fnDelete = jest.fn(() => ({
+const mockDelete = jest.fn(() => ({
     eq: jest.fn(() => ({
       select: jest.fn(() => ({
         data: null,
@@ -37,13 +37,13 @@ jest.mock('@supabase/supabase-js', () => {
     return {
       createClient: jest.fn(() => ({
         from: jest.fn(() => ({
-          select: select,
+          select: mockSelect,
           insert: jest.fn(() => ({
               error: {message: "FailTest", code: "32"} 
             })
           ),
-          update: update,
-          delete: fnDelete
+          update: mockUpdate,
+          delete: mockDelete
         })),
       })),
     };

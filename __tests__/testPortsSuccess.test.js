@@ -2,7 +2,7 @@ import { createTransaction, readTransaction, updateTransaction, deleteTransactio
 import { createWallet, readWallet, updateWallet, deleteWallet } from "../src/helpers/portWallets";
 
 // Mocks the supabase api so it always works
-const select = jest.fn(() => ({
+const mockSelect = jest.fn(() => ({
     eq: jest.fn(() => ({
       data: [], 
       error: null 
@@ -17,7 +17,7 @@ const select = jest.fn(() => ({
     }))
   }));
 
-const fnDelete = jest.fn(() => ({
+const mockDelete = jest.fn(() => ({
     eq: jest.fn(() => ({
       select: jest.fn(() => ({
         data: [],
@@ -26,7 +26,7 @@ const fnDelete = jest.fn(() => ({
     }))
   }));
 
-const update = jest.fn(() => ({
+const mockUpdate = jest.fn(() => ({
     eq: jest.fn(() => ({
       error: null
     }))
@@ -36,13 +36,13 @@ jest.mock('@supabase/supabase-js', () => {
   return {
     createClient: jest.fn(() => ({
       from: jest.fn(() => ({
-        select: select,
+        select: mockSelect,
         insert: jest.fn(() => ({
             error: null
           })
         ),
-        update: update,
-        delete: fnDelete
+        update: mockUpdate,
+        delete: mockDelete
       })),
     })),
   };
