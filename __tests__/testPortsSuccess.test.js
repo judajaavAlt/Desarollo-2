@@ -57,3 +57,4 @@ test("Work updateWallet test", ()=>{expect(updateWallet()).resolves.not.toThrow(
 test("Work readTransaction test", ()=>{expect(readTransaction()).resolves.not.toThrow();});
 test("Work updateTransaction test", () => {expect(updateTransaction()).resolves.not.toThrow();});
 test("Work deleteTransaction test", () => {expect(deleteTransaction()).resolves.not.toThrow();});
+test("Work createTransaction test", () => {expect(createTransaction()).resolves.not.toThrow();});
