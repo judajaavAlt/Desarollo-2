@@ -1,0 +1,15 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .home-graphic-section {
+    width: 100%;
+    margin-bottom: 30px; /* Ajusta este valor según el espacio que necesites */
+  }
+  
+  .home-movements-section {
+    width: 100%;
+  }
+  
