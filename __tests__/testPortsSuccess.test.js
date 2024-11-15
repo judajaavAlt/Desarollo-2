@@ -1,4 +1,5 @@
 import { createTransaction, readTransaction, updateTransaction, deleteTransaction } from "../src/helpers/portTransaccion";
+import { createUser, deleteUser, readUser, updateUser } from "../src/helpers/portUsers";
 import { createWallet, readWallet, updateWallet, deleteWallet } from "../src/helpers/portWallets";
 
 // Mocks the supabase api so it always works
@@ -47,6 +48,12 @@ jest.mock('@supabase/supabase-js', () => {
     })),
   };
 });
+
+// Test related to the User port
+test("Work createUser test", ()=>{expect(createUser()).resolves.not.toThrow();});
+test("Work readUser test", ()=>{expect(readUser()).resolves.not.toThrow();});
+test("Work updateUser test", ()=>{expect(updateUser()).resolves.not.toThrow();});
+test("Work deleteUser test", ()=>{expect(deleteUser()).resolves.not.toThrow();});
 
 // Test related to the Wallet port
 test("Work readWallet test", ()=>{expect(readWallet()).resolves.not.toThrow();});
