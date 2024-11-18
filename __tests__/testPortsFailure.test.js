@@ -71,8 +71,8 @@ jest.mock('@supabase/supabase-js', () => {
 
   // Test related to the Categories port
   test("Fail readCategoriesByType test", () => {expect(readCategoriesByType()).rejects.toThrow();});
-  test("Fail updateCategory test", () => {expect(readCategoriesByType()).rejects.toThrow();});
-  test("Fail deleteCategory test", () => {expect(readCategoriesByType()).rejects.toThrow();});
-  test("Fail createCategory test", () => {expect(readCategoriesByType()).rejects.toThrow();});
+  test("Fail updateCategory test", () => {expect(updateCategory()).rejects.toThrow();});
+  test("Fail deleteCategory test", () => {expect(deleteCategory()).rejects.toThrow();});
+  test("Fail createCategory test", () => {expect(createCategory()).rejects.toThrow();});
 
   
