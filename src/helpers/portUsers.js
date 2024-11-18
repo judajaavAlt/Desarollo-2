@@ -68,7 +68,7 @@ async function deleteUser(userID) {
     const {data,error} = await supabase.from("User")
                                        .delete()
                                        .eq("userID", userID)
-                                       .select()
+                                       .select();
     if (data == null)
     {
         const outPutError = "error code:"  + error.code + ", error description:" + error.message;
@@ -76,5 +76,5 @@ async function deleteUser(userID) {
     }
     else {return data;}}
 
-export{createUser, readUser, updateUser, deleteUser}
+export{createUser, readUser, updateUser, deleteUser};
 
