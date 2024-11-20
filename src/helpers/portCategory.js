@@ -75,7 +75,6 @@ async function updateCategory({ categoryID, categoryName, categoryIcon, incomeOr
 //       Int categoryID: ID of the category to delete
 // Returns: Nothing
 async function deleteCategory({categoryID}) {
-  console.log(categoryID)
   const { data, error } = await supabase.from("Category")
                                         .delete()
                                         .eq("categoryID", categoryID)

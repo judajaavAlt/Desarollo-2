@@ -36,7 +36,7 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
     } else {
       setCat(data);
     }
-  }, [isCreate]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -71,10 +71,7 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
       return;
     }
 
-    // Si pasa validación, llamamos a onCreate
-
     action(cat, type);
-    onClose();
   };
 
   return (
@@ -139,10 +136,5 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
     </div>
   );
 }
-
-CreateCategoryModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
 
 export default CreateCategoryModal;

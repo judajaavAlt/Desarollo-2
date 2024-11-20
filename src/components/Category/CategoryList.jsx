@@ -15,51 +15,20 @@ const emojiDictionary = {
   chart: "📈",
 };
 
-/*
-const categories = [
-  {
-    categoryID: 1,
-    categoryName: "Food",
-    categoryIcon: "ham", // Clave que referencia el diccionario
-    incomeOrExpense: false,
-  },
-  {
-    categoryID: 2,
-    categoryName: "Salary",
-    categoryIcon: "money",
-    incomeOrExpense: true,
-  },
-  {
-    categoryID: 3,
-    categoryName: "Entertainment",
-    categoryIcon: "game",
-    incomeOrExpense: false,
-  },
-  {
-    categoryID: 4,
-    categoryName: "Investment",
-    categoryIcon: "chart",
-    incomeOrExpense: true,
-  },
-];
-*/
-
 function CategoryList() {
-  const usuario_id = 2;
+  const usuario_id = 1;
   const [typeCategory, setTypeCategory] = useState(true);
+  const [categories, setCategories] = useState([]);
   const [modalState, setModalState] = useState({
     isOpen: false,
     data: null,
     typeAction: "",
   });
 
-  const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     const traer = async () => {
       const kev = await readCategoriesByUserId(usuario_id);
       setCategories(kev);
-      console.log(kev);
     };
     traer();
   }, []);
@@ -100,15 +69,14 @@ function CategoryList() {
       alert("Hubo un error al procesar la solicitud. Inténtalo nuevamente.");
     } finally {
       console.log("Acción finalizada.");
-      // Aquí puedes realizar tareas que siempre deban ejecutarse
-      // por ejemplo, ocultar un spinner o restablecer un estado de carga.
       const kev = await readCategoriesByUserId(usuario_id);
       setCategories(kev);
+      closeModal();
     }
   };
 
   return (
-    <div className="transaction-list">
+    <div className="content">
       {
         //<SideBar><sideBar/>
       }

@@ -1,4 +1,8 @@
 /* Contenedor de los botones */
+.content {
+  background-color: #ffffff;
+}
+
 .toggle-buttons {
   display: flex;
   border-radius: 20px; /* Más redondeado */
