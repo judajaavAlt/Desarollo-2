@@ -1,7 +1,12 @@
 import CreateCategoryModal from "./crud/CreateCategory";
 import { useState } from "react";
 import "./CategoryList.css";
-import { createCategory } from "../../helpers/portCategory";
+import {
+  readCategoriesByType,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from "../../helpers/portCategory";
 
 const emojiDictionary = {
   ham: "🍔",
@@ -38,34 +43,46 @@ const categories = [
 ];
 
 function CategoryList() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeCategory, setTypeCategory] = useState(true);
-  const [active, setActive] = useState("ingresos");
-
-  const [cat, setCat] = useState({
-    categoryName: "",
-    categoryIcon: "",
-    incomeOrExpense: false,
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    data: null,
+    typeAction: "",
   });
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openCreateModal = () => {
+    setModalState({ isOpen: true, data: null, typeAction: "create" });
+  };
+
+  const openEditModal = (data) => {
+    setModalState({ isOpen: true, data: data, typeAction: "update" });
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setModalState({ isOpen: false, data: null, typeAction: "" });
   };
 
-  const onEditClick = () => {
-    console.log(cat);
-  };
+  const handleAction = async (cat, type) => {
+    const enhancedCat = {
+      ...cat,
+      incomeOrExpense: typeCategory,
+    };
+    console.log(enhancedCat);
 
-  const onCreateClick = () => {
-    console.log(cat);
+    const kev = await readCategoriesByType(true);
 
-    //createCategory(cat);
+    console.log(kev);
 
-    console.log("creadaaaaaaaaa");
+    if (type === "create") {
+      console.log("crearaaaaaaaaa");
+      // await  createCategory(enhancedCat);
+    } else if (type === "update") {
+      console.log("editttttttttttttttttttttttttt");
+      //updateCategory(enhancedCat);
+    } else {
+      console.log("eliminarrrrrrrrrrrrrrrrrrrrr");
+      //await  deleteCategory(enhancedCat);
+    }
   };
 
   return (
@@ -76,28 +93,14 @@ function CategoryList() {
 
       <div className="toggle-buttons">
         <button
-          className={`button ${active === "ingresos" ? "active" : ""}`}
-          onClick={() => {
-            setActive("ingresos");
-            setTypeCategory(true);
-            setCat((prevState) => ({
-              ...prevState,
-              incomeOrExpense: true,
-            }));
-          }}
+          className={`button ${typeCategory ? "active" : ""}`}
+          onClick={() => setTypeCategory(true)}
         >
           INGRESOS
         </button>
         <button
-          className={`button ${active === "egresos" ? "active" : ""}`}
-          onClick={() => {
-            setActive("egresos");
-            setTypeCategory(false);
-            setCat((prevState) => ({
-              ...prevState,
-              incomeOrExpense: false,
-            }));
-          }}
+          className={`button ${!typeCategory ? "active" : ""}`}
+          onClick={() => setTypeCategory(false)}
         >
           EGRESOS
         </button>
@@ -109,7 +112,15 @@ function CategoryList() {
           {categories.map((category) =>
             typeCategory === category.incomeOrExpense ? (
               <li key={category.categoryID} className="category-item">
-                <button onClick={onEditClick}>
+                <button
+                  onClick={() =>
+                    openEditModal({
+                      categoryID: category.categoryID,
+                      categoryName: category.categoryName,
+                      categoryIcon: category.categoryIcon,
+                    })
+                  }
+                >
                   <span>{emojiDictionary[category.categoryIcon]}</span>
                   <p>{category.categoryName}</p>
                 </button>
@@ -119,7 +130,7 @@ function CategoryList() {
 
           {/* Botón para crear */}
           <li className="category-item">
-            <button onClick={openModal}>
+            <button onClick={openCreateModal}>
               <span>➕</span>
               <p>Crear</p>
             </button>
@@ -128,11 +139,11 @@ function CategoryList() {
       </div>
 
       <CreateCategoryModal
-        isOpen={isModalOpen}
+        isOpen={modalState["isOpen"]}
         onClose={closeModal}
-        cat={cat}
-        setCat={setCat}
-        onCreate={onCreateClick}
+        data={modalState["data"]}
+        action={handleAction}
+        typeAction={modalState["typeAction"]}
       />
     </div>
   );

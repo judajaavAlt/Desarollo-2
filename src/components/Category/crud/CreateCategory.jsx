@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./CreateCategory.css"; // Asegúrate de tener estilos asociados
+import { deleteCategory } from "../../../helpers/portCategory";
 
 const emojiDictionary = {
   ham: "🍔",
@@ -9,8 +10,33 @@ const emojiDictionary = {
   chart: "📈",
 };
 
-function CreateCategoryModal({ isOpen, onClose, cat, setCat, onCreate }) {
+function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
   const [errors, setErrors] = useState({ name: false, icon: false });
+  const isCreate = !data;
+
+  const [cat, setCat] = useState(
+    data
+      ? data
+      : {
+          categoryID: "",
+          categoryName: "",
+          categoryIcon: "",
+          incomeOrExpense: "",
+        }
+  );
+
+  useEffect(() => {
+    if (isCreate) {
+      setCat({
+        categoryID: "",
+        categoryName: "",
+        categoryIcon: "",
+        incomeOrExpense: "",
+      });
+    } else {
+      setCat(data);
+    }
+  }, [isCreate]);
 
   if (!isOpen) return null;
 
@@ -36,7 +62,7 @@ function CreateCategoryModal({ isOpen, onClose, cat, setCat, onCreate }) {
   };
 
   // Validar datos antes de crear
-  const handleCreate = () => {
+  const handleCreate = (type) => {
     const hasNameError = !cat.categoryName.trim();
     const hasIconError = !cat.categoryIcon;
 
@@ -46,14 +72,16 @@ function CreateCategoryModal({ isOpen, onClose, cat, setCat, onCreate }) {
     }
 
     // Si pasa validación, llamamos a onCreate
-    onCreate();
+
+    action(cat, type);
+    onClose();
   };
 
   return (
     <div className="modal-overlay">
       <div className="modal">
         <div className="modal-header">
-          <h2>CREAR CATEGORÍA</h2>
+          <h2>{isCreate ? "CREAR CATEGORÍA" : "EDITAS"}</h2>
         </div>
 
         <div className="modal-body">
@@ -94,11 +122,17 @@ function CreateCategoryModal({ isOpen, onClose, cat, setCat, onCreate }) {
         </div>
 
         <div className="modal-footer">
-          <button className="create-button" onClick={handleCreate}>
-            Crear
+          <button
+            className="close-button"
+            onClick={isCreate ? onClose : () => handleCreate("delete")}
+          >
+            {isCreate ? "CANCELAR" : "BORRAR"}
           </button>
-          <button className="close-button" onClick={onClose}>
-            Cancelar
+          <button
+            className="create-button"
+            onClick={() => handleCreate(typeAction)}
+          >
+            {isCreate ? "CREAR" : "CONFIRMAR"}
           </button>
         </div>
       </div>
@@ -109,12 +143,6 @@ function CreateCategoryModal({ isOpen, onClose, cat, setCat, onCreate }) {
 CreateCategoryModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  cat: PropTypes.shape({
-    categoryName: PropTypes.string,
-    categoryIcon: PropTypes.string,
-  }).isRequired,
-  setCat: PropTypes.func.isRequired,
-  onCreate: PropTypes.func.isRequired,
 };
 
 export default CreateCategoryModal;

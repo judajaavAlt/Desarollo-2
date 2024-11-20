@@ -1,58 +1,67 @@
 /* Contenedor de los botones */
 .toggle-buttons {
   display: flex;
-  border-radius: 20px;
-  overflow: hidden; /* Bordes redondeados */
-  background-color: #f4f1eb; /* Fondo del contenedor */
+  border-radius: 20px; /* Más redondeado */
+  overflow: hidden; /* Bordes redondeados visibles */
+  background-color: #f4f1eb; /* Fondo neutro */
   width: fit-content;
   margin: 20px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 /* Estilo base de los botones */
 .button {
   border: none;
-  padding: 10px 100px;
+  padding: 15px 60px;
   cursor: pointer;
   background-color: transparent;
   font-weight: bold;
-  color: black;
-  font-size: 14px;
-  flex: 1; /* Ambos botones ocupan el mismo ancho */
-  transition: background-color 0.3s ease;
+  color: #333;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
-/* Estilo del botón activo */
+/* Botón activo */
 .button.active {
-  background-color: #ffc107; /* Color del botón activo */
+  background-color: #ffc107; /* Color amarillo */
   color: black;
+  border-radius: 20px; /* Mantén bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Sombra para destacar */
 }
 
-/* Efecto hover para botones inactivos */
+/* Hover en botones inactivos */
 .button:not(.active):hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Color gris claro */
+  background-color: rgba(0, 0, 0, 0.1); /* Fondo gris claro */
+  color: black;
+  border-radius: 20px; /* Mantén bordes redondeados */
 }
 
+/* Título */
 .title {
   display: block;
-  font-size: 2rem;
-  font-weight: bold; /* Texto en negrita */
-  margin-bottom: 5px;
-  color: #333; /* Color del texto */
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
 }
 
+/* Lista de categorías */
 .list-categories {
   display: flex;
-  justify-content: start; /* Alinea los elementos desde el borde izquierdo */
-  align-items: center; /* Alinea los elementos verticalmente al centro */
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias líneas */
+  justify-content: start; /* Alineación inicial */
+  gap: 20px; /* Espaciado uniforme entre los elementos */
+  padding: 0 20px; /* Espaciado a los lados */
 }
 
+/* Estilo de cada categoría */
 .category-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100px; /* Ajusta según sea necesario */
-  margin-right: 80px; /* Margen uniforme */
+  width: 100px;
   text-align: center;
   font-family: Arial, sans-serif;
 }
@@ -61,22 +70,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffd782; /* Color de fondo amarillo */
-  color: #5a3c00; /* Color del símbolo */
-  font-size: 24px; /* Tamaño del símbolo */
+  background-color: #ffd782; /* Amarillo cálido */
+  color: #5a3c00; /* Marrón oscuro */
+  font-size: 24px;
   font-weight: bold;
   width: 80px;
   height: 80px;
-  border-radius: 50%; /* Hace que el fondo sea circular */
-  border: 1px solid #000; /* Borde del círculo */
+  border-radius: 50%; /* Fondo circular */
+  border: 1px solid #ccc; /* Borde claro */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  transition: all 0.3s ease; /* Suaviza cambios */
 }
 
 .category-item p {
-  margin-top: 8px;
-  font-size: 24px;
-  color: #000; /* Color del texto */
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
 }
 
+/* Botón de cada categoría */
 .category-item button {
   display: flex;
   flex-direction: column;
@@ -84,17 +96,21 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  border: none; /* Sin bordes */
-  background: none; /* Sin fondo adicional */
+  border: none;
+  background: none;
   cursor: pointer;
   text-align: center;
-  padding: 0; /* Elimina el padding predeterminado */
+  padding: 0;
 }
 
+/* Hover en el ícono */
 .category-item button:hover span {
-  background-color: #f35e28; /* Efecto hover en el círculo */
+  background-color: #f35e28; /* Cambia a naranja intenso */
+  color: #fff; /* Texto blanco */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
 }
 
+/* Hover en el texto */
 .category-item button:hover p {
-  color: #805d11; /* Cambia el color del texto al pasar el mouse */
+  color: #805d11; /* Marrón más cálido */
 }
