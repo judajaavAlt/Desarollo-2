@@ -1,8 +1,8 @@
 import CreateCategoryModal from "./crud/CreateCategory";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./CategoryList.css";
 import {
-  readCategoriesByType,
+  readCategoriesByUserId,
   createCategory,
   updateCategory,
   deleteCategory,
@@ -15,6 +15,7 @@ const emojiDictionary = {
   chart: "📈",
 };
 
+/*
 const categories = [
   {
     categoryID: 1,
@@ -41,14 +42,27 @@ const categories = [
     incomeOrExpense: true,
   },
 ];
+*/
 
 function CategoryList() {
+  const usuario_id = 2;
   const [typeCategory, setTypeCategory] = useState(true);
   const [modalState, setModalState] = useState({
     isOpen: false,
     data: null,
     typeAction: "",
   });
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const traer = async () => {
+      const kev = await readCategoriesByUserId(usuario_id);
+      setCategories(kev);
+      console.log(kev);
+    };
+    traer();
+  }, []);
 
   const openCreateModal = () => {
     setModalState({ isOpen: true, data: null, typeAction: "create" });
@@ -66,22 +80,30 @@ function CategoryList() {
     const enhancedCat = {
       ...cat,
       incomeOrExpense: typeCategory,
+      userID: usuario_id,
     };
     console.log(enhancedCat);
 
-    const kev = await readCategoriesByType(true);
-
-    console.log(kev);
-
-    if (type === "create") {
-      console.log("crearaaaaaaaaa");
-      // await  createCategory(enhancedCat);
-    } else if (type === "update") {
-      console.log("editttttttttttttttttttttttttt");
-      //updateCategory(enhancedCat);
-    } else {
-      console.log("eliminarrrrrrrrrrrrrrrrrrrrr");
-      //await  deleteCategory(enhancedCat);
+    try {
+      if (type === "create") {
+        console.log("crearaaaaaaaaa");
+        await createCategory(enhancedCat);
+      } else if (type === "update") {
+        console.log("editttttttttttttttttttttttttt");
+        await updateCategory(enhancedCat);
+      } else {
+        console.log("eliminarrrrrrrrrrrrrrrrrrrrr");
+        await deleteCategory(enhancedCat);
+      }
+    } catch (e) {
+      console.error("Error en la acción:", e.message);
+      alert("Hubo un error al procesar la solicitud. Inténtalo nuevamente.");
+    } finally {
+      console.log("Acción finalizada.");
+      // Aquí puedes realizar tareas que siempre deban ejecutarse
+      // por ejemplo, ocultar un spinner o restablecer un estado de carga.
+      const kev = await readCategoriesByUserId(usuario_id);
+      setCategories(kev);
     }
   };
 

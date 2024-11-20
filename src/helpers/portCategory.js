@@ -5,31 +5,36 @@ import supabase from "../apis/supa-base-api.js";
 //       String categoryName: Name of the category
 //       String categoryIcon: Icon of the category
 //       String incomeOrExpense: Specifies if the category is for income or expense
+//       int    userID: Specifies the user relation with category
 // Returns: Nothing
-async function createCategory(IcategoryName, IcategoryIcon, IincomeOrExpense) {
+async function createCategory({ categoryName, categoryIcon, incomeOrExpense, userID }) {
   const data = {
-                categoryName: IcategoryName,
-                categoryIcon: IcategoryIcon,
-                incomeOrExpense: IincomeOrExpense
+    categoryName,
+    categoryIcon,
+    incomeOrExpense,
+    userID
   };
 
-  const { error } = await supabase.from("Category")
-                                  .insert(data);
+  try {
+    const { error } = await supabase.from("Category").insert(data);
 
-  if (error != null) {
-    const outPutError = "error code:" + error.code + ", error description:" + error.message;
-    throw Error(outPutError);
+    if (error) {
+      throw new Error(`Código: ${error.code}, Descripción: ${error.message}`);
+    }
+  } catch (error) {
+    console.error("Error al crear categoría:", error.message);
+    throw error; // Re-lanzamos el error para que lo maneje el componente
   }
 }
 
-// Read categories by type (income or expense)
+// Read categories by userId (userId)
 // Input: 
-//       String incomeOrExpense: Specifies if looking for income or expense categories
+//       int userId: Specifies categories to search according to userID
 // Returns: Array of categories
-async function readCategoriesByType(IincomeOrExpense) {
+async function readCategoriesByUserId(userId) {
   const { data, error } = await supabase.from("Category")
                                         .select()
-                                        .eq("incomeOrExpense", IincomeOrExpense);
+                                        .eq("userID", userId);
 
   if (data == null) {
     const outPutError = "error code:" + error.code + ", error description:" + error.message;
@@ -46,20 +51,22 @@ async function readCategoriesByType(IincomeOrExpense) {
 //       String categoryIcon: New icon of the category
 //       String incomeOrExpense: New type (income or expense) of the category
 // Returns: Nothing
-async function updateCategory(IcategoryID, IcategoryName, IcategoryIcon, IincomeOrExpense) {
+async function updateCategory({ categoryID, categoryName, categoryIcon, incomeOrExpense }) {
   const data = {
-    categoryName: IcategoryName,
-    categoryIcon: IcategoryIcon,
-    incomeOrExpense: IincomeOrExpense
+    categoryName,
+    categoryIcon,
+    incomeOrExpense,
   };
 
-  const { error } = await supabase.from("Category")
-                                  .update(data)
-                                  .eq("categoryID", IcategoryID);
+  try {
+    const { error } = await supabase.from("Category").update(data).eq("categoryID", categoryID);
 
-  if (error != null) {
-    const outPutError = "error code:" + error.code + ", error description:" + error.message;
-    throw Error(outPutError);
+    if (error) {
+      throw new Error(`Código: ${error.code}, Descripción: ${error.message}`);
+    }
+  } catch (error) {
+    console.error("Error al actualizar categoría:", error.message);
+    throw error; // Re-lanzamos el error para que lo maneje el componente
   }
 }
 
@@ -67,10 +74,11 @@ async function updateCategory(IcategoryID, IcategoryName, IcategoryIcon, Iincome
 // Input: 
 //       Int categoryID: ID of the category to delete
 // Returns: Nothing
-async function deleteCategory(IcategoryID) {
+async function deleteCategory({categoryID}) {
+  console.log(categoryID)
   const { data, error } = await supabase.from("Category")
                                         .delete()
-                                        .eq("categoryID", IcategoryID)
+                                        .eq("categoryID", categoryID)
                                         .select();
 
   if (data == null) {
@@ -81,4 +89,4 @@ async function deleteCategory(IcategoryID) {
   }
 }
 
-export { createCategory, readCategoriesByType, updateCategory, deleteCategory };
+export { createCategory, readCategoriesByUserId, updateCategory, deleteCategory };
