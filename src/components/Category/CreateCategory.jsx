@@ -28,6 +28,7 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
     } else {
       setCat(data);
     }
+    setErrors({ name: false, icon: false });
   }, [isOpen]);
 
   if (!isOpen) return null;
