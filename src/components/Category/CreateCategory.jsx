@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CreateCategory.css"; // Asegúrate de tener estilos asociados
-import emojiDictionary from "../../../utils/emojiDictionary";
+import emojiDictionary from "../../utils/emojiDictionary";
 
 function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
   const [errors, setErrors] = useState({ name: false, icon: false });
@@ -14,7 +14,7 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
           categoryName: "",
           categoryIcon: "",
           incomeOrExpense: "",
-        }
+        },
   );
 
   useEffect(() => {

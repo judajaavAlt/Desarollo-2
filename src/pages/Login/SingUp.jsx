@@ -1,11 +1,15 @@
+// Dependencias
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import Swal from "sweetalert2";
-import Logo from "../components/Logo";
-import Decoracion from "../components/Decoracion";
-import Footer from "../components/Footer";
+
+//componentes
+import Logo from "../../components/Login/Logo";
+import Decoracion from "../../components/Login/Decoracion";
+import Footer from "../../components/Login/Footer";
+
+//helpers
 
 export default function SingUp() {
   const [email, setEmail] = useState("");
@@ -15,19 +19,11 @@ export default function SingUp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
- 
- 
+
   function handleSingUp(e) {
     e.preventDefault();
- 
 
     console.log(`crear cuenta ${email} ${password}`);
-    navigate("/home");
-  }
-
-  function handleGoogle(e) {
-    e.preventDefault();
-    console.log("inicio sesion con google");
     navigate("/home");
   }
 
@@ -107,8 +103,6 @@ export default function SingUp() {
               </button>
             </div>
 
- 
-
             <div className="my-4 text-center">
               <button
                 type="submit"
@@ -122,23 +116,6 @@ export default function SingUp() {
               <div className="flex-grow border-t border-gray-300"></div>
               <span className="mx-2 flex h-3 w-3 items-center justify-center rounded-full border border-gray-300"></span>
               <div className="flex-grow border-t border-gray-300"></div>
-            </div>
-
-            <div className="my-4 text-center">
-              <button
-                type="button"
-                onClick={handleGoogle}
-                className="flex w-full items-center justify-center rounded-full border border-gray-300 px-6 py-5 shadow-md transition-shadow hover:shadow-lg"
-              >
-                <img
-                  src="https://imagepng.org/wp-content/uploads/2019/08/google-icon-1.png"
-                  alt="Google"
-                  className="mr-3 h-6 w-6"
-                />
-                <span className="font-medium text-gray-600">
-                  Continue with Google
-                </span>
-              </button>
             </div>
 
             <div className="my-4 text-center">

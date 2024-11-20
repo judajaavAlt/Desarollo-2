@@ -1,4 +1,4 @@
-import CreateCategoryModal from "./crud/CreateCategory";
+import CreateCategoryModal from "../../components/Category/CreateCategory";
 import { useState, useEffect } from "react";
 import {
   readCategoriesByUserId,
@@ -9,8 +9,10 @@ import {
 import "./CategoryList.css";
 import emojiDictionary from "../../utils/emojiDictionary";
 
-function CategoryList() {
-  const usuario_id = 1;
+function CategoryPage() {
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const usuario_id = userData[0]["userID"];
+
   const [typeCategory, setTypeCategory] = useState(true);
   const [categories, setCategories] = useState([]);
   const [modalState, setModalState] = useState({
@@ -71,10 +73,6 @@ function CategoryList() {
 
   return (
     <div className="content">
-      {
-        //<SideBar><sideBar/>
-      }
-
       <div className="toggle-buttons">
         <button
           className={`button ${typeCategory ? "active" : ""}`}
@@ -109,7 +107,7 @@ function CategoryList() {
                   <p>{category.categoryName}</p>
                 </button>
               </li>
-            ) : null
+            ) : null,
           )}
 
           {/* Botón para crear */}
@@ -133,4 +131,4 @@ function CategoryList() {
   );
 }
 
-export default CategoryList;
+export default CategoryPage;

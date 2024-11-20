@@ -1,11 +1,17 @@
+// Dependencias
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; 
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import Logo from "../components/Logo";
-import Decoracion from "../components/Decoracion";
-import Footer from "../components/Footer";
+
+//componentes
+import Logo from "../../components/Login/Logo"
+import Decoracion from "../../components/Login/Decoracion";
+import Footer from "../../components/Login/Footer";
+
+//helpers
+import { readUser } from "../../helpers/portUsers";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,26 +21,60 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
- 
-
-  function handleGoogle(e) {
-    e.preventDefault();
-    console.log("inicio sesion con google");
-    navigate("/home");
-  }
 
   function retrievePassword(e) {
     e.preventDefault();
     console.log("recuperar contrasenia");
   }
 
- 
+  async function handleLogin(e) {
+    e.preventDefault();
 
-  function handleLogin(e) {
-    e.preventDefault(); 
+    try {
+      // Muestra una alerta de "inicio de sesión" en curso
+      Swal.fire({
+        position: "top-end",
+        icon: "info",
+        title: "Logging in...",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
-    console.log(`inicio sesion ${email} ${password}`);
-    navigate("/home");
+      console.log(`Inicio sesión con ${email} y ${password}`);
+
+      // Intenta obtener los datos del usuario
+      const dataUsers = await readUser(email);
+
+      // Si el usuario es encontrado y autenticado
+      if (dataUsers) {
+        // Muestra alerta de éxito si el usuario es encontrado
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        console.log("Usuario encontrado:", dataUsers);
+
+        // Guarda los datos del usuario en sessionStorage
+        localStorage.setItem("user", JSON.stringify(dataUsers));
+
+        // Redirige al usuario a la página principal
+        navigate("/home");
+      }
+    } catch (error) {
+      // Si ocurre un error (como "User not found")
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: error.message || "Error al iniciar sesión",
+        showConfirmButton: true,
+      });
+
+      console.error("Error de inicio de sesión:", error.message);
+    }
   }
 
   return (
@@ -56,23 +96,6 @@ export default function Login() {
                 </h2>
               </div>
             </header>
-
-            <div className="my-4 text-center">
-              <button
-                type="button"
-                onClick={handleGoogle}
-                className="flex w-full items-center justify-center rounded-full border border-gray-300 px-6 py-5 shadow-md transition-shadow hover:shadow-lg"
-              >
-                <img
-                  src="https://imagepng.org/wp-content/uploads/2019/08/google-icon-1.png"
-                  alt="Google"
-                  className="mr-3 h-6 w-6"
-                />
-                <span className="font-medium text-gray-600">
-                  Continue with Google
-                </span>
-              </button>
-            </div>
 
             <div className="flex items-center">
               <div className="flex-grow border-t border-gray-300"></div>
@@ -146,9 +169,7 @@ export default function Login() {
               </button>
             </div>
 
-            <div className="my-4 flex justify-center text-center">
- 
-            </div>
+            <div className="my-4 flex justify-center text-center"></div>
 
             <div className="my-4 text-center">
               <button
