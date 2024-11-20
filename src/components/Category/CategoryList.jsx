@@ -1,19 +1,13 @@
 import CreateCategoryModal from "./crud/CreateCategory";
 import { useState, useEffect } from "react";
-import "./CategoryList.css";
 import {
   readCategoriesByUserId,
   createCategory,
   updateCategory,
   deleteCategory,
 } from "../../helpers/portCategory";
-
-const emojiDictionary = {
-  ham: "🍔",
-  money: "💵",
-  game: "🎮",
-  chart: "📈",
-};
+import "./CategoryList.css";
+import emojiDictionary from "../../utils/emojiDictionary";
 
 function CategoryList() {
   const usuario_id = 1;

@@ -1,14 +1,6 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import "./CreateCategory.css"; // Asegúrate de tener estilos asociados
-import { deleteCategory } from "../../../helpers/portCategory";
-
-const emojiDictionary = {
-  ham: "🍔",
-  money: "💵",
-  game: "🎮",
-  chart: "📈",
-};
+import emojiDictionary from "../../../utils/emojiDictionary";
 
 function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
   const [errors, setErrors] = useState({ name: false, icon: false });
