@@ -1,0 +1,155 @@
+/* Estilos generales del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 15px;
+  width: 600px; /* Ajuste del ancho del modal */
+  padding: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.error-text {
+  color: rgb(221, 56, 56);
+  font-size: 0.8em;
+  margin-top: 4px;
+}
+
+/* Estilos header */
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Estilos body */
+.modal-body {
+  padding: 20px 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  background-color: #fff6da; /* Fondo amarillo pastel */
+  padding: 15px;
+  border: 2px solid #ffd700; /* Color del borde */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold; /* Texto en negrita */
+  margin-bottom: 5px;
+  color: #333; /* Color del texto */
+}
+
+.form-group input {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  padding: 10px;
+  font-size: 1rem;
+  color: #1d1d1d; /* Color del texto por defecto */
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: #aaa; /* Estilo del texto del placeholder */
+}
+
+.form-group input:focus {
+  border-bottom: 2px solid #ffd700; /* Líneas inferiores en amarillo */
+}
+
+/* iconos */
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* Distribución en 6 columnas */
+  gap: 10px;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+.icons-grid-button {
+  width: 50px; /* Tamaño de los iconos */
+  height: 50px;
+  cursor: pointer;
+  border-radius: 50%; /* Forma circular */
+  background-color: #ffd700; /* Color dorado */
+  border: none; /* Sin borde */
+  display: flex; /* Para centrar el contenido */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+}
+
+.icons-grid-button.active {
+  background-color: #827529; /* Color dorado */
+  border: 1px solid #000; /* Borde del círculo */
+}
+
+.icons-grid-button:hover {
+  background-color: #f35e28; /* Cambia el color al pasar el cursor */
+}
+
+.icons-grid-button span {
+  font-size: 25px;
+}
+
+/* Estilos footer */
+.modal-footer {
+  text-align: center;
+  display: flex;
+  justify-content: end;
+}
+
+.create-button {
+  background-color: #ffdd77;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 20%;
+  transition: background-color 0.3s;
+  margin-right: 15px;
+}
+
+.create-button:hover {
+  background-color: #f0c44f;
+}
+
+.close-button {
+  background-color: #ea6382;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 20%;
+  transition: background-color 0.3s;
+}
+
+.close-button:hover {
+  background-color: #ba3e5b;
+}
