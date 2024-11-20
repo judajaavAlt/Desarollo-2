@@ -20,11 +20,18 @@ function CategoryPage() {
     data: null,
     typeAction: "",
   });
+  const [loading, setLoading] = useState(true); // Nuevo estado de carga
 
   useEffect(() => {
     const traer = async () => {
-      const kev = await readCategoriesByUserId(usuario_id);
-      setCategories(kev);
+      try {
+        const kev = await readCategoriesByUserId(usuario_id);
+        setCategories(kev);
+      } catch (e) {
+        console.error("Error al cargar categorías:", e);
+      } finally {
+        setLoading(false); // Cambia el estado de carga una vez se obtienen los datos
+      }
     };
     traer();
   }, []);
@@ -47,17 +54,13 @@ function CategoryPage() {
       incomeOrExpense: typeCategory,
       userID: usuario_id,
     };
-    console.log(enhancedCat);
 
     try {
       if (type === "create") {
-        console.log("crearaaaaaaaaa");
         await createCategory(enhancedCat);
       } else if (type === "update") {
-        console.log("editttttttttttttttttttttttttt");
         await updateCategory(enhancedCat);
       } else {
-        console.log("eliminarrrrrrrrrrrrrrrrrrrrr");
         await deleteCategory(enhancedCat);
       }
     } catch (e) {
@@ -90,34 +93,41 @@ function CategoryPage() {
 
       <div>
         <h3 className="title">Categorías</h3>
-        <ul className="list-categories">
-          {categories.map((category) =>
-            typeCategory === category.incomeOrExpense ? (
-              <li key={category.categoryID} className="category-item">
-                <button
-                  onClick={() =>
-                    openEditModal({
-                      categoryID: category.categoryID,
-                      categoryName: category.categoryName,
-                      categoryIcon: category.categoryIcon,
-                    })
-                  }
-                >
-                  <span>{emojiDictionary[category.categoryIcon]}</span>
-                  <p>{category.categoryName}</p>
-                </button>
-              </li>
-            ) : null,
-          )}
+        {loading ? (
+          // Aquí agregamos una animación de carga
+          <div className="loading-spinner">
+            <span>Loading...</span>
+          </div>
+        ) : (
+          <ul className="list-categories">
+            {categories.map((category) =>
+              typeCategory === category.incomeOrExpense ? (
+                <li key={category.categoryID} className="category-item">
+                  <button
+                    onClick={() =>
+                      openEditModal({
+                        categoryID: category.categoryID,
+                        categoryName: category.categoryName,
+                        categoryIcon: category.categoryIcon,
+                      })
+                    }
+                  >
+                    <span>{emojiDictionary[category.categoryIcon]}</span>
+                    <p>{category.categoryName}</p>
+                  </button>
+                </li>
+              ) : null
+            )}
 
-          {/* Botón para crear */}
-          <li className="category-item">
-            <button onClick={openCreateModal}>
-              <span>➕</span>
-              <p>Crear</p>
-            </button>
-          </li>
-        </ul>
+            {/* Botón para crear */}
+            <li className="category-item">
+              <button onClick={openCreateModal}>
+                <span>➕</span>
+                <p>Crear</p>
+              </button>
+            </li>
+          </ul>
+        )}
       </div>
 
       <CreateCategoryModal

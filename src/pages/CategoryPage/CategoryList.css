@@ -118,3 +118,17 @@
 .category-item button:hover p {
   color: #805d11; /* Marrón más cálido */
 }
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+
+.loading-spinner::after {
+  content: '⏳'; /* Puedes usar un emoji o un ícono de carga */
+}
