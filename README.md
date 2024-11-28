@@ -13,3 +13,6 @@
 # Snapshot-10-20 :
 # Se creo el componente genérico SmallModal con su respectivo estilo,
 # Se crearon los componentes UpdateTransaction y DeleteTransaction.
+
+# Snapshot-11-27 :
+# Se integra correctamente el readTransaction
