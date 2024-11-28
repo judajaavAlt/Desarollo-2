@@ -28,6 +28,9 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
   if (!infoTransaction) {
     return null
   }
+  
+  console.log(infoTransaction.transactionDate)
+
   return (
     <Modal
       isOpen={isOpen}
