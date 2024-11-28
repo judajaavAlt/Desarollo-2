@@ -25,10 +25,10 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
     traer();
   }, []);
 
-  if (!infoTransaction) {
+  if (!infoTransaction ) {
     return null
   }
-  
+
   console.log(infoTransaction.transactionDate)
 
   return (
@@ -38,10 +38,18 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
       title={"Información de la transacción"}
     >
       <InfoGroup label={"Transferido de:"}>
-        <label className="label-info-transaction"> {dataWallet[infoTransaction.from - 1].walletName} </label>
+        <label className="label-info-transaction"> {
+                  dataWallet.find(
+                    (wallet) => wallet.walletID === infoTransaction.from
+                  ).walletName
+                } </label>
       </InfoGroup>
       <InfoGroup label={"Transferido a:"}>
-        <label className="label-info-transaction"> {dataWallet[infoTransaction.destination - 1].walletName} </label>
+        <label className="label-info-transaction"> {
+                  dataWallet.find(
+                    (wallet) => wallet.walletID === infoTransaction.destination
+                  ).walletName
+                } </label>
       </InfoGroup>
       <InfoGroup label={"Cantidad:"}>
         <label className="info-amount">{infoTransaction.transactionAmount} COL$</label>
