@@ -19,3 +19,6 @@
 
 # Snapshot-11-28 :
 # Se añaden los gràficos de lìneas y PAstel
+
+# Snapshot-11-28 :
+# Se integra la funcion deleteTransaction

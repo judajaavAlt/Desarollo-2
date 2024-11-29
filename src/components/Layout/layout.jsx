@@ -16,7 +16,6 @@ export default function Layout() {
       try {
         const obtener = await readWallet(1);
         setDataWallet(obtener);
-        console.log(obtener);
       } catch (e) {
         console.error("Error al cargar categorías:", e);
       }

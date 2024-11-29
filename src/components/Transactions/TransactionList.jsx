@@ -36,7 +36,7 @@ function TransactionList() {
       }
     };
     traer();
-  }, [isModalOpenCreate, isModalOpenCreate]);
+  }, [isModalOpenRead, isModalOpenCreate]);
 
   const openModalRead = (data) => {
     setIsModalOpenRead(true);

@@ -48,6 +48,5 @@ var myoptions = {
 };
 
 export default function LineChart() {
-  console.log(readTransaction(1,11,2024))
   return <Line data={midata} options={myoptions}/>
 }
