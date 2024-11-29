@@ -1,7 +1,7 @@
 import { createTransaction, readTransaction, updateTransaction, deleteTransaction } from "../src/helpers/portTransaccion";
 import { createUser, deleteUser, readUser, updateUser } from "../src/helpers/portUsers";
 import { createWallet, readWallet, updateWallet, deleteWallet } from "../src/helpers/portWallets";
-import { createCategory, readCategoriesByType, updateCategory, deleteCategory } from "../src/helpers/portCategory";
+import { createCategory, readCategoriesByUserId, updateCategory, deleteCategory } from "../src/helpers/portCategory";
 
 // Mocks the supabase api so it always throws error
 
@@ -70,7 +70,7 @@ jest.mock('@supabase/supabase-js', () => {
   test("Fail createTrasanction test", () => {expect(createTransaction()).rejects.toThrow();});
 
   // Test related to the Categories port
-  test("Fail readCategoriesByType test", () => {expect(readCategoriesByType()).rejects.toThrow();});
+  test("Fail readCategoriesByType test", () => {expect(readCategoriesByUserId()).rejects.toThrow();});
   test("Fail updateCategory test", () => {expect(updateCategory()).rejects.toThrow();});
   test("Fail deleteCategory test", () => {expect(deleteCategory()).rejects.toThrow();});
   test("Fail createCategory test", () => {expect(createCategory()).rejects.toThrow();});
