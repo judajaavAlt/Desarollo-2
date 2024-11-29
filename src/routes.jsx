@@ -12,7 +12,7 @@ import Layout from "./components/Layout/Layout";
 import Login from "./pages/Login/Login";
 import SingUp from "./pages/Login/SingUp";
 import HomePage from "./pages/HomePage/HomePage";
-import CategoryPage from "./pages/CategoryPage/CategoryPage";
+/*import CategoryPage from "./pages/CategoryPage/CategoryPage";*/
 
 function AppRoutes() {
   return (
