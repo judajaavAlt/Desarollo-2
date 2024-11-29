@@ -26,7 +26,7 @@ function AppRoutes() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/categories" element={<CategoryPage />} />
+          {/*<Route path="/categories" element={<CategoryPage />} />*/}
         </Route>
       </Routes>
     </Router>
