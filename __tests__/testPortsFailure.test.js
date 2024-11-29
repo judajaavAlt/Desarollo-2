@@ -70,7 +70,7 @@ jest.mock('@supabase/supabase-js', () => {
   test("Fail createTrasanction test", () => {expect(createTransaction()).rejects.toThrow();});
 
   // Test related to the Categories port
-  test("Fail readCategoriesByType test", () => {expect(readCategoriesByUserId()).rejects.toThrow();});
+  test("Fail readCategoriesByUserId test", () => {expect(readCategoriesByUserId()).rejects.toThrow();});
   test("Fail updateCategory test", () => {expect(updateCategory()).rejects.toThrow();});
   test("Fail deleteCategory test", () => {expect(deleteCategory()).rejects.toThrow();});
   test("Fail createCategory test", () => {expect(createCategory()).rejects.toThrow();});

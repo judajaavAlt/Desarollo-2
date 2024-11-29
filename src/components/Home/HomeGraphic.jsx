@@ -1,6 +1,4 @@
-import React from 'react';
 import './HomeGraphic.css';
-import imgd from "../../assets/images/bar-graph-placeholder.png"
 
 const HomeGraphic = () => {
   return (

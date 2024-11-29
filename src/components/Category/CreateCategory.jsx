@@ -1,3 +1,4 @@
+/*
 import { useEffect, useState } from "react";
 import "./CreateCategory.css"; // Asegúrate de tener estilos asociados
 import emojiDictionary from "../../utils/emojiDictionary";
@@ -131,3 +132,4 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
 }
 
 export default CreateCategoryModal;
+*/

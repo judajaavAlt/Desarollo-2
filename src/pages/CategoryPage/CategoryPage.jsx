@@ -1,3 +1,4 @@
+/*
 import CreateCategoryModal from "../../components/Category/CreateCategory";
 import { useState, useEffect } from "react";
 import {
@@ -119,7 +120,7 @@ function CategoryPage() {
               ) : null
             )}
 
-            {/* Botón para crear */}
+            {// Botón para crear }
             <li className="category-item">
               <button onClick={openCreateModal}>
                 <span>➕</span>
@@ -142,3 +143,4 @@ function CategoryPage() {
 }
 
 export default CategoryPage;
+*/

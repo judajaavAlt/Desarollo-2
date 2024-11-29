@@ -7,7 +7,7 @@ import supabase from "../apis/supa-base-api.js";
 //       String incomeOrExpense: Specifies if the category is for income or expense
 //       int    userID: Specifies the user relation with category
 // Returns: Nothing
-async function createCategory({ categoryName, categoryIcon, incomeOrExpense, userID }) {
+async function createCategory(categoryName, categoryIcon, incomeOrExpense, userID) {
   const data = {
     categoryName,
     categoryIcon,
@@ -19,7 +19,7 @@ async function createCategory({ categoryName, categoryIcon, incomeOrExpense, use
     const { error } = await supabase.from("Category").insert(data);
 
     if (error) {
-      throw new Error(`Código: ${error.code}, Descripción: ${error.message}`);
+      throw Error(`Código: ${error.code}, Descripción: ${error.message}`);
     }
   } catch (error) {
     console.error("Error al crear categoría:", error.message);
@@ -51,7 +51,7 @@ async function readCategoriesByUserId(userId) {
 //       String categoryIcon: New icon of the category
 //       String incomeOrExpense: New type (income or expense) of the category
 // Returns: Nothing
-async function updateCategory({ categoryID, categoryName, categoryIcon, incomeOrExpense }) {
+async function updateCategory(categoryID, categoryName, categoryIcon, incomeOrExpense) {
   const data = {
     categoryName,
     categoryIcon,
@@ -62,7 +62,7 @@ async function updateCategory({ categoryID, categoryName, categoryIcon, incomeOr
     const { error } = await supabase.from("Category").update(data).eq("categoryID", categoryID);
 
     if (error) {
-      throw new Error(`Código: ${error.code}, Descripción: ${error.message}`);
+      throw Error(`Código: ${error.code}, Descripción: ${error.message}`);
     }
   } catch (error) {
     console.error("Error al actualizar categoría:", error.message);
@@ -74,7 +74,7 @@ async function updateCategory({ categoryID, categoryName, categoryIcon, incomeOr
 // Input: 
 //       Int categoryID: ID of the category to delete
 // Returns: Nothing
-async function deleteCategory({categoryID}) {
+async function deleteCategory(categoryID) {
   const { data, error } = await supabase.from("Category")
                                         .delete()
                                         .eq("categoryID", categoryID)

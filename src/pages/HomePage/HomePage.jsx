@@ -1,4 +1,3 @@
-import { React } from "react";
 import HomeGraphic from "../../components/Home/HomeGraphic";
 import "./homePage.css";
 
