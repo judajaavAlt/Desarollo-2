@@ -6,7 +6,7 @@ import "./layout.css";
 export default function Layout() {
   return (
     <div className="app-layout">
-      <Sidebar />
+      {/*<Sidebar />*/}
       <div className="content">
         <Outlet />
       </div>
