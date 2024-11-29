@@ -54,6 +54,7 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
 
    const closeModalUpdate = () => {
      setIsModalOpenUpdate(false);
+     onClose();
    };
 
   return (
@@ -94,7 +95,7 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
         <Button text={"Borrar"} onClick={()=> openModalDelete(infoTransaction.transactionID)}></Button>
       </div>
       <DeleteTransaction isOpen={isModalOpenDelete} onClose={closeModalDelete} transactionID={selectedTransactionID}/>
-      <UpdateTransaction isOpen={isModalOpenUpdate} onClose={closeModalUpdate}/>
+      <UpdateTransaction isOpen={isModalOpenUpdate} onClose={closeModalUpdate} infoTransaction={infoTransaction}/>
     </Modal>
   );
 };

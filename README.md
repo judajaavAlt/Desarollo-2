@@ -22,3 +22,6 @@
 
 # Snapshot-11-28 :
 # Se integra la funcion deleteTransaction
+
+# Snapshot-11-29 :
+# Se integra la funcion updateTransaction

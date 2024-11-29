@@ -27,7 +27,7 @@ export default function Layout() {
       <Sidebar />
       <div className="content">
         <Outlet />
-        <LineChart/>
+        {/* <LineChart/> */}
         <Pie data={dataWallet}/>
       </div>
     </div>
