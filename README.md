@@ -16,3 +16,6 @@
 
 # Snapshot-11-27 :
 # Se integra correctamente el readTransaction
+
+# Snapshot-11-28 :
+# Se añaden los gràficos de lìneas y PAstel

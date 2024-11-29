@@ -2,6 +2,8 @@ import SmallModal from "../../generics/SmallModal/SmallModal";
 import PropTypes from "prop-types";
 import "./DeleteTransaction.css";
 
+
+
 const DeleteTransaction = ({ isOpen, onClose }) => {
   return (
 
