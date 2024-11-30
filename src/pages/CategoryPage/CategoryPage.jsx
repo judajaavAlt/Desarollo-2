@@ -1,4 +1,3 @@
-/*
 import CreateCategoryModal from "../../components/Category/CreateCategory";
 import { useState, useEffect } from "react";
 import {
@@ -8,7 +7,6 @@ import {
   deleteCategory,
 } from "../../helpers/portCategory";
 import "./CategoryList.css";
-import emojiDictionary from "../../utils/emojiDictionary";
 
 function CategoryPage() {
   const userData = JSON.parse(localStorage.getItem("user"));
@@ -35,7 +33,7 @@ function CategoryPage() {
       }
     };
     traer();
-  }, []);
+  }, [usuario_id]);
 
   const openCreateModal = () => {
     setModalState({ isOpen: true, data: null, typeAction: "create" });
@@ -113,14 +111,16 @@ function CategoryPage() {
                       })
                     }
                   >
-                    <span>{emojiDictionary[category.categoryIcon]}</span>
+                    <span>{category.categoryIcon}</span>
                     <p>{category.categoryName}</p>
                   </button>
                 </li>
-              ) : null
+              ) : null,
             )}
 
-            {// Botón para crear }
+            {
+              // Botón para crear
+            }
             <li className="category-item">
               <button onClick={openCreateModal}>
                 <span>➕</span>
@@ -143,4 +143,3 @@ function CategoryPage() {
 }
 
 export default CategoryPage;
-*/

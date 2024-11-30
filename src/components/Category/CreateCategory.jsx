@@ -1,21 +1,19 @@
-/*
 import { useEffect, useState } from "react";
 import "./CreateCategory.css"; // Asegúrate de tener estilos asociados
 import emojiDictionary from "../../utils/emojiDictionary";
+import PropTypes from "prop-types";
 
 function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
   const [errors, setErrors] = useState({ name: false, icon: false });
   const isCreate = !data;
 
   const [cat, setCat] = useState(
-    data
-      ? data
-      : {
-          categoryID: "",
-          categoryName: "",
-          categoryIcon: "",
-          incomeOrExpense: "",
-        },
+    data || {
+      categoryID: "",
+      categoryName: "",
+      categoryIcon: "",
+      incomeOrExpense: "",
+    },
   );
 
   useEffect(() => {
@@ -30,7 +28,7 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
       setCat(data);
     }
     setErrors({ name: false, icon: false });
-  }, [isOpen]);
+  }, [isOpen, data, isCreate]);
 
   if (!isOpen) return null;
 
@@ -76,36 +74,39 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
         </div>
 
         <div className="modal-body">
-          <div className="form-group">
-            <label>Nombre de la categoría</label>
+          <from className="form-group">
+            <label htmlFor="categoryName">Nombre de la categoría</label>
             <input
+              id="categoryName"
               type="text"
               placeholder="Introduzca un nombre de categoría"
               value={cat.categoryName}
               onChange={handleNameChange}
             />
+
             {errors.name && (
               <span className="error-text">El nombre es obligatorio.</span>
             )}
-          </div>
+          </from>
 
           <div className="form-group">
-            <label>Símbolo</label>
-            <div className="icons-grid">
-              {Object.entries(emojiDictionary).map(([key, emoji]) => (
-                <button
-                  key={key}
-                  role="img"
-                  aria-label={key}
-                  onClick={() => handleIconChange(key)}
-                  className={`icons-grid-button ${
-                    key === cat.categoryIcon ? "active" : ""
-                  }`}
-                >
-                  <span>{emoji}</span>
-                </button>
-              ))}
-            </div>
+            <label>
+              Símbolo
+              <div className="icons-grid">
+                {Object.entries(emojiDictionary).map(([key, emoji]) => (
+                  <button
+                    key={key}
+                    aria-label={`Seleccionar ${key}`}
+                    onClick={() => handleIconChange(key)}
+                    className={`icons-grid-button ${
+                      key === cat.categoryIcon ? "active" : ""
+                    }`}
+                  >
+                    {emoji}
+                  </button>
+                ))}
+              </div>
+            </label>
             {errors.icon && (
               <span className="error-text">Selecciona un ícono.</span>
             )}
@@ -131,5 +132,12 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
   );
 }
 
+CreateCategoryModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  data: PropTypes.object,
+  action: PropTypes.func,
+  typeAction: PropTypes.string,
+};
+
 export default CreateCategoryModal;
-*/
