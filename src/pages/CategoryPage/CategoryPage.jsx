@@ -56,11 +56,21 @@ function CategoryPage() {
 
     try {
       if (type === "create") {
-        await createCategory(enhancedCat);
+        await createCategory(
+          enhancedCat.categoryName,
+          enhancedCat.categoryIcon,
+          enhancedCat.incomeOrExpense,
+          enhancedCat.userID,
+        );
       } else if (type === "update") {
-        await updateCategory(enhancedCat);
+        await updateCategory(
+          enhancedCat.categoryID,
+          enhancedCat.categoryName,
+          enhancedCat.categoryIcon,
+          enhancedCat.incomeOrExpense,
+        );
       } else {
-        await deleteCategory(enhancedCat);
+        await deleteCategory(enhancedCat.categoryID);
       }
     } catch (e) {
       console.error("Error en la acción:", e.message);
