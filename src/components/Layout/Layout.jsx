@@ -1,5 +1,5 @@
 // src/Layout.jsx
-import Sidebar from "../SideBar/SideBar";
+import Sidebar from "../Sidebar/sidebar";
 import { Outlet } from "react-router-dom";
 import "./layout.css";
 
