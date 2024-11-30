@@ -1,7 +1,7 @@
 // src/components/Sidebar.jsx
 
 import { NavLink } from "react-router-dom";
-import "./sidebar.css"; // Importamos los estilos
+import "./sideBar.css"; // Importamos los estilos
 
 // Importamos los íconos
 import logoIcon from "../../assets/icons/logo.png";
