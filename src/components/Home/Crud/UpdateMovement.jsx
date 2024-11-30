@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/*
+import { useState } from 'react';
 import './UpdateMovement.css';
 
 const UpdateMovement = ({ movement, onClose }) => {
@@ -30,7 +31,7 @@ const UpdateMovement = ({ movement, onClose }) => {
     };
 
 
-    {/*Conectar con el Backend Update*/}
+    {//Conectar con el Backend Update}
     try {
       const response = await fetch(`URL_DE_TU_BACKEND/api/movements/${movement.id}`, {
         method: 'PUT',
@@ -121,3 +122,4 @@ const UpdateMovement = ({ movement, onClose }) => {
 };
 
 export default UpdateMovement;
+*/

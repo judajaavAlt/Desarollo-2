@@ -3,7 +3,6 @@ import Header from '../../components/Wallets/Header/Header';
 import TransactionList from '../../components/Transactions/TransactionList';
 import WalletList from '../../components/Wallets/WalletList';
 import CreateWalletModal from '../../components/Wallets/Crud/CreateWalletModal';
-import CreateTransaction from '../../components/Transactions/crud/CreateTransaction';
 import './walletPage.css'; // Asegúrate de que el archivo CSS esté correctamente importado
 
 function WalletsPage() {

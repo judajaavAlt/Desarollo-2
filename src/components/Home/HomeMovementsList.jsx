@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CreateMovement from '../../components/Home/Crud/CreateMovement'; // Modal de creación de movimiento
 import ReadMovement from '../../components/Home/Crud/ReadMovement';    // Modal de lectura de movimiento
 import './HomeMovementsList.css';
