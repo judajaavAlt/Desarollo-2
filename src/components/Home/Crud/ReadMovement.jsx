@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/*
+import { useState } from 'react';
 import './ReadMovement.css';
 import UpdateMovement from './UpdateMovement';
 import DeleteMovement from './DeleteMovement';
@@ -15,7 +16,7 @@ const ReadMovement = ({ movement, onClose }) => {
 
   const handleDelete = async () => {
     try {
-      {/*Aqui se conecta con el backend el delete*/} 
+      {//Aqui se conecta con el backend el delete} 
       const response = await fetch(`URL_DE_TU_BACKEND/api/movements/${movement.id}`, {
         method: 'DELETE',
       });
@@ -76,3 +77,4 @@ const ReadMovement = ({ movement, onClose }) => {
 };
 
 export default ReadMovement;
+*/
