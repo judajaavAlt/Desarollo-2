@@ -11,8 +11,6 @@ import "./CategoryList.css";
 import emojiDictionary from "../../utils/emojiDictionary";
 
 function CategoryPage() {
-  const userData = JSON.parse(localStorage.getItem("user"));
-  const usuario_id = userData[0]["userID"];
 
   const [typeCategory, setTypeCategory] = useState(true);
   const [categories, setCategories] = useState([]);
