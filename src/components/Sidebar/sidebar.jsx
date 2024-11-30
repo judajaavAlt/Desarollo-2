@@ -11,8 +11,8 @@ import categoriesIcon from "../../assets/icons/categories.png";
 import logoutIcon from "../../assets/icons/logout.png";
 
 export default function Sidebar() {
-  /*const userData = JSON.parse(localStorage.getItem("user"));*/
-  /*const usuario_id = userData[0]["userID"];*/
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const usuario_id = userData[0]["userID"];
 
   return (
     <div className="sidebar">
@@ -65,7 +65,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        {/*${userData[0]["name"]} = ${usuario_id}*/'Usuario'}
+        {`${userData[0]["name"]} = ${usuario_id}`}
         <NavLink to="/Login">
           <img src={logoutIcon} alt="Logout Icon" className="icon" />{" "}
           {/* Icono de Logout */}

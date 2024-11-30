@@ -1,4 +1,3 @@
-/*
 import CreateCategoryModal from "../../components/Category/CreateCategory";
 import { useState, useEffect } from "react";
 import {
@@ -8,7 +7,6 @@ import {
   deleteCategory,
 } from "../../helpers/portCategory";
 import "./CategoryList.css";
-import emojiDictionary from "../../utils/emojiDictionary";
 
 function CategoryPage() {
   const userData = JSON.parse(localStorage.getItem("user"));
@@ -35,7 +33,7 @@ function CategoryPage() {
       }
     };
     traer();
-  }, []);
+  }, [usuario_id]);
 
   const openCreateModal = () => {
     setModalState({ isOpen: true, data: null, typeAction: "create" });
@@ -58,11 +56,21 @@ function CategoryPage() {
 
     try {
       if (type === "create") {
-        await createCategory(enhancedCat);
+        await createCategory(
+          enhancedCat.categoryName,
+          enhancedCat.categoryIcon,
+          enhancedCat.incomeOrExpense,
+          enhancedCat.userID,
+        );
       } else if (type === "update") {
-        await updateCategory(enhancedCat);
+        await updateCategory(
+          enhancedCat.categoryID,
+          enhancedCat.categoryName,
+          enhancedCat.categoryIcon,
+          enhancedCat.incomeOrExpense,
+        );
       } else {
-        await deleteCategory(enhancedCat);
+        await deleteCategory(enhancedCat.categoryID);
       }
     } catch (e) {
       console.error("Error en la acción:", e.message);
@@ -113,14 +121,16 @@ function CategoryPage() {
                       })
                     }
                   >
-                    <span>{emojiDictionary[category.categoryIcon]}</span>
+                    <span>{category.categoryIcon}</span>
                     <p>{category.categoryName}</p>
                   </button>
                 </li>
-              ) : null
+              ) : null,
             )}
 
-            {// Botón para crear }
+            {
+              // Botón para crear
+            }
             <li className="category-item">
               <button onClick={openCreateModal}>
                 <span>➕</span>
@@ -143,4 +153,3 @@ function CategoryPage() {
 }
 
 export default CategoryPage;
-*/
