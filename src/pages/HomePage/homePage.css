@@ -1,0 +1,30 @@
+/* Estilos generales para la página de inicio */
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+/* Sección de los gráficos (parte superior) */
+.home-graphic-section {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px; /* Espacio entre la sección de gráficos y la lista de movimientos */
+}
+
+/* Sección de la lista de movimientos (parte inferior) */
+.home-movements-section {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
