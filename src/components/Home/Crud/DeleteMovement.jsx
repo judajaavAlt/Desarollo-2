@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import './DeleteMovement.css';
 
@@ -14,3 +15,4 @@ const DeleteMovement = ({ onClose, onDelete }) => {
 };
 
 export default DeleteMovement;
+*/

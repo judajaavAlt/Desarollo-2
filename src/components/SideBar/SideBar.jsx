@@ -1,7 +1,7 @@
 // src/components/Sidebar.jsx
 
 import { NavLink } from "react-router-dom";
-import "./sidebar.css"; // Importamos los estilos
+import "./sideBar.css"; // Importamos los estilos
 
 // Importamos los íconos
 import logoIcon from "../../assets/icons/logo.png";
@@ -11,7 +11,7 @@ import categoriesIcon from "../../assets/icons/categories.png";
 import logoutIcon from "../../assets/icons/logout.png";
 
 export default function Sidebar() {
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const userData = [{userID:3, name: "Usuario"}]; /*JSON.parse(localStorage.getItem("user"));*/
   const usuario_id = userData[0]["userID"];
 
   return (
