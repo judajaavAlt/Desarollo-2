@@ -1,20 +1,36 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout/layout'; // Importa el layout
-import WalletsPage from './pages/WalletsPage/walletPage'; // Importa la página WalletsPage
- // Otra página de ejemplo
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-function App() {
+//components
+import Layout from "./components/Layout/layout";
+
+//pages
+import Login from "./pages/Login/Login";
+import SingUp from "./pages/Login/SingUp";
+import HomePage from "./pages/HomePage/HomePage";
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
+
+function AppRoutes() {
   return (
     <Router>
       <Routes>
-        {/* Ruta que usa el layout */}
+        {/* Rutas que no usan el layout (sin Sidebar) */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/singup" element={<SingUp />} />
+
+        {/* Rutas que usan el layout con Sidebar */}
         <Route path="/" element={<Layout />}>
-          <Route path="wallets" element={<WalletsPage />} />
-   
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/categories" element={<CategoryPage />} />
         </Route>
       </Routes>
     </Router>
   );
 }
 
-export default App;
+export default AppRoutes;
