@@ -3,10 +3,10 @@ import "../styles/CreateCategory.css"; // Asegúrate de tener estilos asociados
 import PropTypes from "prop-types";
 
 //COMPONENTS
-import ModalHeader from "../ModalHeader/ModalHeader";
-import CategoryNameInput from "../CategoryNameInput/CategoryNameInput";
-import IconSelector from "../IconSelector/IconSelector";
-import ModalFooter from "../ModalFooter/ModalFooter";
+import ModalHeader from "./ModalHeader/ModalHeader";
+import CategoryNameInput from "./CategoryNameInput/CategoryNameInput";
+import IconSelector from "./IconSelector/IconSelector";
+import ModalFooter from "./ModalFooter/ModalFooter";
 
 function CategoryModal({ isOpen, onClose, data, action, typeAction }) {
   const [errors, setErrors] = useState({ name: false, icon: false });

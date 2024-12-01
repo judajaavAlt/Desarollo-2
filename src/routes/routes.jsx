@@ -6,14 +6,14 @@ import {
 } from "react-router-dom";
 
 //components
-import Layout from "./components/Layout/layout";
+import Layout from "../core/components/layout";
 
 //pages
-import Login from "./pages/Login/Login";
-import SingUp from "./pages/Login/SingUp";
-import HomePage from "./pages/HomePage/HomePage";
-import CategoryPage from "./pages/CategoryPage/CategoryPage";
-import WalletPage from "./pages/WalletsPage/walletPage";
+import Login from "../features/Login/pages/Login";
+import SingUp from "../features/Login/pages/SingUp";
+import HomePage from "../features/home/pages/HomePage";
+import CategoryPage from "../features/category/pages/CategoryPage";
+import WalletPage from "../features/wallets/pages/walletPage";
 
 function AppRoutes() {
   return (
