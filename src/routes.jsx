@@ -9,8 +9,8 @@ import {
 import Layout from "./core/components/layout";
 
 //pages
-import Login from "./features/Login/pages/Login";
-import SingUp from "./features/Login/pages/SingUp";
+import Login from "./Login/pages/Login";
+import SingUp from "./Login/pages/SingUp";
 import HomePage from "./features/home/pages/homePage";
 import CategoryPage from "./features/category/pages/CategoryPage";
 import WalletPage from "./features/wallets/pages/walletPage";

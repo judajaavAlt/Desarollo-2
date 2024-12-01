@@ -11,7 +11,7 @@ import Decoracion from "../components/Decoracion";
 import Footer from "../components/Footer";
 
 //helpers
-import { readUser } from "../../../helpers/portUsers";
+import { readUser } from "../../helpers/portUsers";
 
 export default function Login() {
   const [email, setEmail] = useState("");
