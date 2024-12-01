@@ -1,0 +1,34 @@
+.home-graphic {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .home-graphic h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .home-graphic .total-amount {
+    background-color: #f0c14b;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .home-graphic .total-amount h3 {
+    color: #333;
+    font-size: 22px;
+  }
+  
+  .home-graphic img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+  
