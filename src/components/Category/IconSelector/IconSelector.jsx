@@ -11,7 +11,7 @@ function IconSelector({ selectedIcon, onSelectIcon, error }) {
             key={key}
             id="iconInput"
             aria-label={key}
-            onClick={() => onSelectIcon(key)}
+            onClick={() => onSelectIcon(emoji)}
             className={`icons-grid-button ${
               key === selectedIcon ? "active" : ""
             }`}

@@ -1,4 +1,4 @@
-import CreateCategoryModal from "../../components/Category/CreateCategory";
+import CategoryModal from "../../components/Category/CategoryModal/CategoryModal";
 import { useState, useEffect } from "react";
 import {
   readCategoriesByUserId,
@@ -141,7 +141,7 @@ function CategoryPage() {
         )}
       </div>
 
-      <CreateCategoryModal
+      <CategoryModal
         isOpen={modalState["isOpen"]}
         onClose={closeModal}
         data={modalState["data"]}
