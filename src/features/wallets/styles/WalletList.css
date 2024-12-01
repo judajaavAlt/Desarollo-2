@@ -1,0 +1,31 @@
+.wallet-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.wallet-icon {
+  font-size: 24px; /* Tamaño de los íconos */
+  color: #555; /* Color del ícono */
+}
+
+.wallet-details {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.view-more-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px; /* Tamaño del ícono de ver más */
+  color: #333;
+}
+
+.view-more-button:hover {
+  color: #000; /* Cambia el color cuando se pasa el ratón por encima */
+}
