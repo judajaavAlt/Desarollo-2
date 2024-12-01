@@ -1,114 +1,89 @@
 // Dependencias
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types"; // Importa PropTypes
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-//componentes
+// Componentes
 import Logo from "../components/Logo";
 import Decoracion from "../components/Decoracion";
 import Footer from "../components/Footer";
 
-//helpers
-
-export default function SingUp() {
+export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const [showPassword, setShowPassword] = useState(false);
+  // Maneja el cambio de valores de los inputs
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") setEmail(value);
+    if (name === "password") setPassword(value);
+  };
 
-  function handleSingUp(e) {
+  const handleSignUp = (e) => {
     e.preventDefault();
 
-    console.log(`crear cuenta ${email} ${password}`);
+    console.log(`Crear cuenta con ${email} y ${password}`);
     navigate("/home");
-  }
+  };
 
   return (
     <div className="grid min-h-screen grid-cols-2 bg-gradient-to-r from-amber-500 to-amber-300">
       <nav className="col-span-2">
-        <Logo></Logo>
+        <Logo />
       </nav>
 
-      <Decoracion></Decoracion>
+      <Decoracion />
 
       <div className="flex items-center justify-center">
         <div className="rounded-xl bg-slate-50 p-8 lg:w-full 2xl:w-7/12">
-          <form onSubmit={handleSingUp} className="">
+          <form onSubmit={handleSignUp}>
             <header className="my-4 mb-8 text-center">
-              <div className="flex flex-row">
-                <div className="mr-3 h-12 w-2 bg-amber-300"></div>
-                <h2 className="content-center text-5xl font-extrabold text-slate-800">
-                  CREAR CUENTA
-                </h2>
-              </div>
+              <h2 className="text-5xl font-extrabold text-slate-800">
+                CREAR CUENTA
+              </h2>
             </header>
 
-            <div className="my-4 flex flex-col">
-              <label
-                className="text-md mb-2 font-semibold text-slate-600"
-                htmlFor="email"
-              >
-                Correo Electrónico
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="Ingresa tu correo"
-                className="rounded-md border border-gray-700 p-3 text-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
-            </div>
+            <InputField
+              label="Correo Electrónico"
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              placeholder="Ingresa tu correo"
+              required
+            />
 
-            <div className="relative my-4 w-full">
-              <label
-                className="text-md mb-2 font-semibold text-slate-600"
-                htmlFor="password"
-              >
-                Contraseña
-              </label>
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                placeholder="Ingresa tu contraseña"
-                className="w-full rounded-md border border-gray-700 p-3 pr-10 text-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
-
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-10 right-2 flex items-center p-2"
-              >
-                {showPassword ? (
+            <InputField
+              label="Contraseña"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={password}
+              onChange={handleChange}
+              placeholder="Ingresa tu contraseña"
+              required
+              icon={
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   <FontAwesomeIcon
-                    icon={faEyeSlash}
-                    style={{ color: "#d93030", fontSize: "1.5rem" }} // Aumenta el tamaño del ícono
+                    icon={showPassword ? faEyeSlash : faEye}
+                    className="text-amber-400"
                   />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faEye}
-                    style={{ color: "#FEAF00", fontSize: "1.5rem" }} // Aumenta el tamaño del ícono
-                  />
-                )}
-              </button>
-            </div>
+                </button>
+              }
+            />
 
-            <div className="my-4 text-center">
-              <button
-                type="submit"
-                className="focus:ring-esmerald-400 w-full rounded-full bg-amber-500 py-3 text-slate-900 transition-all duration-500 hover:bg-amber-600 focus:ring-2"
-              >
-                Aceptar y unirse
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="w-full rounded-full bg-amber-500 py-3 text-slate-900 transition hover:bg-amber-600 my-4"
+            >
+              Aceptar y unirse
+            </button>
 
             <div className="flex items-center">
               <div className="flex-grow border-t border-gray-300"></div>
@@ -118,8 +93,7 @@ export default function SingUp() {
 
             <div className="my-4 text-center">
               <p className="text-sm">
-                Al hacer clic en «Aceptar y unirse» o «Continuar como», aceptas
-                las{" "}
+                Al hacer clic en «Aceptar y unirse», aceptas las{" "}
                 <a className="text-amber-400 underline" href="#">
                   Condiciones de uso
                 </a>
@@ -127,7 +101,7 @@ export default function SingUp() {
                 <a className="text-amber-400 underline" href="#">
                   Política de privacidad
                 </a>{" "}
-                y la
+                y la{" "}
                 <a className="text-amber-400 underline" href="#">
                   Política de cookies
                 </a>
@@ -151,8 +125,56 @@ export default function SingUp() {
       </div>
 
       <footer className="col-span-2 w-full">
-        <Footer></Footer>
+        <Footer />
       </footer>
     </div>
   );
 }
+
+// Componente reutilizable para campos de entrada
+function InputField({
+  label,
+  type,
+  name,
+  value,
+  onChange,
+  placeholder,
+  required,
+  icon,
+}) {
+  return (
+    <div className="my-4">
+      <label className="block mb-2 text-md font-semibold text-slate-600">
+        {label}
+      </label>
+      <div className="relative">
+        <input
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          required={required}
+          className="w-full rounded-md border border-gray-700 p-3 pr-10 text-gray-600 focus:ring-amber-400"
+        />
+        {icon && (
+          <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+            {icon}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Validación de PropTypes para InputField
+InputField.propTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+  icon: PropTypes.node,
+};
