@@ -4,25 +4,42 @@
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .total-display {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
-}
-
-.total-display h1 {
-  font-size: 2rem;
-  margin: 0;
+  background-color: #f9f9f9; /* Fondo claro similar al diseño */
+  border-radius: 10px;
+  padding: 10px 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  gap: 10px; /* Espacio entre los elementos */
 }
 
 .money-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px; /* Ajuste del tamaño del icono */
+  height: 40px;
+  border-radius: 8px; /* Hace que el icono sea ligeramente redondeado */
 }
+
+.total-amount h1 {
+  font-size: 1.5rem; /* Ajuste del tamaño de la fuente */
+  margin: 0;
+  padding: 0 10px; /* Espaciado alrededor del texto */
+}
+
+.currency-selector {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 
 /* El contenedor principal con Flexbox */
 .main-content {
@@ -46,13 +63,17 @@
   box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
 }
 
-/* Para asegurarte de que no haya conflicto de tamaños */
+/* Hacemos que la lista de billeteras permita el desplazamiento si hay muchas */
 .wallet-list-container {
   display: flex;
   flex-direction: column;
-  height: auto; /* Deja que el contenido fluya según lo que se necesite */
+  height: auto;
+  max-height: 400px; /* Limita la altura máxima de la lista */
+  overflow-y: auto; /* Permite desplazamiento vertical si es necesario */
+  overflow-x: hidden;
 }
 
+/* Lista de transacciones sigue igual */
 .transaction-list-container {
   display: flex;
   flex-direction: column;
@@ -103,4 +124,30 @@
 .arrow {
   font-size: 1.5rem;
   color: #000;
+}
+
+/* Personaliza la barra de desplazamiento si es necesario */
+.wallet-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wallet-list-container::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 4px;
+}
+
+/* Media queries para hacer la página más responsiva en pantallas pequeñas */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column; /* Apilamos las listas verticalmente en pantallas pequeñas */
+  }
+
+  .wallet-list-container,
+  .transaction-list-container {
+    max-width: 100%; /* Asegura que las listas ocupen todo el ancho en pantallas pequeñas */
+  }
+
+  .wallet-list-container {
+    max-height: 300px; /* Ajusta la altura máxima en pantallas pequeñas */
+  }
 }
