@@ -1,152 +1,142 @@
 /* Estilos generales del modal */
-.modal-overlay {
+.create-wallet-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3); 
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-.modal {
+.create-wallet-modal {
   background-color: #fff;
-  border-radius: 15px; /* Mantener los bordes redondeados */
-  width: 500px; /* Ajuste del ancho */
-  padding: 10px; /* Eliminar padding externo del modal para ajustar el header */
+  border-radius: 15px;
+  width: 500px;
+  padding: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   position: relative;
-  font-family: 'Montserrat', sans-serif; /* Aplicar Montserrat al modal */
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Estilos del header */
-.modal-header {
+.create-wallet-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #d3c2c2; /* Color de fondo del header */
-  padding: 20px; /* Padding interno */
-  width: 96%; /* Hacer que el header ocupe todo el ancho */
-  margin: -10px -10px 0 -10px; /* Ajustar margen negativo para que el header se alinee con el borde del modal */
-  border-radius: 15px 15px 0 0; /* Bordes redondeados solo en las esquinas superiores */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para el header */
+  background-color: #d3c2c2;
+  padding: 20px;
+  width: 104%;
+  margin: -10px -10px 0 -10px;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.modal-header h2 {
+.create-wallet-modal-header h2 {
   margin: 0;
   font-size: 1.6rem;
   color: #333;
 }
 
-.close-button {
+.create-wallet-close-button {
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
 }
 
-.modal-body {
+.create-wallet-modal-body {
   padding: 20px;
 }
 
-.form-group {
+.create-wallet-form-group {
   display: flex;
-  flex-direction: column; /* Organiza el label y el input en columnas */
+  flex-direction: column;
   margin-bottom: 20px;
-
 }
 
-.form-group label {
+.create-wallet-form-group label {
   display: block;
   font-size: 1.2rem;
   margin-bottom: 20px;
   color: #666;
 }
 
-/* Estilos específicos para el input "Cantidad" */
-.form-group input.cantidad-input {
-  width: 20%;        /* Ancho reducido */
-  padding: 7px;       /* Espacio interno reducido */
-  font-size: 1.1rem;  /* Tamaño de fuente pequeño para cantidad */
+.create-wallet-cantidad-input {
+  width: 40%;
+  padding: 7px;
+  font-size: 1.1rem;
   border: none;
-  border-bottom: 2px solid #ddd;  /* Línea inferior */
+  border-bottom: 2px solid #ddd;
   outline: none;
   transition: border-color 0.3s;
 }
 
-.form-group input.cantidad-input:focus {
-  border-color: #333;  /* Cambia el color del borde cuando está enfocado */
+.create-wallet-cantidad-input:focus {
+  border-color: #333;
 }
 
-/* Estilos específicos para el input "Nombre de la billetera" */
-.form-group input.nombre-input {
-  width: 60%;        /* Ancho ajustado */
-  padding: 7px;      /* Espacio interno */
-  font-size: 1.1rem; /* Tamaño de fuente */
+.create-wallet-nombre-input {
+  width: 70%;
+  padding: 7px;
+  font-size: 1.1rem;
   border: none;
-  border-bottom: 2px solid #ddd;  /* Línea inferior */
+  border-bottom: 2px solid #ddd;
   outline: none;
   transition: border-color 0.3s;
 }
 
-.form-group input.nombre-input:focus {
-  border-color: #333;  /* Cambia el color del borde cuando está enfocado */
+.create-wallet-nombre-input:focus {
+  border-color: #333;
 }
 
-/* Estilos para los íconos circulares en React */
-.icons-grid {
+/* Estilos para los íconos */
+.create-wallet-icons-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Distribución en 6 columnas */
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
   justify-items: center;
   margin-bottom: 20px;
 }
 
-.icon {
+.create-wallet-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px; /* Reducir el tamaño del círculo */
-  height: 50px; /* Reducir el tamaño del círculo */
-  border-radius: 60%; /* Hacer el contenedor circular */
-  background-color: #f0f0f0; /* Fondo claro para el círculo */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  width: 50px;
+  height: 50px;
+  border-radius: 60%;
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, transform 0.3s;
   cursor: pointer;
-  overflow: hidden;
-}
-.icon svg {
-  width: 24px; /* Tamaño máximo del ícono SVG */
-  height: 24px; /* Tamaño máximo del ícono SVG */
-  max-width: 50%; /* Asegura que el ícono no crezca fuera del contenedor */
-  max-height: 50%; /* Asegura que el ícono no crezca fuera del contenedor */
-}
-.icon:hover {
-  background-color: #e0e0e0; /* Cambiar el color de fondo en hover */
-  transform: scale(1.1); /* Aumentar ligeramente el tamaño en hover */
 }
 
+.create-wallet-icon:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.1);
+}
 
-.modal-footer {
+.create-wallet-modal-footer {
   text-align: center;
   justify-content: center;
 }
 
-.create-button {
-  background-color: #FFDD77; /* Fondo amarillo claro */
+.create-wallet-create-button {
+  background-color: #FFDD77;
   padding: 12px 30px;
   border: none;
-  border-radius: 20px; /* Bordes redondeados */
+  border-radius: 20px;
   font-size: 1.2rem;
   cursor: pointer;
-  width: 50%; /* Ancho ajustado */
+  width: 50%;
   transition: background-color 0.3s;
   color: #333;
 }
 
-.create-button:hover {
+.create-wallet-create-button:hover {
   background-color: #f0c44f;
 }
