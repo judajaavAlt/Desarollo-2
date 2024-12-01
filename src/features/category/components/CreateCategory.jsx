@@ -3,12 +3,12 @@ import "../styles/CreateCategory.css"; // Asegúrate de tener estilos asociados
 import PropTypes from "prop-types";
 
 //COMPONENTS
-import ModalHeader from "./ModalHeader/ModalHeader";
-import CategoryNameInput from "./CategoryNameInput/CategoryNameInput";
-import IconSelector from "./IconSelector/IconSelector";
-import ModalFooter from "./ModalFooter/ModalFooter";
+import ModalHeader from "../ModalHeader/ModalHeader";
+import CategoryNameInput from "../CategoryNameInput/CategoryNameInput";
+import IconSelector from "../IconSelector/IconSelector";
+import ModalFooter from "../ModalFooter/ModalFooter";
 
-function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
+function CategoryModal({ isOpen, onClose, data, action, typeAction }) {
   const [errors, setErrors] = useState({ name: false, icon: false });
   const isCreate = !data;
 
@@ -103,7 +103,7 @@ function CreateCategoryModal({ isOpen, onClose, data, action, typeAction }) {
   );
 }
 
-CreateCategoryModal.propTypes = {
+CategoryModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   data: PropTypes.object,
@@ -111,4 +111,4 @@ CreateCategoryModal.propTypes = {
   typeAction: PropTypes.string,
 };
 
-export default CreateCategoryModal;
+export default CategoryModal;
