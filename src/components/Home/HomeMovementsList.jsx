@@ -31,10 +31,10 @@ const HomeMovementsList = () => {
 
   // Ejemplo de datos de movimientos recientes (Aquí creería que se conecta con el back)
   const movements = [
-    { id: 1, category: 'Almuerzo', amount: 50.0, date: '20 de Septiembre' },
-    { id: 2, category: 'Transporte', amount: 30.0, date: '21 de Septiembre' },
-    { id: 3, category: 'Comida', amount: 20.0, date: '22 de Septiembre' },
-    { id: 4, category: 'Internet', amount: 30.0, date: '28 de Septiembre'},
+    { id: 1, category: 'Almuerzo', amount: 50000, date: '   20 de Septiembre' },
+    { id: 2, category: 'Transporte', amount: 30000, date: '   21 de Septiembre' },
+    { id: 3, category: 'Comida', amount: 20000, date: '   22 de Septiembre' },
+    { id: 4, category: 'Internet', amount: 30000, date: '   28 de Septiembre'},
   ];
 
   return (
@@ -42,8 +42,8 @@ const HomeMovementsList = () => {
       <h2>Movimientos Recientes</h2>
       <ul>
         {movements.map((movement) => (
-          <li key={movement.id} onClick={() => handleMovementClick(movement)}>
-            {movement.category} ${movement.amount} - {movement.date}
+          <li className='movements-elements' key={movement.id} onClick={() => handleMovementClick(movement)}>
+            {movement.category} ${movement.amount} |{movement.date}
           </li>
         ))}
       </ul>

@@ -34,6 +34,12 @@
 
 /* --- NUEVOS ESTILOS PARA LA LISTA DE MOVIMIENTOS --- */
 
+.movements-elements{
+  background-color: #f3cc6a8a;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .movements-list {
   display: flex;
   justify-content: center;
