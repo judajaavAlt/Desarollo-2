@@ -1,6 +1,6 @@
 .app-container {
   padding: 20px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .header {
@@ -35,7 +35,8 @@
 }
 
 /* Las listas ocupan el 45% del contenedor principal */
-.wallet-list-container, .transaction-list-container {
+.wallet-list-container,
+.transaction-list-container {
   flex: 1; /* Ambos elementos ocupan el mismo espacio proporcionalmente */
   max-width: 45%; /* Limita el ancho máximo de cada lista al 45% del espacio total */
   background-color: #f9f9f9;
@@ -60,17 +61,29 @@
 }
 
 /* Botones para crear billetera y transferencia */
-.create-wallet-btn, .create-transaction-btn {
-  background-color: #FFDD77;
+.create-wallet-btn,
+.create-transaction-btn {
+  background-color: #ffdd77;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.create-wallet-btn:hover,
+.create-transaction-btn:hover {
+  background-color: #ffc533; /* Cambia el color a un tono más oscuro */
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade un poco de sombra para resaltar */
 }
 
 /* Elementos dentro de cada lista */
-.wallet-item, .transaction-item {
+.wallet-item,
+.transaction-item {
   margin-top: 12px;
   display: flex;
   justify-content: space-between;
@@ -85,12 +98,12 @@
   width: 100%;
 }
 
-.wallet-item:hover, .transaction-item:hover {
+.wallet-item:hover,
+.transaction-item:hover {
   background-color: #f0f8ff; /* Cambia el fondo al pasar el mouse */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Incrementa la sombra */
   transform: scale(1.02); /* Amplía ligeramente el tamaño */
 }
-
 
 /* Iconos de las billeteras */
 .wallet-icon {

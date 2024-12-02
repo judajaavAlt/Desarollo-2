@@ -13,7 +13,7 @@ import logoutIcon from "../../assets/icons/logout.png";
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const { setUserDocData } = useAuth();
+  const { userDocData, setUserDocData } = useAuth();
 
   const handleSignOut = async () => {
     try {
@@ -24,6 +24,8 @@ export default function Sidebar() {
     }
   };
 
+  if (!userDocData) return null;
+
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
@@ -32,7 +34,7 @@ export default function Sidebar() {
       </div>
 
       <div className="sidebar-user">
-        <h3>Michi Cat Mochi</h3> {/* Nombre del usuario */}
+        <h3>{userDocData.name}</h3>
       </div>
 
       <nav className="sidebar-nav">
