@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 const PrivateRoute = ({ element: Component, ...rest }) => {
   const { userDocData } = useAuth();
+  console.log(userDocData);
 
   return userDocData ? <Component {...rest} /> : <Navigate to="/login" />;
 };

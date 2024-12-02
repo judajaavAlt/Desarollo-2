@@ -13,8 +13,7 @@ import logoutIcon from "../../assets/icons/logout.png";
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const { userDocData, setUserDocData } = useAuth();
-
+  const { setUserDocData } = useAuth();
 
   const handleSignOut = async () => {
     try {
@@ -76,7 +75,6 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        {`${userDocData.name} => ${userDocData["email"]}`}
         <button onClick={handleSignOut}>
           <img src={logoutIcon} alt="Logout Icon" className="icon" />{" "}
           {/* Icono de Logout */}
