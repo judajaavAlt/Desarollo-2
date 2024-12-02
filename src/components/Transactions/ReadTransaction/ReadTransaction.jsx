@@ -66,7 +66,7 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
           {" "}
           {
             dataWallet.find(
-              (wallet) => wallet.walletID === infoTransaction.from
+              (wallet) => wallet.walletID === infoTransaction.from,
             ).walletName
           }{" "}
         </label>
@@ -76,19 +76,22 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
           {" "}
           {
             dataWallet.find(
-              (wallet) => wallet.walletID === infoTransaction.destination
+              (wallet) => wallet.walletID === infoTransaction.destination,
             ).walletName
           }{" "}
         </label>
       </InfoGroup>
+
       <InfoGroup label={"Cantidad:"}>
         <label className="info-amount">
           {infoTransaction.transactionAmount} COL$
         </label>
       </InfoGroup>
+
       <InfoGroup label={"Fecha:"}>
         <label className="info-date">{infoTransaction.transactionDate}</label>
       </InfoGroup>
+
       <InfoGroup label={"Comentarios:"}>
         <textarea
           className="info-comments"
@@ -96,6 +99,7 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
           defaultValue={infoTransaction.transactionName}
         ></textarea>
       </InfoGroup>
+      
       <div className="button-group">
         <Button text={"Editar"} onClick={openModalUpdate}></Button>
         <Button

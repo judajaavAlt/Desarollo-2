@@ -1,11 +1,17 @@
+//librerias
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+
+//puertos
+import { createTransaction } from "../../../helpers/portTransaccion";
+import { readWallet } from "../../../helpers/portWallets";
+
+//archivos css
+
+//componentes
 import Modal from "../../generics/Modal/Modal";
 import InfoGroup from "../../generics/InfoGroup/InfoGroup";
 import Button from "../../generics/Button/Button";
-import "./CreateTransaction.css";
-import { useState, useEffect } from "react";
-import { createTransaction } from "../../../helpers/portTransaccion";
-import { readWallet } from "../../../helpers/portWallets";
 
 const CreateTransaction = ({ isOpen, onClose }) => {
   const [cat, setCat] = useState({
@@ -47,7 +53,7 @@ const CreateTransaction = ({ isOpen, onClose }) => {
         cat.transactionName,
         cat.transactionAmount,
         cat.destination,
-        cat.from
+        cat.from,
       );
       console.log("Transacción creada exitosamente.");
       setCat({

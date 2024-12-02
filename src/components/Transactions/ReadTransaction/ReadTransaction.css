@@ -1,54 +1,48 @@
-input[type="text"] {
-    display: block; /* Hace que el label ocupe todo el ancho */
-    font-size: 1.5rem; /* Tamaño de fuente más grande */
-    font-weight: bold; /* Texto en negrita */
-    margin-bottom: 10px; /* Espacio entre el label y el input */
-    color: #1e9532; /* Color del texto */
-    padding: 5px; /* Espaciado interno */
-    border-bottom: 2px solid #1e9532; /* Borde inferior */
+.label-info-transaction {
+  width: 150px; /* Mismo ancho que el select */
+  padding: 5px; /* Padding similar al select */
+  border: 1px solid #000000; /* Borde igual al select */
+  border-radius: 10px; /* Bordes redondeados */
+  color: #1e9532; /* Color del texto */
+  background-color: #fff; /* Color de fondo */
+  cursor: default; /* Cursor normal, no pointer */
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s; /* Transiciones */
+  outline: none; /* Sin contorno */
 }
 
-.label-info-transaction{
-    width: 150px; /* Mismo ancho que el select */
-    padding: 5px; /* Padding similar al select */
-    border: 1px solid #000000; /* Borde igual al select */
-    border-radius: 10px; /* Bordes redondeados */
-    color: #1e9532; /* Color del texto */
-    background-color: #fff; /* Color de fondo */
-    cursor: default; /* Cursor normal, no pointer */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Transiciones */
-    outline: none; /* Sin contorno */
+.info-amount {
+  width: 492px;
+  padding: 2px;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  color: #848484;
 }
 
-.info-amount{
-    width: 492px;
-    padding: 2px;
-    font-size: 1rem;
-    border: none;
-    border-bottom: 2px solid #ddd;
-    outline: none;
-    color: #848484;
-}
-
-.info-date{
-    width: 492px;
-    padding: 2px;
-    font-size: 1rem;
-    border: none;
-    border-bottom: 2px solid #ddd;
-    outline: none;
-    color: #1e9532;
+.info-date {
+  width: 492px;
+  padding: 2px;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  outline: none;
+  color: #1e9532;
 }
 
 .info-comments {
-    width: 494px;
-    font-size: 1rem;
-    height: 67px;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    resize: none;
-    color: #848484;
+  width: 494px;
+  font-size: 1rem;
+  height: 67px;
+  border-radius: 4px;
+  outline: none;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  resize: none;
+  color: #848484;
 }

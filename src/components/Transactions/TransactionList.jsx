@@ -70,7 +70,7 @@ function TransactionList() {
                 <span>
                   {
                     dataWallet.find(
-                      (wallet) => wallet.walletID === transaction.from
+                      (wallet) => wallet.walletID === transaction.from,
                     ).walletName
                   }
                 </span>
@@ -78,7 +78,7 @@ function TransactionList() {
                 <span>
                   {
                     dataWallet.find(
-                      (wallet) => wallet.walletID === transaction.destination
+                      (wallet) => wallet.walletID === transaction.destination,
                     ).walletName
                   }
                 </span>
