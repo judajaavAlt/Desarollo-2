@@ -1,5 +1,6 @@
 import { Chart as ChartJSX, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import PropTypes from "prop-types"; // Importar PropTypes para validaciones
 
 ChartJSX.register(ArcElement, Tooltip, Legend);
 
@@ -8,11 +9,10 @@ const options = {
   maintainAspectRadio: false,
 };
 
-export default function Pies(props) {
-  //console.log(props.data)
+export default function Pies({ dataPure }) {
   const bolsaDinero = [];
   const bolsaNombre = [];
-  props.data.forEach((cat) => {
+  dataPure.forEach((cat) => {
     bolsaDinero.push(cat.walletAmount);
     bolsaNombre.push(cat.walletName);
   });
@@ -42,3 +42,13 @@ export default function Pies(props) {
   };
   return <Pie data={data} options={options} />;
 }
+
+// Definir la validación de las propiedades
+Pies.propTypes = {
+  dataPure: PropTypes.arrayOf(
+    PropTypes.shape({
+      walletAmount: PropTypes.number.isRequired,
+      walletName: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
