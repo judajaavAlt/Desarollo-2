@@ -1,0 +1,23 @@
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.button-create {
+  background-color: #ffdd77;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: auto;
+  transition: background-color 0.3s;
+  flex: 1;
+}
+
+.button-create:hover {
+  background-color: #ffc700; /* Cambia el color al pasar el cursor */
+}

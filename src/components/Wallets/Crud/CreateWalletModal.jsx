@@ -1,3 +1,4 @@
+
 import PropTypes from 'prop-types'; // Importar PropTypes
 import './CreateWalletModal.css'; // Asegúrate de tener estilos asociados
 import { FaWallet, FaPiggyBank, FaUniversity, FaCreditCard, FaMobileAlt, FaCoins, FaMoneyBillWave, FaDollarSign, FaChartLine, FaHandHoldingUsd, FaMoneyCheckAlt, FaShoppingCart } from 'react-icons/fa'; // Importar íconos relacionados con finanzas
@@ -50,6 +51,7 @@ function CreateWalletModal({ isOpen, onClose }) {
     </div>
   );
 }
+
 
 CreateWalletModal.propTypes = {
   isOpen: PropTypes.bool.isRequired, // isOpen es un booleano requerido

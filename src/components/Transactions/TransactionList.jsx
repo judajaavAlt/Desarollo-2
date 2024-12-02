@@ -1,44 +1,103 @@
-import CreateTransaction from "./crud/CreateTransaction";
-import { useState } from "react";
-
-
-const transactions = [
-  { from: 'Principal', to: 'Efectivo', amount: '1.000.000', date: '22 de septiembre de 2024' },
-  { from: 'Nequi', to: 'Principal', amount: '1.000.000', date: '22 de septiembre de 2024' },
-  { from: 'Nequi', to: 'Daviplata', amount: '1.200.000', date: '22 de septiembre de 2024' },
-  { from: 'Nequi', to: 'Tarjeta débito', amount: '20.000', date: '22 de septiembre de 2024' },
-  { from: 'Daviplata', to: 'Tarjeta débito', amount: '220.000', date: '22 de septiembre de 2024' },
-];
-
-
+import CreateTransaction from "./CreateTransaction/CreateTransaction";
+import { useState, useEffect } from "react";
+import { readTransaction } from "../../helpers/portTransaccion";
+import { readWallet } from "../../helpers/portWallets";
+import ReadTransaction from "./ReadTransaction/ReadTransaction";
 
 function TransactionList() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [infoTransaction, setInfoTransaction] = useState(null);
+  const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
+  const [isModalOpenRead, setIsModalOpenRead] = useState(false);
+  const [dataWallet, setDataWallet] = useState([]);
+  const [dataTranstation, setDataTranstation] = useState([]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  useEffect(() => {
+    const traer = async () => {
+      try {
+        const giveWallet = await readWallet(1);
+        setDataWallet(giveWallet);
+
+        const now = new Date();
+        const mesActual = now.getMonth() + 1;
+        const anioActual = now.getFullYear();
+
+        const obtener = await readTransaction(1, mesActual, anioActual);
+        setDataTranstation(obtener);
+      } catch (e) {
+        console.error("Error al cargar categorías:", e);
+      }
+    };
+    traer();
+  }, [isModalOpenRead, isModalOpenCreate]);
+
+  const openModalRead = (data) => {
+    setIsModalOpenRead(true);
+    setInfoTransaction(data);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeModalRead = () => {
+    setIsModalOpenRead(false);
   };
+
+  const openModalCreate = () => {
+    setIsModalOpenCreate(true);
+  };
+
+  const closeModalCreate = () => {
+    setIsModalOpenCreate(false);
+  };
+
   return (
     <div className="transaction-list">
-      <button className="create-transaction-btn" onClick={openModal}>Crear Transferencia</button>
+      <button className="create-transaction-btn" onClick={openModalCreate}>
+        Crear Transferencia
+      </button>
       <div className="transactions">
-        {transactions.map((transaction, index) => (
-          <div key={index} className="transaction-item">
-            <p>{transaction.date}</p>
-            <div className="transaction-details">
-              <span>{transaction.from}</span>
-              <span className="arrow">→</span>
-              <span>{transaction.to}</span>
-              <span>{transaction.amount} COL$</span>
-            </div>
-          </div>
-        ))}
+        {dataTranstation.map((transaction) => {
+          const uniqueKey = `${transaction.transactionDate}-${transaction.from}-${transaction.destination}`;
+          return (
+            <button
+              key={uniqueKey} // Clave única generada
+              tabIndex="0"
+              onClick={() => openModalRead(transaction)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") openModalRead(transaction);
+              }}
+              className="transaction-item"
+            >
+              <p>{transaction.transactionDate}</p>
+              <div className="transaction-details">
+                <span>
+                  {
+                    dataWallet.find(
+                      (wallet) => wallet.walletID === transaction.from,
+                    ).walletName
+                  }
+                </span>
+                <span className="arrow">→</span>
+                <span>
+                  {
+                    dataWallet.find(
+                      (wallet) => wallet.walletID === transaction.destination,
+                    ).walletName
+                  }
+                </span>
+                <span>{transaction.transactionAmount} COL$</span>
+              </div>
+            </button>
+          );
+        })}
       </div>
-      <CreateTransaction isOpen={isModalOpen} onClose={closeModal} />
+
+      <CreateTransaction
+        isOpen={isModalOpenCreate}
+        onClose={closeModalCreate}
+      />
+      <ReadTransaction
+        isOpen={isModalOpenRead}
+        onClose={closeModalRead}
+        infoTransaction={infoTransaction}
+      />
     </div>
   );
 }
