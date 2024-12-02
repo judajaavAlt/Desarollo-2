@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import Modal from "../../generics/Modal/Modal";
 import Button from "../../generics/Button/Button";
 import InfoGroup from "../../generics/InfoGroup/InfoGroup";
-import "./UpdateTransaction.css";
 import { useState, useEffect } from "react";
 import { readWallet } from "../../../helpers/portWallets";
 import { updateTransaction } from "../../../helpers/portTransaccion";
@@ -111,7 +110,7 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
         <Button text={"Confirmar"} onClick={llamoo} />
         <Button
           text={"Cancelar"}
-          className={"button-create-cancel"}
+          className="text-red-500"
           onClick={onClose}
         />
       </div>

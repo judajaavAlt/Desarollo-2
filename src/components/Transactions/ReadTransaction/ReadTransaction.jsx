@@ -1,4 +1,3 @@
-import "./ReadTransaction.css";
 import PropTypes from "prop-types";
 import Modal from "../../generics/Modal/Modal";
 import InfoGroup from "../../generics/InfoGroup/InfoGroup";
@@ -99,7 +98,7 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
           defaultValue={infoTransaction.transactionName}
         ></textarea>
       </InfoGroup>
-      
+
       <div className="button-group">
         <Button text={"Editar"} onClick={openModalUpdate}></Button>
         <Button
