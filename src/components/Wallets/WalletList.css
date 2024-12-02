@@ -1,3 +1,13 @@
+.wallet-list {
+  max-height: 400px; /* Ajusta la altura máxima del contenedor */
+  overflow-y: auto; /* Habilita el scroll vertical */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ddd; /* Opcional: un borde para resaltar el área de scroll */
+  border-radius: 10px; /* Esquinas redondeadas */
+  background-color: #f9f9f9; /* Fondo opcional */
+}
+
+/* Elementos individuales de la lista */
 .wallet-item {
   display: flex;
   align-items: center;
@@ -6,18 +16,22 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   margin-bottom: 10px;
+  background-color: #fff; /* Fondo blanco para cada billetera */
 }
 
+/* Icono de la billetera */
 .wallet-icon {
   font-size: 24px; /* Tamaño de los íconos */
   color: #555; /* Color del ícono */
 }
 
+/* Detalles de la billetera */
 .wallet-details {
   flex: 1;
   margin-left: 10px;
 }
 
+/* Botón de ver más */
 .view-more-button {
   background: none;
   border: none;
@@ -28,4 +42,22 @@
 
 .view-more-button:hover {
   color: #000; /* Cambia el color cuando se pasa el ratón por encima */
+}
+
+/* Estilo para el scrollbar (opcional) */
+.wallet-list::-webkit-scrollbar {
+  width: 8px; /* Ancho del scrollbar */
+}
+
+.wallet-list::-webkit-scrollbar-thumb {
+  background-color: #aaa; /* Color de la barra de desplazamiento */
+  border-radius: 10px; /* Esquinas redondeadas */
+}
+
+.wallet-list::-webkit-scrollbar-thumb:hover {
+  background-color: #888; /* Color más oscuro al pasar el ratón */
+}
+
+.wallet-list::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Fondo del track del scrollbar */
 }

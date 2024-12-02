@@ -120,6 +120,14 @@
   transform: scale(1.1);
 }
 
+/* Estilo para el ícono seleccionado */
+.create-wallet-icon.selected {
+  background-color: #FFDD77;
+  border: 2px solid #FFAA33;
+  transform: scale(1.2);
+}
+
+/* Estilos del footer */
 .create-wallet-modal-footer {
   text-align: center;
   justify-content: center;

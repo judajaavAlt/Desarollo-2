@@ -1,54 +1,63 @@
-import  { useState } from 'react';
-import { FaWallet, FaMoneyBillWave, FaPiggyBank, FaUniversity, FaMobileAlt, FaCreditCard, FaMoneyCheckAlt, FaRegEye } from 'react-icons/fa'; // Importar íconos de Font Awesome
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { FaWallet, FaRegEye } from 'react-icons/fa';
 import ReadWalletModal from './Crud/ReadWalletModal';
-import './WalletList.css'; // Asegúrate de tener estilos asociados
+import CreateWalletModal from './Crud/CreateWalletModal';
+import './WalletList.css';
 
-const wallets = [
-  { name: 'Principal', amount: '1.000.000', currency: 'COL$', icon: <FaWallet /> },
-  { name: 'Efectivo', amount: '1.000.000', currency: 'COL$', icon: <FaMoneyBillWave /> },
-  { name: 'Ahorro', amount: '500.000', currency: 'COL$', icon: <FaPiggyBank /> },
-  { name: 'Banco', amount: '100.000', currency: 'COL$', icon: <FaUniversity /> },
-  { name: 'Nequi', amount: '0', currency: 'COL$', icon: <FaMobileAlt /> },
-  { name: 'Tarjeta débito', amount: '220.000', currency: 'COL$', icon: <FaCreditCard /> },
-  { name: 'Daviplata', amount: '1.000.000', currency: 'COL$', icon: <FaMoneyCheckAlt /> },
-];
+function WalletList({ wallets, onWalletCreated, onWalletDeleted, onWalletUpdated }) {
+  const [selectedWallet, setSelectedWallet] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
-function WalletList() {
-  const [selectedWallet, setSelectedWallet] = useState(null); // Estado para la billetera seleccionada
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para abrir/cerrar el modal
-
+  // Maneja la apertura del modal para mostrar detalles de la billetera
   const handleViewMore = (wallet) => {
-    setSelectedWallet(wallet); // Establecer la billetera seleccionada
-    setIsModalOpen(true); // Abrir el modal
+    setSelectedWallet(wallet);
+    setIsModalOpen(true);
   };
 
-  const handleDelete = (wallet) => {
-    console.log('Eliminar billetera:', wallet);
-    setIsModalOpen(false); // Cerrar el modal después de eliminar
+  // Maneja la eliminación de una billetera
+  const handleDelete = (deletedWallet) => {
+    if (onWalletDeleted) {
+      onWalletDeleted(deletedWallet); // Notifica al componente padre que la billetera fue eliminada
+    }
+    setIsModalOpen(false); // Cierra el modal de detalles después de eliminar
   };
 
-  const handleEdit = (wallet) => {
-    console.log('Editar billetera:', wallet);
-    setIsModalOpen(false); // Cerrar el modal después de editar
-  };
+  // Maneja la apertura del modal de creación
+  const openCreateModal = () => setIsCreateModalOpen(true);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // Maneja el cierre del modal de creación
+  const closeCreateModal = () => setIsCreateModalOpen(false);
 
   return (
     <div className="wallet-list">
+      {/* Botón para abrir el modal de creación */}
+      <button className="create-wallet-button" onClick={openCreateModal}>
+        Crear Billetera
+      </button>
+
+      {/* Mensaje cuando no hay billeteras */}
+      {wallets.length === 0 && <p>No hay billeteras disponibles.</p>}
+
+      {/* Lista de billeteras */}
       <div className="wallets">
-        {wallets.map((wallet, index) => (
-          <div key={index} className="wallet-item">
-            <div className="wallet-icon">{wallet.icon}</div>
+        {wallets.map((wallet) => (
+          <div key={wallet.id} className="wallet-item">
+            <div className="wallet-icon">
+              <FaWallet />
+            </div>
             <div className="wallet-details">
               <h3>{wallet.name}</h3>
-              <p>{wallet.amount} {wallet.currency}</p>
+              <p>
+                {wallet.amount} {wallet.currency}
+              </p>
             </div>
-            {/* Ícono de ver más */}
-            <button className="view-more-button" onClick={() => handleViewMore(wallet)}>
-              <FaRegEye /> {/* Ícono de "ver más" */}
+            <button
+              className="view-more-button"
+              onClick={() => handleViewMore(wallet)}
+            >
+              <FaRegEye />
             </button>
           </div>
         ))}
@@ -58,14 +67,28 @@ function WalletList() {
       {selectedWallet && (
         <ReadWalletModal
           isOpen={isModalOpen}
-          onClose={closeModal}
-          wallet={selectedWallet}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
+          onClose={() => setIsModalOpen(false)} // Cierra el modal de detalles
+          wallet={selectedWallet} // Pasa la billetera seleccionada
+          onDelete={handleDelete} // Maneja la eliminación
+          onUpdate={onWalletUpdated} // Maneja la actualización
         />
       )}
+
+      {/* Modal para crear una nueva billetera */}
+      <CreateWalletModal
+        isOpen={isCreateModalOpen}
+        onClose={closeCreateModal} // Cierra el modal de creación
+        onWalletCreated={onWalletCreated} // Notifica al padre que se creó una billetera
+      />
     </div>
   );
 }
+
+WalletList.propTypes = {
+  wallets: PropTypes.array.isRequired, // Lista de billeteras
+  onWalletCreated: PropTypes.func.isRequired, // Función para manejar la creación de una billetera
+  onWalletDeleted: PropTypes.func.isRequired, // Función para manejar la eliminación de una billetera
+  onWalletUpdated: PropTypes.func.isRequired, // Función para manejar la actualización de una billetera
+};
 
 export default WalletList;

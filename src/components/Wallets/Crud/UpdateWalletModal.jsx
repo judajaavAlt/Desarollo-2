@@ -10,12 +10,15 @@ import {
   FaMoneyCheckAlt,
 } from 'react-icons/fa';
 import './UpdateWalletModal.css';
+import { updateWallet, readWallet } from '../../../helpers/portWallets'; // Importar el puerto de actualización
 
 function UpdateWalletModal({ isOpen, onClose, wallet, onSave }) {
   const [amount, setAmount] = useState(wallet.amount);
   const [name, setName] = useState(wallet.name);
   const [currency, setCurrency] = useState(wallet.currency);
   const [icon, setIcon] = useState(wallet.icon);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const icons = [
     { id: 1, icon: <FaWallet /> },
@@ -29,10 +32,42 @@ function UpdateWalletModal({ isOpen, onClose, wallet, onSave }) {
 
   if (!isOpen) return null;
 
-  const handleSave = () => {
-    const updatedWallet = { ...wallet, amount, name, currency, icon };
-    onSave(updatedWallet);
-    onClose();
+  const handleSave = async () => {
+    try {
+      // Validar que el ID de la billetera esté disponible
+      let walletID = wallet?.id;
+      if (!walletID) {
+        console.warn('El ID de la billetera no está definido. Intentando obtenerlo...');
+        const userID = 1; // Ajustar según la lógica de autenticación
+
+        // Obtener la lista de billeteras para encontrar el walletID
+        const wallets = await readWallet(userID);
+        const matchingWallet = wallets.find((w) => w.walletName === wallet.name);
+
+        if (!matchingWallet) {
+          console.error('No se pudo encontrar una billetera que coincida:', wallet.name);
+          setErrorMessage('No se pudo actualizar la billetera. Verifica el nombre.');
+          return;
+        }
+
+        walletID = matchingWallet.walletID; // Asigna el ID encontrado
+      }
+
+      // Llamar al puerto para actualizar la billetera
+      const userID = 1; // Ajustar según tu lógica de autenticación
+      await updateWallet(walletID, name, parseFloat(amount), icon, userID);
+
+      // Mostrar mensaje de éxito
+      setSuccessMessage('¡La billetera fue actualizada exitosamente!');
+      setTimeout(() => {
+        setSuccessMessage('');
+        onSave({ ...wallet, id: walletID, name, amount, currency, icon }); // Notificar al padre
+        onClose(); // Cerrar el modal
+      }, 2000);
+    } catch (error) {
+      console.error('Error al actualizar la billetera:', error);
+      setErrorMessage('No se pudo guardar la billetera. Intenta nuevamente.');
+    }
   };
 
   return (
@@ -45,6 +80,8 @@ function UpdateWalletModal({ isOpen, onClose, wallet, onSave }) {
           </button>
         </div>
         <div className="update-wallet-modal-body">
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {successMessage && <p className="success-message">{successMessage}</p>}
           <div className="update-wallet-form-group">
             <label>Cantidad</label>
             <input
@@ -106,6 +143,7 @@ UpdateWalletModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   wallet: PropTypes.shape({
+    id: PropTypes.number, // Ahora opcional, ya que puede obtenerse desde el puerto
     amount: PropTypes.string.isRequired,
     currency: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
