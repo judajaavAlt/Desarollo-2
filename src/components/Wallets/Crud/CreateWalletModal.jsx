@@ -1,60 +1,60 @@
 
 import PropTypes from 'prop-types'; // Importar PropTypes
 import './CreateWalletModal.css'; // Asegúrate de tener estilos asociados
+import { FaWallet, FaPiggyBank, FaUniversity, FaCreditCard, FaMobileAlt, FaCoins, FaMoneyBillWave, FaDollarSign, FaChartLine, FaHandHoldingUsd, FaMoneyCheckAlt, FaShoppingCart } from 'react-icons/fa'; // Importar íconos relacionados con finanzas
 
 function CreateWalletModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <div className="modal-header">
+    <div className="create-wallet-modal-overlay">
+      <div className="create-wallet-modal">
+        <div className="create-wallet-modal-header">
           <h2>Cree una billetera</h2>
-          <button className="close-button" onClick={onClose}>×</button>
+          <button className="create-wallet-close-button" onClick={onClose}>×</button>
         </div>
-        <div className="modal-body">
-          <div className="form-group">
+        <div className="create-wallet-modal-body">
+          <div className="create-wallet-form-group">
             <label>Cantidad</label>
-            <input type="number" value="0" />
+            <input type="number" className="create-wallet-cantidad-input" value="0" />
           </div>
 
-          <div className="form-group">
+          <div className="create-wallet-form-group">
             <label>Nombre de la billetera</label>
-            <input type="text" placeholder="Introduzca un nombre de billetera" />
+            <input type="text" className="create-wallet-nombre-input" placeholder="Introduzca un nombre de billetera" />
           </div>
 
-          <div className="form-group">
+          <div className="create-wallet-form-group">
             <label>Símbolos</label>
-            <div className="icons-grid">
-              {/* Asegúrate de tener los íconos disponibles */}
-              <img src="/path/to/icon1.png" alt="Icon1" />
-              <img src="/path/to/icon2.png" alt="Icon2" />
-              <img src="/path/to/icon3.png" alt="Icon3" />
-              {/* Más íconos según sea necesario */}
+            <div className="create-wallet-icons-grid">
+              {/* 12 íconos relacionados con finanzas */}
+              <FaWallet title="Billetera" className="create-wallet-icon" />
+              <FaPiggyBank title="Ahorro" className="create-wallet-icon" />
+              <FaUniversity title="Banco" className="create-wallet-icon" />
+              <FaCreditCard title="Tarjeta de Crédito" className="create-wallet-icon" />
+              <FaMobileAlt title="Pagos Móviles" className="create-wallet-icon" />
+              <FaCoins title="Monedas" className="create-wallet-icon" />
+              <FaMoneyBillWave title="Dinero en Efectivo" className="create-wallet-icon" />
+              <FaDollarSign title="Dólares" className="create-wallet-icon" />
+              <FaChartLine title="Inversiones" className="create-wallet-icon" />
+              <FaHandHoldingUsd title="Fondos" className="create-wallet-icon" />
+              <FaMoneyCheckAlt title="Cheques" className="create-wallet-icon" />
+              <FaShoppingCart title="Gastos" className="create-wallet-icon" />
             </div>
           </div>
 
-          <div className="form-group">
-            <label>Color</label>
-            <div className="color-options">
-              <button className="color red"></button>
-              <button className="color blue"></button>
-              <button className="color green"></button>
-              <button className="color yellow"></button>
-            </div>
-          </div>
         </div>
-        <div className="modal-footer">
-          <button className="create-button">Crear</button>
+        <div className="create-wallet-modal-footer">
+          <button className="create-wallet-create-button">Crear</button>
         </div>
       </div>
     </div>
   );
 }
 
-// Definir PropTypes para validar las props
+
 CreateWalletModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,  // isOpen es un booleano requerido
+  isOpen: PropTypes.bool.isRequired, // isOpen es un booleano requerido
   onClose: PropTypes.func.isRequired, // onClose es una función requerida
 };
 

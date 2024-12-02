@@ -1,12 +1,12 @@
 // Dependencias
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 
 //componentes
-import Logo from "../../components/Login/Logo"
+import Logo from "../../components/Login/Logo";
 import Decoracion from "../../components/Login/Decoracion";
 import Footer from "../../components/Login/Footer";
 
@@ -18,8 +18,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
   function retrievePassword(e) {

@@ -6,13 +6,14 @@ import {
 } from "react-router-dom";
 
 //components
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/Layout/layout";
 
 //pages
 import Login from "./pages/Login/Login";
 import SingUp from "./pages/Login/SingUp";
 import HomePage from "./pages/HomePage/HomePage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
+import WalletPage from "./pages/WalletsPage/walletPage";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ function AppRoutes() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/categories" element={<CategoryPage />} />
+          <Route path="/wallets" element={<WalletPage />} />
         </Route>
       </Routes>
     </Router>

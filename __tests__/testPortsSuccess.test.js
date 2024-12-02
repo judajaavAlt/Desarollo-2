@@ -1,12 +1,12 @@
 import { createTransaction, readTransaction, updateTransaction, deleteTransaction } from "../src/helpers/portTransaccion";
 import { createUser, deleteUser, readUser, updateUser } from "../src/helpers/portUsers";
 import { createWallet, readWallet, updateWallet, deleteWallet } from "../src/helpers/portWallets";
-import { createCategory, readCategoriesByType, updateCategory, deleteCategory } from "../src/helpers/portCategory";
+import { createCategory, readCategoriesByUserId, updateCategory, deleteCategory } from "../src/helpers/portCategory";
 
 // Mocks the supabase api so it always works
 const mockSelect = jest.fn(() => ({
     eq: jest.fn(() => ({
-      data: [], 
+      data: [32], 
       error: null 
     })),
     in: jest.fn(() =>({
@@ -69,7 +69,7 @@ test("Work deleteTransaction test", () => {expect(deleteTransaction()).resolves.
 test("Work createTransaction test", () => {expect(createTransaction()).resolves.not.toThrow();});
 
 // Test related to the Categories port
-test("Work readCategoriesByType test", () => {expect(readCategoriesByType()).resolves.not.toThrow();});
+test("Work readCategoriesByUserId test", () => {expect(readCategoriesByUserId()).resolves.not.toThrow();});
 test("Work createCategory test", () => {expect(createCategory()).resolves.not.toThrow();});
 test("Work updateCategory test", () => {expect(updateCategory()).resolves.not.toThrow();});
 test("Work deleteCategory test", () => {expect(deleteCategory()).resolves.not.toThrow();});
