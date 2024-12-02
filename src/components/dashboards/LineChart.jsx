@@ -1,5 +1,4 @@
 import { Line } from "react-chartjs-2";
-import { readTransaction } from "../../helpers/portTransaccion";
 import {
   Chart as ChartJSX,
   CategoryScale,
@@ -20,13 +19,26 @@ ChartJSX.register(
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
 );
 
-var beneficios = [22,50,12,68,79,42,68,53,47,19,30,25]
-var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+const beneficios = [22, 50, 12, 68, 79, 42, 68, 53, 47, 19, 30, 25];
+const meses = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
 
-var midata = {
+const midata = {
   labels: meses, // Etiquetas dinámicas
   datasets: [
     {
@@ -43,10 +55,8 @@ var midata = {
   ],
 };
 
-var myoptions = {
-
-};
+const myoptions = {};
 
 export default function LineChart() {
-  return <Line data={midata} options={myoptions}/>
+  return <Line data={midata} options={myoptions} />;
 }

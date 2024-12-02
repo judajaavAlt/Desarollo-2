@@ -2,7 +2,6 @@
 import Sidebar from '../Sidebar/sidebar';
 import { Outlet } from 'react-router-dom';
 import './layout.css';
-import LineChart from '../dashboards/LineChart';
 import Pie from '../dashboards/PieChart';
 import { readWallet } from '../../helpers/portWallets';
 import { useState, useEffect } from 'react';

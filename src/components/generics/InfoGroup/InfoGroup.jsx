@@ -1,5 +1,4 @@
-import React from 'react';
-import './InfoGroup.css';
+import PropTypes from 'prop-types';
 
 const InfoGroup = ({ label, children }) => (
     <div className="info-group">
@@ -8,5 +7,9 @@ const InfoGroup = ({ label, children }) => (
     </div>
 );
 
-export default InfoGroup;
+InfoGroup.propTypes = {
+    label: PropTypes.string.isRequired, // 'label' debe ser una cadena y es obligatorio
+    children: PropTypes.node.isRequired, // 'children' puede ser cualquier tipo de contenido y es obligatorio
+};
 
+export default InfoGroup;
