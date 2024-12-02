@@ -94,13 +94,15 @@ function CreateWalletModal({ isOpen, onClose, onWalletCreated }) {
             <label>Símbolos</label>
             <div className="create-wallet-icons-grid">
               {icons.map(({ id, component: Icon }) => (
-                <div
+                <button
                   key={id}
                   className={`create-wallet-icon ${walletIcon === id ? 'selected' : ''}`}
                   onClick={() => setWalletIcon(id)}
+                  onKeyDown={(e) => e.key === 'Enter' && setWalletIcon(id)}
+                  type="button" // Para evitar comportamiento predeterminado del formulario
                 >
                   <Icon />
-                </div>
+                </button>
               ))}
             </div>
           </div>
