@@ -1,0 +1,134 @@
+/* Contenedor de los botones */
+.content {
+  background-color: #ffffff;
+}
+
+.toggle-buttons {
+  display: flex;
+  border-radius: 20px; /* Más redondeado */
+  overflow: hidden; /* Bordes redondeados visibles */
+  background-color: #f4f1eb; /* Fondo neutro */
+  width: fit-content;
+  margin: 20px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo base de los botones */
+.button {
+  border: none;
+  padding: 15px 60px;
+  cursor: pointer;
+  background-color: transparent;
+  font-weight: bold;
+  color: #333;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Botón activo */
+.button.active {
+  background-color: #ffc107; /* Color amarillo */
+  color: black;
+  border-radius: 20px; /* Mantén bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Sombra para destacar */
+}
+
+/* Hover en botones inactivos */
+.button:not(.active):hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Fondo gris claro */
+  color: black;
+  border-radius: 20px; /* Mantén bordes redondeados */
+}
+
+/* Título */
+.title {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+}
+
+/* Lista de categorías */
+.list-categories {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias líneas */
+  justify-content: start; /* Alineación inicial */
+  gap: 20px; /* Espaciado uniforme entre los elementos */
+  padding: 0 20px; /* Espaciado a los lados */
+}
+
+/* Estilo de cada categoría */
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.category-item span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffd782; /* Amarillo cálido */
+  color: #5a3c00; /* Marrón oscuro */
+  font-size: 24px;
+  font-weight: bold;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Fondo circular */
+  border: 1px solid #ccc; /* Borde claro */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  transition: all 0.3s ease; /* Suaviza cambios */
+}
+
+.category-item p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Botón de cada categoría */
+.category-item button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: center;
+  padding: 0;
+}
+
+/* Hover en el ícono */
+.category-item button:hover span {
+  background-color: #f35e28; /* Cambia a naranja intenso */
+  color: #fff; /* Texto blanco */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+}
+
+/* Hover en el texto */
+.category-item button:hover p {
+  color: #805d11; /* Marrón más cálido */
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+
+.loading-spinner::after {
+  content: '⏳'; /* Puedes usar un emoji o un ícono de carga */
+}
