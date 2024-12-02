@@ -4,14 +4,6 @@ import { readTransaction } from "../../helpers/portTransaccion";
 import { readWallet } from "../../helpers/portWallets";
 import ReadTransaction from "./ReadTransaction/ReadTransaction";
 
-// const transactions = [
-//   { from: 'Principal', to: 'Efectivo', amount: '1.000.000', date: '22 de septiembre de 2024' },
-//   { from: 'Nequi', to: 'Principal', amount: '1.000.000', date: '22 de septiembre de 2024' },
-//   { from: 'Nequi', to: 'Daviplata', amount: '1.200.000', date: '22 de septiembre de 2024' },
-//   { from: 'Nequi', to: 'Tarjeta débito', amount: '20.000', date: '22 de septiembre de 2024' },
-//   { from: 'Daviplata', to: 'Tarjeta débito', amount: '220.000', date: '22 de septiembre de 2024' },
-// ];
-
 function TransactionList() {
   const [infoTransaction, setInfoTransaction] = useState(null);
   const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
@@ -26,7 +18,7 @@ function TransactionList() {
         setDataWallet(giveWallet);
 
         const now = new Date();
-        const mesActual = now.getMonth() + 1; // getMonth() devuelve un índice de 0 (enero) a 11 (diciembre), por eso se suma 1.
+        const mesActual = now.getMonth() + 1;
         const anioActual = now.getFullYear();
 
         const obtener = await readTransaction(1, mesActual, anioActual);
@@ -61,34 +53,42 @@ function TransactionList() {
         Crear Transferencia
       </button>
       <div className="transactions">
-        {dataTranstation.map((transaction, index) => (
-          <div
-            key={index}
-            onClick={() => openModalRead(transaction)}
-            className="transaction-item"
-          >
-            <p>{transaction.transactionDate}</p>
-            <div className="transaction-details">
-              <span>
-                {
-                  dataWallet.find(
-                    (wallet) => wallet.walletID === transaction.from
-                  ).walletName
-                }
-              </span>
-              <span className="arrow">→</span>
-              <span>
-                {
-                  dataWallet.find(
-                    (wallet) => wallet.walletID === transaction.destination
-                  ).walletName
-                }
-              </span>
-              <span>{transaction.transactionAmount} COL$</span>
-            </div>
-          </div>
-        ))}
+        {dataTranstation.map((transaction) => {
+          const uniqueKey = `${transaction.transactionDate}-${transaction.from}-${transaction.destination}`;
+          return (
+            <button
+              key={uniqueKey} // Clave única generada
+              tabIndex="0"
+              onClick={() => openModalRead(transaction)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") openModalRead(transaction);
+              }}
+              className="transaction-item"
+            >
+              <p>{transaction.transactionDate}</p>
+              <div className="transaction-details">
+                <span>
+                  {
+                    dataWallet.find(
+                      (wallet) => wallet.walletID === transaction.from
+                    ).walletName
+                  }
+                </span>
+                <span className="arrow">→</span>
+                <span>
+                  {
+                    dataWallet.find(
+                      (wallet) => wallet.walletID === transaction.destination
+                    ).walletName
+                  }
+                </span>
+                <span>{transaction.transactionAmount} COL$</span>
+              </div>
+            </button>
+          );
+        })}
       </div>
+
       <CreateTransaction
         isOpen={isModalOpenCreate}
         onClose={closeModalCreate}

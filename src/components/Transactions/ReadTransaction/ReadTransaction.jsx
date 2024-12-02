@@ -1,5 +1,4 @@
 import "./ReadTransaction.css";
-import React from "react";
 import PropTypes from "prop-types";
 import Modal from "../../generics/Modal/Modal";
 import InfoGroup from "../../generics/InfoGroup/InfoGroup";
@@ -10,7 +9,6 @@ import DeleteTransaction from "../DeleteTransaction/DeleteTransaction";
 import UpdateTransaction from "../UpdateTransaction/UpdateTransaction";
 
 const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
-
   const [isModalOpenDelete, setIsModalOpenDelete] = useState(false);
   const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
   const [selectedTransactionID, setSelectedTransactionID] = useState(null);
@@ -31,8 +29,8 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
     traer();
   }, []);
 
-  if (!infoTransaction ) {
-    return null
+  if (!infoTransaction) {
+    return null;
   }
 
   //console.log(infoTransaction.transactionDate)
@@ -48,14 +46,14 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
     onClose();
   };
 
-   const openModalUpdate = () => {
-     setIsModalOpenUpdate(true);
-   };
+  const openModalUpdate = () => {
+    setIsModalOpenUpdate(true);
+  };
 
-   const closeModalUpdate = () => {
-     setIsModalOpenUpdate(false);
-     onClose();
-   };
+  const closeModalUpdate = () => {
+    setIsModalOpenUpdate(false);
+    onClose();
+  };
 
   return (
     <Modal
@@ -64,21 +62,29 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
       title={"Información de la transacción"}
     >
       <InfoGroup label={"Transferido de:"}>
-        <label className="label-info-transaction"> {
-                  dataWallet.find(
-                    (wallet) => wallet.walletID === infoTransaction.from
-                  ).walletName
-                } </label>
+        <label className="label-info-transaction">
+          {" "}
+          {
+            dataWallet.find(
+              (wallet) => wallet.walletID === infoTransaction.from
+            ).walletName
+          }{" "}
+        </label>
       </InfoGroup>
       <InfoGroup label={"Transferido a:"}>
-        <label className="label-info-transaction"> {
-                  dataWallet.find(
-                    (wallet) => wallet.walletID === infoTransaction.destination
-                  ).walletName
-                } </label>
+        <label className="label-info-transaction">
+          {" "}
+          {
+            dataWallet.find(
+              (wallet) => wallet.walletID === infoTransaction.destination
+            ).walletName
+          }{" "}
+        </label>
       </InfoGroup>
       <InfoGroup label={"Cantidad:"}>
-        <label className="info-amount">{infoTransaction.transactionAmount} COL$</label>
+        <label className="info-amount">
+          {infoTransaction.transactionAmount} COL$
+        </label>
       </InfoGroup>
       <InfoGroup label={"Fecha:"}>
         <label className="info-date">{infoTransaction.transactionDate}</label>
@@ -92,17 +98,29 @@ const ReadTransaction = ({ isOpen, onClose, infoTransaction }) => {
       </InfoGroup>
       <div className="button-group">
         <Button text={"Editar"} onClick={openModalUpdate}></Button>
-        <Button text={"Borrar"} onClick={()=> openModalDelete(infoTransaction.transactionID)}></Button>
+        <Button
+          text={"Borrar"}
+          onClick={() => openModalDelete(infoTransaction.transactionID)}
+        ></Button>
       </div>
-      <DeleteTransaction isOpen={isModalOpenDelete} onClose={closeModalDelete} transactionID={selectedTransactionID}/>
-      <UpdateTransaction isOpen={isModalOpenUpdate} onClose={closeModalUpdate} infoTransaction={infoTransaction}/>
+      <DeleteTransaction
+        isOpen={isModalOpenDelete}
+        onClose={closeModalDelete}
+        transactionID={selectedTransactionID}
+      />
+      <UpdateTransaction
+        isOpen={isModalOpenUpdate}
+        onClose={closeModalUpdate}
+        infoTransaction={infoTransaction}
+      />
     </Modal>
   );
 };
 
 ReadTransaction.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-  };
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  infoTransaction: PropTypes.object,
+};
 
 export default ReadTransaction;

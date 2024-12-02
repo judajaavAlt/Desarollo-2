@@ -71,15 +71,26 @@
 
 /* Elementos dentro de cada lista */
 .wallet-item, .transaction-item {
+  margin-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
   background-color: #fff;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 15px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: all 0.3s ease; /* Transición suave para los cambios */
+  width: 100%;
 }
+
+.wallet-item:hover, .transaction-item:hover {
+  background-color: #f0f8ff; /* Cambia el fondo al pasar el mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Incrementa la sombra */
+  transform: scale(1.02); /* Amplía ligeramente el tamaño */
+}
+
 
 /* Iconos de las billeteras */
 .wallet-icon {

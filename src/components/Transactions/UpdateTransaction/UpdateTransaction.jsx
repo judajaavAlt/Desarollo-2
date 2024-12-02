@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Modal from "../../generics/Modal/Modal";
 import Button from "../../generics/Button/Button";
 import InfoGroup from "../../generics/InfoGroup/InfoGroup";
-import "./UpdateTransaction.css"
+import "./UpdateTransaction.css";
 import { useState, useEffect } from "react";
 import { readWallet } from "../../../helpers/portWallets";
 import { updateTransaction } from "../../../helpers/portTransaccion";
@@ -10,7 +10,7 @@ import { updateTransaction } from "../../../helpers/portTransaccion";
 // Ejemplo de uso:
 
 const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
-  console.log(infoTransaction)
+  console.log(infoTransaction);
   const [cat, setCat] = useState(infoTransaction);
 
   const [dataWallet, setDataWallet] = useState([]);
@@ -57,7 +57,7 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={"Actualizar Transacción:"}>
       <InfoGroup label={"Transferido de:"}>
-      <select name="from" onChange={handleNameChange} value={cat.from}>
+        <select name="from" onChange={handleNameChange} value={cat.from}>
           <option value="">Seleccione</option>
           {dataWallet
             .filter((w) => w.walletID + "" !== cat.destination) // Filtrar la opción seleccionada en "destination"
@@ -69,7 +69,7 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
         </select>
       </InfoGroup>
       <InfoGroup label={"Transferido a:"}>
-      <select
+        <select
           name="destination"
           onChange={handleNameChange}
           value={cat.destination}
@@ -85,7 +85,7 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
         </select>
       </InfoGroup>
       <InfoGroup label={"Cantidad:"}>
-      <input
+        <input
           name="transactionAmount"
           type="number"
           onChange={handleNameChange}
@@ -93,7 +93,7 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
         />
       </InfoGroup>
       <InfoGroup label={"Fecha:"}>
-      <input
+        <input
           type="date"
           name="transactionDate"
           onChange={handleNameChange}
@@ -101,15 +101,19 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
         />
       </InfoGroup>
       <InfoGroup label={"Comentarios:"}>
-      <textarea
+        <textarea
           name="transactionName"
           onChange={handleNameChange}
           value={cat.transactionName}
         ></textarea>
       </InfoGroup>
       <div className="button-group">
-        <Button text={"Confirmar"} onClick={llamoo}/>
-        <Button text={"Cancelar"} className={"button-create-cancel"} onClick={onClose}/>
+        <Button text={"Confirmar"} onClick={llamoo} />
+        <Button
+          text={"Cancelar"}
+          className={"button-create-cancel"}
+          onClick={onClose}
+        />
       </div>
     </Modal>
   );
@@ -118,6 +122,7 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
 UpdateTransaction.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  infoTransaction: PropTypes.object.isRequired,
 };
 
 export default UpdateTransaction;

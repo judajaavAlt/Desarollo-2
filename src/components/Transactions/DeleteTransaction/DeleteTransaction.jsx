@@ -5,7 +5,7 @@ import { deleteTransaction } from "../../../helpers/portTransaccion";
 const DeleteTransaction = ({ isOpen, onClose, transactionID }) => {
   // Maneja la confirmación de eliminación
   const handleConfirm = async () => {
-    console.log(transactionID)
+    console.log(transactionID);
     try {
       await deleteTransaction(transactionID); // Llama a la función para eliminar la transacción
       onClose(); // Cierra el modal
@@ -15,7 +15,6 @@ const DeleteTransaction = ({ isOpen, onClose, transactionID }) => {
   };
 
   return (
-    
     <SmallModal
       isOpen={isOpen}
       onClose={onClose}
@@ -29,6 +28,7 @@ const DeleteTransaction = ({ isOpen, onClose, transactionID }) => {
 DeleteTransaction.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  transactionID: PropTypes.number.isRequired,
 };
 
 export default DeleteTransaction;
