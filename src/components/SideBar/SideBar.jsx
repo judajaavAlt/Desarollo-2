@@ -67,7 +67,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        {`${userData[0]["name"]} = ${usuario_id}`}
+        {`${userData[0]["name"]} => ${usuario_id}`}
         <NavLink to="/Login">
           <img src={logoutIcon} alt="Logout Icon" className="icon" />{" "}
           {/* Icono de Logout */}
