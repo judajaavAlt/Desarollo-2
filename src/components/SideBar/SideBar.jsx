@@ -2,7 +2,7 @@
 
 import { NavLink, useNavigate } from "react-router-dom";
 import "./sideBar.css"; // Importamos los estilos
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/useAuth";
 
 // Importamos los íconos
 import logoIcon from "../../assets/icons/logo.png";
@@ -13,12 +13,8 @@ import logoutIcon from "../../assets/icons/logout.png";
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const { auserData, setUserDocData } = useAuth();
+  const { userDocData, setUserDocData } = useAuth();
 
-  const userData = [
-    { userID: 3, name: "Usuario" },
-  ]; /*JSON.parse(localStorage.getItem("user"));*/
-  const usuario_id = userData[0]["userID"];
 
   const handleSignOut = async () => {
     try {
@@ -80,7 +76,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        {`${userData[0]["name"]} => ${usuario_id}`}
+        {`${userDocData.name} => ${userDocData["email"]}`}
         <button onClick={handleSignOut}>
           <img src={logoutIcon} alt="Logout Icon" className="icon" />{" "}
           {/* Icono de Logout */}

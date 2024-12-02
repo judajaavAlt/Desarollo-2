@@ -8,9 +8,12 @@ import {
 } from "../../helpers/portCategory";
 import "./CategoryList.css";
 
+//contextos
+import { useAuth } from "../../context/useAuth";
+
 function CategoryPage() {
-  const userData = JSON.parse(localStorage.getItem("user"));
-  const usuario_id = userData[0]["userID"];
+  const { userDocData } = useAuth();
+  const usuario_id = userDocData["userID"];
 
   const [typeCategory, setTypeCategory] = useState(true);
   const [categories, setCategories] = useState([]);

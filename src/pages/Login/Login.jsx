@@ -12,7 +12,7 @@ import Footer from "../../components/Login/Footer";
 
 //helpers
 import { readUser } from "../../helpers/portUsers";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/useAuth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -56,10 +56,11 @@ export default function Login() {
           timer: 1500,
         });
 
-        console.log("Usuario encontrado:", dataUsers);
+        console.log(dataUsers);
+        console.log(dataUsers[0]);
 
         // Guarda los datos del usuario en sessionStorage
-        setUserDocData(dataUsers);
+        setUserDocData(dataUsers[0]);
 
         // Redirige al usuario a la página principal
         navigate("/home");
