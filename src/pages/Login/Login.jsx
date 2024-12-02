@@ -12,10 +12,12 @@ import Footer from "../../components/Login/Footer";
 
 //helpers
 import { readUser } from "../../helpers/portUsers";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setUserDocData } = useAuth();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -57,7 +59,7 @@ export default function Login() {
         console.log("Usuario encontrado:", dataUsers);
 
         // Guarda los datos del usuario en sessionStorage
-        localStorage.setItem("user", JSON.stringify(dataUsers));
+        setUserDocData(dataUsers);
 
         // Redirige al usuario a la página principal
         navigate("/home");

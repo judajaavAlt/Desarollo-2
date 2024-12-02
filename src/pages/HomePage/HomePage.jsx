@@ -4,8 +4,11 @@ import { readWallet } from "../../helpers/portWallets";
 import { useState, useEffect } from "react";
 import Pies from "../../components/dashboards/PieChart";
 
+import { useAuth } from "../../context/AuthContext";
+
 const HomePage = () => {
   const [dataWallet, setDataWallet] = useState([]);
+  const { userDocData } = useAuth();
 
   useEffect(() => {
     const traer = async () => {
@@ -18,6 +21,8 @@ const HomePage = () => {
     };
     traer();
   }, []);
+
+  console.log(userDocData);
 
   return (
     <div className="home-page">
