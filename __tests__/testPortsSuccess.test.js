@@ -2,6 +2,7 @@ import { createTransaction, readTransaction, updateTransaction, deleteTransactio
 import { createUser, deleteUser, readUser, updateUser } from "../src/helpers/portUsers";
 import { createWallet, readWallet, updateWallet, deleteWallet } from "../src/helpers/portWallets";
 import { createCategory, readCategoriesByType, updateCategory, deleteCategory } from "../src/helpers/portCategory";
+import { createMovement, readMovements, updateMovement, deleteMovement } from "../src/helpers/portMovements";
 
 // Mocks the supabase api so it always works
 const mockSelect = jest.fn(() => ({
@@ -73,3 +74,9 @@ test("Work readCategoriesByType test", () => {expect(readCategoriesByType()).res
 test("Work createCategory test", () => {expect(createCategory()).resolves.not.toThrow();});
 test("Work updateCategory test", () => {expect(updateCategory()).resolves.not.toThrow();});
 test("Work deleteCategory test", () => {expect(deleteCategory()).resolves.not.toThrow();});
+
+// Test related to the Movement port
+test("Work createMovement test", () => { expect(createMovement()).resolves.not.toThrow(); });
+test("Work readMovements test", () => { expect(readMovements()).resolves.not.toThrow(); });
+test("Work updateMovement test", () => { expect(updateMovement()).resolves.not.toThrow(); });
+test("Work deleteMovement test", () => { expect(deleteMovement()).resolves.not.toThrow(); });
