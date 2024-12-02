@@ -23,6 +23,7 @@ function CreateWalletModal({ isOpen, onClose, onWalletCreated }) {
   const [walletIcon, setWalletIcon] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Maneja la creación de la billetera
   const handleCreateWallet = async () => {
     try {
       if (!walletName.trim() || !walletIcon || parseFloat(walletAmount) <= 0) {
@@ -30,21 +31,24 @@ function CreateWalletModal({ isOpen, onClose, onWalletCreated }) {
         return;
       }
 
-      const userID = 1;
+      const userID = 1; // Aquí se debería ajustar según la lógica de autenticación
 
       await createWallet(walletName.trim(), parseFloat(walletAmount), walletIcon, userID);
 
+      // Limpiar los campos del formulario
       setWalletAmount('');
       setWalletName('');
       setWalletIcon('');
-      onWalletCreated();
+      setErrorMessage('');
+      onWalletCreated(); // Notifica al componente padre que se creó una billetera
+      onClose(); // Cierra el modal
     } catch (error) {
       console.error('Error al crear la billetera:', error);
       setErrorMessage('Error al crear la billetera. Intenta nuevamente.');
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) return null; // No renderiza el modal si no está abierto
 
   const icons = [
     { id: 'FaWallet', component: FaWallet },
@@ -66,25 +70,31 @@ function CreateWalletModal({ isOpen, onClose, onWalletCreated }) {
       <div className="create-wallet-modal">
         <div className="create-wallet-modal-header">
           <h2>Cree una billetera</h2>
-          <button className="create-wallet-close-button" onClick={onClose}>
+          <button
+            className="create-wallet-close-button"
+            onClick={onClose}
+            aria-label="Cerrar modal"
+          >
             ×
           </button>
         </div>
         <div className="create-wallet-modal-body">
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           <div className="create-wallet-form-group">
-            <label>Cantidad</label>
+            <label htmlFor="wallet-amount">Cantidad</label>
             <input
               type="number"
+              id="wallet-amount"
               className="create-wallet-cantidad-input"
               value={walletAmount}
               onChange={(e) => setWalletAmount(e.target.value)}
             />
           </div>
           <div className="create-wallet-form-group">
-            <label>Nombre de la billetera</label>
+            <label htmlFor="wallet-name">Nombre de la billetera</label>
             <input
               type="text"
+              id="wallet-name"
               className="create-wallet-nombre-input"
               value={walletName}
               onChange={(e) => setWalletName(e.target.value)}
@@ -99,7 +109,8 @@ function CreateWalletModal({ isOpen, onClose, onWalletCreated }) {
                   className={`create-wallet-icon ${walletIcon === id ? 'selected' : ''}`}
                   onClick={() => setWalletIcon(id)}
                   onKeyDown={(e) => e.key === 'Enter' && setWalletIcon(id)}
-                  type="button" // Para evitar comportamiento predeterminado del formulario
+                  type="button"
+                  aria-label={`Seleccionar ícono ${id}`}
                 >
                   <Icon />
                 </button>
@@ -108,7 +119,11 @@ function CreateWalletModal({ isOpen, onClose, onWalletCreated }) {
           </div>
         </div>
         <div className="create-wallet-modal-footer">
-          <button className="create-wallet-create-button" onClick={handleCreateWallet}>
+          <button
+            className="create-wallet-create-button"
+            onClick={handleCreateWallet}
+            aria-label="Crear billetera"
+          >
             Crear
           </button>
         </div>
@@ -118,9 +133,9 @@ function CreateWalletModal({ isOpen, onClose, onWalletCreated }) {
 }
 
 CreateWalletModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onWalletCreated: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired, // Indica si el modal está abierto
+  onClose: PropTypes.func.isRequired, // Función para cerrar el modal
+  onWalletCreated: PropTypes.func.isRequired, // Función para notificar que se creó una billetera
 };
 
 export default CreateWalletModal;

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './ReadWalletModal.css';
 import UpdateWalletModal from './UpdateWalletModal.jsx';
-
 import { readWallet, deleteWallet, updateWallet } from '../../../helpers/portWallets.js'; // Importar las funciones necesarias
 
 function ReadWalletModal({ isOpen, onClose, wallet, onDelete, onUpdate }) {
@@ -14,33 +13,36 @@ function ReadWalletModal({ isOpen, onClose, wallet, onDelete, onUpdate }) {
   // Validar que el modal solo se renderice si está abierto
   if (!isOpen) return null;
 
-  const handleDelete = async () => {
+  // Función auxiliar para manejar la eliminación
+  const deleteWalletById = async (walletID, walletName) => {
     try {
-      // Si el `wallet.id` no está disponible, intenta obtenerlo desde la base de datos
-      let walletID = wallet?.id;
-
       if (!walletID) {
-        console.warn('El ID de la billetera no está definido. Intentando obtenerlo...');
+        console.warn('El ID de la billetera no está definido.');
         const userID = 1; // Ajustar según la lógica de autenticación
-
-        // Obtener la lista de billeteras para encontrar el walletID
         const wallets = await readWallet(userID);
-        const matchingWallet = wallets.find((w) => w.walletName === wallet.name);
+        const matchingWallet = wallets.find((w) => w.walletName === walletName);
 
         if (!matchingWallet) {
-          console.error('No se pudo encontrar una billetera que coincida:', wallet.name);
-          setErrorMessage('No se pudo eliminar la billetera. Verifica el nombre.');
-          return;
+          console.error('No se pudo encontrar una billetera que coincida:', walletName);
+          throw new Error('No se pudo eliminar la billetera. Verifica el nombre.');
         }
 
-        walletID = matchingWallet.walletID; // Asigna el ID encontrado
+        walletID = matchingWallet.walletID;
       }
 
-      // Llama a la función deleteWallet con el ID de la billetera
       await deleteWallet(walletID);
+      return { success: true, message: '¡La billetera fue eliminada exitosamente!' };
+    } catch (error) {
+      console.error('Error al eliminar la billetera:', error);
+      return { success: false, message: 'No se pudo eliminar la billetera. Intenta nuevamente.' };
+    }
+  };
 
-      // Mostrar mensaje de éxito
-      setSuccessMessage('¡La billetera fue eliminada exitosamente!');
+  const handleDelete = async () => {
+    const { success, message } = await deleteWalletById(wallet?.id, wallet.name);
+
+    if (success) {
+      setSuccessMessage(message);
       setTimeout(() => {
         setSuccessMessage('');
         if (onDelete) {
@@ -48,9 +50,8 @@ function ReadWalletModal({ isOpen, onClose, wallet, onDelete, onUpdate }) {
         }
         onClose(); // Cierra el modal
       }, 2000);
-    } catch (error) {
-      console.error('Error al eliminar la billetera:', error);
-      setErrorMessage('No se pudo eliminar la billetera. Intenta nuevamente.');
+    } else {
+      setErrorMessage(message);
     }
   };
 
@@ -113,10 +114,7 @@ function ReadWalletModal({ isOpen, onClose, wallet, onDelete, onUpdate }) {
             >
               Eliminar
             </button>
-            <button
-              className="read-wallet-edit-button"
-              onClick={handleEditClick}
-            >
+            <button className="read-wallet-edit-button" onClick={handleEditClick}>
               Editar
             </button>
           </div>
@@ -135,10 +133,7 @@ function ReadWalletModal({ isOpen, onClose, wallet, onDelete, onUpdate }) {
               >
                 Cancelar
               </button>
-              <button
-                className="confirmation-dialog-confirm"
-                onClick={handleDelete}
-              >
+              <button className="confirmation-dialog-confirm" onClick={handleDelete}>
                 Confirmar
               </button>
             </div>
@@ -157,18 +152,10 @@ function ReadWalletModal({ isOpen, onClose, wallet, onDelete, onUpdate }) {
       )}
 
       {/* Mensaje de Éxito */}
-      {successMessage && (
-        <div className="success-message">
-          {successMessage}
-        </div>
-      )}
+      {successMessage && <div className="success-message">{successMessage}</div>}
 
       {/* Mensaje de Error */}
-      {errorMessage && (
-        <div className="error-message">
-          {errorMessage}
-        </div>
-      )}
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </>
   );
 }
