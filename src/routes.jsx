@@ -8,6 +8,7 @@ import {
 //components
 import Layout from "./components/Layout/layout";
 import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/generics/PrivateRoute";
 
 //pages
 import Login from "./pages/Login/Login";
@@ -28,9 +29,15 @@ function AppRoutes() {
           {/* Rutas que usan el layout con Sidebar */}
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/categories" element={<CategoryPage />} />
-            <Route path="/wallets" element={<WalletPage />} />
+            <Route path="/home" element={<PrivateRoute element={HomePage} />} />
+            <Route
+              path="/categories"
+              element={<PrivateRoute element={CategoryPage} />}
+            />
+            <Route
+              path="/wallets"
+              element={<PrivateRoute element={WalletPage} />}
+            />
           </Route>
         </Routes>
       </Router>
