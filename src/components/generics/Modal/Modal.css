@@ -1,49 +1,49 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .contenedor-modal {
-    width: 500px;
-    height: 600px;
-    background: #fff;
-    position: relative;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    padding: 30px;
+  width: 500px;
+  height: 600px;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 30px;
 }
 
 .encabezado-modal {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-    background-color: #E9D8D8;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  background-color: #e9d8d8;
 }
 
 .encabezado-modal h2 {
-    font-size: 1.5rem;
-    font-weight: 650;
+  font-size: 1.5rem;
+  font-weight: 650;
 }
 
 .button-close {
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: .2s ease all;
-    background: none;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.2s ease all;
+  background: none;
 }
 
 .button-close:hover {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }

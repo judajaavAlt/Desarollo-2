@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Button.css"
+import "./Button.css";
 
 const Button = ({ text, onClick, className }) => (
   <button className={`button-create ${className}`} onClick={onClick}>
