@@ -4,6 +4,9 @@ import { readTransaction } from "../../helpers/portTransaccion";
 import { readWallet } from "../../helpers/portWallets";
 import ReadTransaction from "./ReadTransaction/ReadTransaction";
 
+//contextos
+import { useAuth } from "../../context/useAuth";
+
 function TransactionList() {
   const [infoTransaction, setInfoTransaction] = useState(null);
   const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
@@ -11,24 +14,31 @@ function TransactionList() {
   const [dataWallet, setDataWallet] = useState([]);
   const [dataTranstation, setDataTranstation] = useState([]);
 
+  const { userDocData } = useAuth();
+  const usuario_id = userDocData["userID"];
+
   useEffect(() => {
     const traer = async () => {
       try {
-        const giveWallet = await readWallet(1);
+        const giveWallet = await readWallet(usuario_id);
         setDataWallet(giveWallet);
 
         const now = new Date();
         const mesActual = now.getMonth() + 1;
         const anioActual = now.getFullYear();
 
-        const obtener = await readTransaction(1, mesActual, anioActual);
+        const obtener = await readTransaction(
+          usuario_id,
+          mesActual,
+          anioActual,
+        );
         setDataTranstation(obtener);
       } catch (e) {
         console.error("Error al cargar categorías:", e);
       }
     };
     traer();
-  }, [isModalOpenRead, isModalOpenCreate]);
+  }, [isModalOpenRead, isModalOpenCreate, usuario_id]);
 
   const openModalRead = (data) => {
     setIsModalOpenRead(true);

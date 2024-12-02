@@ -95,7 +95,7 @@
   padding-bottom: 0; /* Elimina el padding inferior */
 }
 
-.sidebar-footer a {
+.sidebar-footer button {
   text-decoration: none;
   color: #333;
   display: flex;
@@ -104,7 +104,7 @@
   font-size: 16px;
 }
 
-.sidebar-footer a .icon {
+.sidebar-footer button .icon {
   width: 45px;
   height: 45px;
   margin-right: 10px;
