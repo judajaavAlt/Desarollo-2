@@ -1,0 +1,130 @@
+.app-container {
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+}
+
+.header {
+  text-align: center;
+}
+
+.total-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.total-display h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.money-icon {
+  width: 50px;
+  height: 50px;
+}
+
+/* El contenedor principal con Flexbox */
+.main-content {
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Deja espacio entre ambos contenedores */
+  gap: 20px; /* Añadir un espacio entre las dos listas */
+  margin-top: 20px;
+  flex-wrap: nowrap; /* Evita que las listas se apilen una debajo de la otra */
+  width: 100%; /* Asegura que el contenedor ocupe todo el espacio disponible */
+}
+
+/* Las listas ocupan el 45% del contenedor principal */
+.wallet-list-container,
+.transaction-list-container {
+  flex: 1; /* Ambos elementos ocupan el mismo espacio proporcionalmente */
+  max-width: 45%; /* Limita el ancho máximo de cada lista al 45% del espacio total */
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden; /* Evitar que el contenido se desborde horizontalmente */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+/* Para asegurarte de que no haya conflicto de tamaños */
+.wallet-list-container {
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Deja que el contenido fluya según lo que se necesite */
+}
+
+.transaction-list-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+/* Botones para crear billetera y transferencia */
+.create-wallet-btn,
+.create-transaction-btn {
+  background-color: #ffdd77;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.create-wallet-btn:hover,
+.create-transaction-btn:hover {
+  background-color: #ffc533; /* Cambia el color a un tono más oscuro */
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade un poco de sombra para resaltar */
+}
+
+/* Elementos dentro de cada lista */
+.wallet-item,
+.transaction-item {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: all 0.3s ease; /* Transición suave para los cambios */
+  width: 100%;
+}
+
+.wallet-item:hover,
+.transaction-item:hover {
+  background-color: #f0f8ff; /* Cambia el fondo al pasar el mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Incrementa la sombra */
+  transform: scale(1.02); /* Amplía ligeramente el tamaño */
+}
+
+/* Iconos de las billeteras */
+.wallet-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.wallet-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.transaction-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #000;
+}
