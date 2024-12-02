@@ -6,45 +6,40 @@ import { useState, useEffect } from "react";
 import { readWallet } from "../../../helpers/portWallets";
 import { updateTransaction } from "../../../helpers/portTransaccion";
 
-// Ejemplo de uso:
-
 const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
-  console.log(infoTransaction);
-  const [cat, setCat] = useState(infoTransaction);
-
+  const [updateITransaction, setUpdateITransaction] = useState(infoTransaction);
   const [dataWallet, setDataWallet] = useState([]);
 
   useEffect(() => {
-    const traer = async () => {
+    const fecthWallets = async () => {
       try {
-        const obtener = await readWallet(1);
-        setDataWallet(obtener);
-      } catch (e) {
-        console.error("Error al cargar categorías:", e);
+        const wallets = await readWallet(1);
+        setDataWallet(wallets);
+      } catch (error) {
+        console.error("Error al cargar las billeteras:", error);
       }
     };
-    traer();
+    fecthWallets();
   }, []);
 
-  const handleNameChange = (event) => {
+  const handlePropertyChange = (event) => {
     const newValue = event.target.value;
     const nameProp = event.target.name;
-    setCat((prevState) => ({
+    setUpdateITransaction((prevState) => ({
       ...prevState,
       [nameProp]: newValue,
     }));
-    console.log(cat);
   };
 
-  const llamoo = async () => {
+  const handleUpdate = async () => {
     try {
       await updateTransaction(
-        cat.transactionID,
-        cat.transactionDate,
-        cat.transactionName,
-        cat.transactionAmount,
-        cat.destination,
-        cat.from
+        updateITransaction.transactionID,
+        updateITransaction.transactionDate,
+        updateITransaction.transactionName,
+        updateITransaction.transactionAmount,
+        updateITransaction.destination,
+        updateITransaction.from,
       );
       console.log("Transacción creada exitosamente.");
       onClose();
@@ -56,10 +51,14 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={"Actualizar Transacción:"}>
       <InfoGroup label={"Transferido de:"}>
-        <select name="from" onChange={handleNameChange} value={cat.from}>
+        <select
+          name="from"
+          onChange={handlePropertyChange}
+          value={updateITransaction.from}
+        >
           <option value="">Seleccione</option>
           {dataWallet
-            .filter((w) => w.walletID + "" !== cat.destination) // Filtrar la opción seleccionada en "destination"
+            .filter((w) => w.walletID + "" !== updateITransaction.destination)
             .map((w) => (
               <option key={w.walletID} value={w.walletID}>
                 {w.walletName}
@@ -70,12 +69,12 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
       <InfoGroup label={"Transferido a:"}>
         <select
           name="destination"
-          onChange={handleNameChange}
-          value={cat.destination}
+          onChange={handlePropertyChange}
+          value={updateITransaction.destination}
         >
           <option value="">Seleccione</option>
           {dataWallet
-            .filter((w) => w.walletID + "" !== cat.from) // Filtrar la opción seleccionada en "from"
+            .filter((w) => w.walletID + "" !== updateITransaction.from)
             .map((w) => (
               <option key={w.walletID} value={w.walletID}>
                 {w.walletName}
@@ -87,32 +86,28 @@ const UpdateTransaction = ({ isOpen, onClose, infoTransaction }) => {
         <input
           name="transactionAmount"
           type="number"
-          onChange={handleNameChange}
-          value={cat.transactionAmount}
+          onChange={handlePropertyChange}
+          value={updateITransaction.transactionAmount}
         />
       </InfoGroup>
       <InfoGroup label={"Fecha:"}>
         <input
           type="date"
           name="transactionDate"
-          onChange={handleNameChange}
-          value={cat.transactionDate}
+          onChange={handlePropertyChange}
+          value={updateITransaction.transactionDate}
         />
       </InfoGroup>
       <InfoGroup label={"Comentarios:"}>
         <textarea
           name="transactionName"
-          onChange={handleNameChange}
-          value={cat.transactionName}
+          onChange={handlePropertyChange}
+          value={updateITransaction.transactionName}
         ></textarea>
       </InfoGroup>
       <div className="button-group">
-        <Button text={"Confirmar"} onClick={llamoo} />
-        <Button
-          text={"Cancelar"}
-          className="text-red-500"
-          onClick={onClose}
-        />
+        <Button text={"Confirmar"} onClick={handleUpdate} />
+        <Button text={"Cancelar"} className="text-red-500" onClick={onClose} />
       </div>
     </Modal>
   );
