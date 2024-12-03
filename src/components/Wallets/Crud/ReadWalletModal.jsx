@@ -1,127 +1,173 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './ReadWalletModal.css';
-import UpdateWalletModal from './UpdateWalletModal';
+import UpdateWalletModal from './UpdateWalletModal.jsx';
+import ConfirmationDialog from './ConfirmationDialog.jsx';
+import { readWallet, deleteWallet, updateWallet } from '../../../helpers/portWallets.js';
 
-function ReadWalletModal({ isOpen, onClose, wallet, onDelete }) {
+// Función para obtener el ID de la billetera
+const fetchWalletID = async (id, name) => {
+  if (id) return id;
+  const userID = 1; // Ajustar según la lógica de autenticación
+  const wallets = await readWallet(userID);
+  const matchingWallet = wallets.find((w) => w.walletName === name);
+  if (!matchingWallet) throw new Error('No se encontró la billetera.');
+  return matchingWallet.walletID;
+};
+
+const ReadWalletModal = ({ isOpen, onClose, wallet, onDelete, onUpdate }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   if (!isOpen) return null;
 
-  const handleEditClick = () => {
-    setIsEditModalOpen(true);
+  const handleDelete = async () => {
+    try {
+      const walletID = await fetchWalletID(wallet?.id, wallet.name);
+      await deleteWallet(walletID);
+      setSuccessMessage('¡La billetera fue eliminada exitosamente!');
+      if (onDelete) onDelete(wallet);
+      onClose();
+    } catch {
+      setErrorMessage('No se pudo eliminar la billetera. Intenta nuevamente.');
+    }
   };
 
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-  };
-
-  const handleSave = (updatedWallet) => {
-    console.log('Guardar cambios de billetera:', updatedWallet);
-    setIsEditModalOpen(false);
-    onClose();
-  };
-
-  const handleDelete = () => {
-    setShowConfirmationDialog(false); // Cierra el diálogo de confirmación
-    onDelete(wallet); // Llama a la función de eliminación
-    setShowSuccessMessage(true); // Muestra el mensaje de éxito
-    setTimeout(() => {
-      setShowSuccessMessage(false); // Oculta el mensaje después de 3 segundos
-      onClose(); // Cierra el modal principal
-    }, 3000);
+  const handleSave = async (updatedWallet) => {
+    try {
+      await updateWallet(updatedWallet.id, updatedWallet.name, updatedWallet.amount, updatedWallet.icon, 1);
+      setSuccessMessage('¡La billetera fue actualizada exitosamente!');
+      if (onUpdate) onUpdate(updatedWallet);
+      setIsEditModalOpen(false);
+      onClose();
+    } catch {
+      setErrorMessage('No se pudo actualizar la billetera. Intenta nuevamente.');
+    }
   };
 
   return (
     <>
-      <div className="read-wallet-modal-overlay">
-        <div className="read-wallet-modal">
-          <div className="read-wallet-modal-header">
-            <h2>Detalles de {wallet.name}</h2>
-            <button className="read-wallet-close-button" onClick={onClose}>
-              ×
-            </button>
-          </div>
-          <div className="read-wallet-modal-body">
-            <p>
-              <strong>Cantidad:</strong> {wallet.amount} {wallet.currency}
-            </p>
-            <p>
-              <strong>Nombre:</strong> {wallet.name}
-            </p>
-          </div>
-          <div className="read-wallet-modal-footer">
-            <button
-              className="read-wallet-delete-button"
-              onClick={() => setShowConfirmationDialog(true)}
-            >
-              Eliminar
-            </button>
-            <button
-              className="read-wallet-edit-button"
-              onClick={handleEditClick}
-            >
-              Editar
-            </button>
-          </div>
-        </div>
-      </div>
+      <ModalContent
+        wallet={wallet}
+        onClose={onClose}
+        onEdit={() => setIsEditModalOpen(true)}
+        onDelete={() => setShowConfirmationDialog(true)}
+      />
 
-      {/* Modal de Confirmación */}
       {showConfirmationDialog && (
-        <div className="confirmation-dialog-overlay">
-          <div className="confirmation-dialog">
-            <p>¿Estás seguro de que deseas eliminar esta billetera?</p>
-            <div className="confirmation-dialog-buttons">
-              <button
-                className="confirmation-dialog-cancel"
-                onClick={() => setShowConfirmationDialog(false)}
-              >
-                Cancelar
-              </button>
-              <button
-                className="confirmation-dialog-confirm"
-                onClick={handleDelete}
-              >
-                Confirmar
-              </button>
-            </div>
-          </div>
-        </div>
+        <ConfirmationDialog
+          message="¿Estás seguro de que deseas eliminar esta billetera?"
+          onCancel={() => setShowConfirmationDialog(false)}
+          onConfirm={handleDelete}
+        />
       )}
 
-      {/* Modal de Edición */}
       {isEditModalOpen && (
         <UpdateWalletModal
           isOpen={isEditModalOpen}
-          onClose={closeEditModal}
+          onClose={() => setIsEditModalOpen(false)}
           wallet={wallet}
           onSave={handleSave}
         />
       )}
 
-      {/* Mensaje de Éxito */}
-      {showSuccessMessage && (
-        <div className="success-message">
-          ¡La billetera fue eliminada exitosamente!
-        </div>
-      )}
+      <AlertMessage type="success" message={successMessage} />
+      <AlertMessage type="error" message={errorMessage} />
     </>
   );
-}
+};
 
-// Definir PropTypes para validar las props
+const ModalContent = ({ wallet, onClose, onEdit, onDelete }) => (
+  <div className="read-wallet-modal-overlay">
+    <div className="read-wallet-modal">
+      <ModalHeader title={`Detalles de ${wallet.name}`} onClose={onClose} />
+      <ModalBody wallet={wallet} />
+      <ModalFooter onEdit={onEdit} onDelete={onDelete} />
+    </div>
+  </div>
+);
+
+const ModalHeader = ({ title, onClose }) => (
+  <div className="read-wallet-modal-header">
+    <h2>{title}</h2>
+    <button className="read-wallet-close-button" onClick={onClose}>
+      ×
+    </button>
+  </div>
+);
+
+const ModalBody = ({ wallet }) => (
+  <div className="read-wallet-modal-body">
+    <p>
+      <strong>Cantidad:</strong> {wallet.amount} {wallet.currency}
+    </p>
+    <p>
+      <strong>Nombre:</strong> {wallet.name}
+    </p>
+  </div>
+);
+
+const ModalFooter = ({ onEdit, onDelete }) => (
+  <div className="read-wallet-modal-footer">
+    <button className="read-wallet-delete-button" onClick={onDelete}>
+      Eliminar
+    </button>
+    <button className="read-wallet-edit-button" onClick={onEdit}>
+      Editar
+    </button>
+  </div>
+);
+
+const AlertMessage = ({ type, message }) => {
+  if (!message) return null;
+  return <div className={`${type}-message`}>{message}</div>;
+};
+
+// PropTypes
 ReadWalletModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  wallet: PropTypes.shape({
+    id: PropTypes.number,
+    amount: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    icon: PropTypes.node,
+  }).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+};
+
+ModalContent.propTypes = {
+  wallet: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
+
+ModalHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+ModalBody.propTypes = {
   wallet: PropTypes.shape({
     amount: PropTypes.string.isRequired,
     currency: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
+};
+
+ModalFooter.propTypes = {
+  onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+};
+
+AlertMessage.propTypes = {
+  type: PropTypes.oneOf(['success', 'error']).isRequired,
+  message: PropTypes.string,
 };
 
 export default ReadWalletModal;
